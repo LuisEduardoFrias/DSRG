@@ -46,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ButtonExtensiones.cs" />
+    <Compile Include="Connecciones.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -54,6 +56,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -62,6 +67,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -75,6 +81,38 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Controles_Personalizado\Controles_Personalizado.csproj">
+      <Project>{C1640024-9A81-4016-A138-1C144EEBE48C}</Project>
+      <Name>Controles_Personalizado</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Recursos\ButtomBackgroundBlack1.png" />
+    <Content Include="Recursos\ButtomBackgroundBlack2.png" />
+    <Content Include="Recursos\ButtomBackgroundBlack3.png" />
+    <Content Include="Recursos\ButtomBackgroundBlue1.png" />
+    <Content Include="Recursos\ButtomBackgroundBlue2.png" />
+    <Content Include="Recursos\ButtomBackgroundBlue3.png" />
+    <Content Include="Recursos\ButtomBackgroundGray1.png" />
+    <Content Include="Recursos\ButtomBackgroundGray2.png" />
+    <Content Include="Recursos\ButtomBackgroundGray3.png" />
+    <Content Include="Recursos\ButtomBackgroundGreen1.png" />
+    <Content Include="Recursos\ButtomBackgroundGreen2.png" />
+    <Content Include="Recursos\ButtomBackgroundGreen3.png" />
+    <Content Include="Recursos\ButtomBackgroundOrange1.png" />
+    <Content Include="Recursos\ButtomBackgroundOrange2.png" />
+    <Content Include="Recursos\ButtomBackgroundOrange3.png" />
+    <Content Include="Recursos\ButtomBackgroundWhite1.png" />
+    <Content Include="Recursos\ButtomBackgroundWhite2.png" />
+    <Content Include="Recursos\ButtomBackgroundWhite3.png" />
+    <Content Include="Recursos\ButtomBackgroundYellow1.png" />
+    <Content Include="Recursos\ButtomBackgroundYellow2.png" />
+    <Content Include="Recursos\ButtomBackgroundYellow3.png" />
+    <Content Include="Recursos\TextBoxBackgroundImage1.png" />
+    <Content Include="Recursos\TextBoxBackgroundImage2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

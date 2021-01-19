@@ -118,67 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="ButtomBackgroundBlack1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Recursos\ButtomBackgroundBlack1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ButtomBackgroundBlack2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Recursos\ButtomBackgroundBlack2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ButtomBackgroundBlack3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Recursos\ButtomBackgroundBlack3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ButtomBackgroundBlue1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Recursos\ButtomBackgroundBlue1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ButtomBackgroundBlue2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Recursos\ButtomBackgroundBlue2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ButtomBackgroundBlue3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Recursos\ButtomBackgroundBlue3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ButtomBackgroundGray1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Recursos\ButtomBackgroundGray1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ButtomBackgroundGray2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Recursos\ButtomBackgroundGray2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ButtomBackgroundGray3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Recursos\ButtomBackgroundGray3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ButtomBackgroundGreen1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Recursos\ButtomBackgroundGreen1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ButtomBackgroundGreen2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Recursos\ButtomBackgroundGreen2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ButtomBackgroundGreen3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Recursos\ButtomBackgroundGreen3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ButtomBackgroundOrange1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Recursos\ButtomBackgroundOrange1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ButtomBackgroundOrange2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Recursos\ButtomBackgroundOrange2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ButtomBackgroundOrange3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Recursos\ButtomBackgroundOrange3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ButtomBackgroundWhite1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Recursos\ButtomBackgroundWhite1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ButtomBackgroundWhite2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Recursos\ButtomBackgroundWhite2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ButtomBackgroundWhite3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Recursos\ButtomBackgroundWhite3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ButtomBackgroundYellow1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Recursos\ButtomBackgroundYellow1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ButtomBackgroundYellow2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Recursos\ButtomBackgroundYellow2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ButtomBackgroundYellow3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Recursos\ButtomBackgroundYellow3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ImageTextBox" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ImageTextBox.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
