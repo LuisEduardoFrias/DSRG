@@ -1,2 +1,2 @@
 # DSG
- Generador de estructura de la base de datos.
+ Generador de reporte de la estructura tu base de datos.
