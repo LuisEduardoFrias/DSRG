@@ -103,7 +103,7 @@ namespace DSG
             this.GBCredenciales.Location = new System.Drawing.Point(313, 19);
             this.GBCredenciales.Name = "GBCredenciales";
             this.GBCredenciales.Size = new System.Drawing.Size(230, 176);
-            this.GBCredenciales.TabIndex = 2;
+            this.GBCredenciales.TabIndex = 3;
             this.GBCredenciales.TabStop = false;
             this.GBCredenciales.Text = "Credenciales";
             // 
@@ -126,7 +126,7 @@ namespace DSG
             this.TBUsuario.ReadOnly = false;
             this.TBUsuario.Size = new System.Drawing.Size(218, 25);
             this.TBUsuario.TabIndex = 3;
-            this.TBUsuario.Text_ = "";
+            this.TBUsuario.Text_ = "USUARIO";
             this.TBUsuario.UseSystemPasswordChar = false;
             // 
             // TBContraseña
@@ -147,9 +147,9 @@ namespace DSG
             this.TBContraseña.PlaceHolder = "";
             this.TBContraseña.ReadOnly = false;
             this.TBContraseña.Size = new System.Drawing.Size(218, 25);
-            this.TBContraseña.TabIndex = 3;
-            this.TBContraseña.Text_ = "";
-            this.TBContraseña.UseSystemPasswordChar = false;
+            this.TBContraseña.TabIndex = 4;
+            this.TBContraseña.Text_ = "123";
+            this.TBContraseña.UseSystemPasswordChar = true;
             // 
             // CBSinCredenciales
             // 
@@ -164,7 +164,7 @@ namespace DSG
             this.CBSinCredenciales.Location = new System.Drawing.Point(6, 134);
             this.CBSinCredenciales.Name = "CBSinCredenciales";
             this.CBSinCredenciales.Size = new System.Drawing.Size(96, 23);
-            this.CBSinCredenciales.TabIndex = 2;
+            this.CBSinCredenciales.TabIndex = 5;
             this.CBSinCredenciales.Text = "Sin Credenciales";
             this.CBSinCredenciales.UseVisualStyleBackColor = false;
             this.CBSinCredenciales.CheckedChanged += new System.EventHandler(this.CBSinCredenciales_CheckedChanged);
@@ -184,6 +184,7 @@ namespace DSG
             this.ListCBTablas.Size = new System.Drawing.Size(533, 197);
             this.ListCBTablas.Sorted = true;
             this.ListCBTablas.TabIndex = 3;
+            this.ListCBTablas.TabStop = false;
             // 
             // GBDatosConexion
             // 
@@ -209,7 +210,8 @@ namespace DSG
             this.CBBBaseDatos.Location = new System.Drawing.Point(22, 110);
             this.CBBBaseDatos.Name = "CBBBaseDatos";
             this.CBBBaseDatos.Size = new System.Drawing.Size(271, 21);
-            this.CBBBaseDatos.TabIndex = 7;
+            this.CBBBaseDatos.TabIndex = 1;
+            this.CBBBaseDatos.Text = "blue-tech";
             // 
             // label6
             // 
@@ -237,7 +239,7 @@ namespace DSG
             this.TBCompanyName.PlaceHolder = "";
             this.TBCompanyName.ReadOnly = false;
             this.TBCompanyName.Size = new System.Drawing.Size(271, 25);
-            this.TBCompanyName.TabIndex = 7;
+            this.TBCompanyName.TabIndex = 2;
             this.TBCompanyName.Text_ = "TRIDENTE SRL";
             this.TBCompanyName.UseSystemPasswordChar = false;
             // 
@@ -258,26 +260,40 @@ namespace DSG
             this.TBServidor.PlaceHolder = "";
             this.TBServidor.ReadOnly = false;
             this.TBServidor.Size = new System.Drawing.Size(271, 25);
-            this.TBServidor.TabIndex = 3;
-            this.TBServidor.Text_ = "(LOCALDB)\\MSSQLLOCALDB";
+            this.TBServidor.TabIndex = 0;
+            this.TBServidor.Text_ = "10.0.0.108";
             this.TBServidor.UseSystemPasswordChar = false;
             // 
             // BTBuscarBaseDatos
             // 
+            this.BTBuscarBaseDatos.FlatAppearance.BorderSize = 0;
+            this.BTBuscarBaseDatos.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.BTBuscarBaseDatos.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.BTBuscarBaseDatos.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.BTBuscarBaseDatos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BTBuscarBaseDatos.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BTBuscarBaseDatos.Location = new System.Drawing.Point(22, 214);
             this.BTBuscarBaseDatos.Name = "BTBuscarBaseDatos";
             this.BTBuscarBaseDatos.Size = new System.Drawing.Size(230, 29);
             this.BTBuscarBaseDatos.TabIndex = 6;
+            this.BTBuscarBaseDatos.TabStop = false;
             this.BTBuscarBaseDatos.Text = "Buscar Base de datos";
             this.BTBuscarBaseDatos.UseVisualStyleBackColor = true;
             this.BTBuscarBaseDatos.Click += new System.EventHandler(this.BTBuscarBaseDatos_Click);
             // 
             // BTConeccion
             // 
+            this.BTConeccion.FlatAppearance.BorderSize = 0;
+            this.BTConeccion.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.BTConeccion.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.BTConeccion.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.BTConeccion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BTConeccion.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BTConeccion.Location = new System.Drawing.Point(313, 214);
             this.BTConeccion.Name = "BTConeccion";
             this.BTConeccion.Size = new System.Drawing.Size(230, 29);
             this.BTConeccion.TabIndex = 6;
+            this.BTConeccion.TabStop = false;
             this.BTConeccion.Text = "Conectarse";
             this.BTConeccion.UseVisualStyleBackColor = true;
             this.BTConeccion.Click += new System.EventHandler(this.BTConeccion_Click);
@@ -310,6 +326,7 @@ namespace DSG
             this.CBView.Name = "CBView";
             this.CBView.Size = new System.Drawing.Size(103, 21);
             this.CBView.TabIndex = 7;
+            this.CBView.TabStop = false;
             // 
             // CBMarcarTodasTablas
             // 
@@ -318,16 +335,24 @@ namespace DSG
             this.CBMarcarTodasTablas.Name = "CBMarcarTodasTablas";
             this.CBMarcarTodasTablas.Size = new System.Drawing.Size(135, 17);
             this.CBMarcarTodasTablas.TabIndex = 6;
+            this.CBMarcarTodasTablas.TabStop = false;
             this.CBMarcarTodasTablas.Text = "Marcar todas las tablas";
             this.CBMarcarTodasTablas.UseVisualStyleBackColor = true;
             this.CBMarcarTodasTablas.CheckedChanged += new System.EventHandler(this.CBMarcarTodasTablas_CheckedChanged);
             // 
             // BTGenerarReporte
             // 
+            this.BTGenerarReporte.FlatAppearance.BorderSize = 0;
+            this.BTGenerarReporte.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.BTGenerarReporte.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.BTGenerarReporte.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.BTGenerarReporte.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BTGenerarReporte.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BTGenerarReporte.Location = new System.Drawing.Point(10, 283);
             this.BTGenerarReporte.Name = "BTGenerarReporte";
             this.BTGenerarReporte.Size = new System.Drawing.Size(533, 29);
             this.BTGenerarReporte.TabIndex = 5;
+            this.BTGenerarReporte.TabStop = false;
             this.BTGenerarReporte.Text = "Generar Reporte";
             this.BTGenerarReporte.UseVisualStyleBackColor = true;
             this.BTGenerarReporte.Click += new System.EventHandler(this.BTGenerarReporte_Click);
@@ -335,11 +360,11 @@ namespace DSG
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(411, 37);
+            this.label7.Location = new System.Drawing.Point(389, 37);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(23, 13);
+            this.label7.Size = new System.Drawing.Size(45, 13);
             this.label7.TabIndex = 4;
-            this.label7.Text = "Ver";
+            this.label7.Text = "Obtener";
             // 
             // label5
             // 
@@ -355,11 +380,17 @@ namespace DSG
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(588, 622);
+            this.ClientSize = new System.Drawing.Size(579, 622);
             this.Controls.Add(this.GBBaseDatos);
             this.Controls.Add(this.GBDatosConexion);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(595, 661);
+            this.MinimumSize = new System.Drawing.Size(595, 661);
             this.Name = "DSG";
-            this.Text = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "DSG";
             this.GBCredenciales.ResumeLayout(false);
             this.GBCredenciales.PerformLayout();
             this.GBDatosConexion.ResumeLayout(false);

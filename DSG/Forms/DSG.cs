@@ -11,9 +11,11 @@ namespace DSG
         {
             InitializeComponent();
 
-            BTGenerarReporte.Temas(Tema.Verde);
-            BTConeccion.Temas(Tema.Verde);
-            BTBuscarBaseDatos.Temas(Tema.Verde);
+            var tema = Tema.Naranja;
+
+            BTGenerarReporte.Temas(tema);
+            BTConeccion.Temas(tema);
+            BTBuscarBaseDatos.Temas(tema);
 
             CBView.SelectedIndex = 0;
         }
@@ -125,10 +127,13 @@ namespace DSG
                 ListCBTablas.SetItemChecked(i, false);
             }
 
+            CBMarcarTodasTablas.Checked = false;
+
             if (tables.Length > 0)
             {
                 try
                 {
+                    
                     var listTable = await ConnectionString
                     .GetInstance()
                     .GetTablesProperty(TBServidor.Text_, CBBBaseDatos.Text, CBSinCredenciales.Checked, tables, TBUsuario.Text_, TBContraseña.Text_);
@@ -137,11 +142,18 @@ namespace DSG
 
                     Reports.Report report = new Reports.Report();
 
-                    report.CompanyName.Value = TBCompanyName.Text_;
-                    report.table.DataSource = listTable;
+                    report.TBCompanyName.Value = TBCompanyName.Text_;
+
+                    report.objectDataSource.DataSource = listTable;
+
+
+                    report.reportNameTextBox.Value = "Resporte de tabla : Servidor = " +
+                                                            TBServidor.Text_ + "; " +
+                                                            "Base de datos = " +
+                                                            CBBBaseDatos.Text + ";";
 
                     FromReport.reportViewer.ShowPrintPreviewButton = true;
-                    FromReport.reportViewer.Report = report;
+                    FromReport.reportViewer.Report = report;// reportTables;
                     FromReport.reportViewer.RefreshReport();
 
                     this.Cursor = Cursors.Default;
@@ -163,19 +175,26 @@ namespace DSG
 
         private async void BTBuscarBaseDatos_Click(object sender, System.EventArgs e)
         {
-            this.Cursor = Cursors.WaitCursor;
-
-            CBBBaseDatos.Items.Add("Seleccione una Base de datos");
-
-            foreach (string tableName in await ConnectionString
-            .GetInstance()
-            .GetDataBases(TBServidor.Text_, CBSinCredenciales.Checked, TBUsuario.Text_, TBContraseña.Text_))
+            try
             {
-                CBBBaseDatos.Items.Add(tableName);
+                this.Cursor = Cursors.WaitCursor;
+
+                CBBBaseDatos.Items.Add("Seleccione una Base de datos");
+
+                foreach (string tableName in await ConnectionString
+                .GetInstance()
+                .GetDataBases(TBServidor.Text_, CBSinCredenciales.Checked, TBUsuario.Text_, TBContraseña.Text_))
+                {
+                    CBBBaseDatos.Items.Add(tableName);
+                }
+
+                CBBBaseDatos.SelectedIndex = 0;
+
             }
-
-            CBBBaseDatos.SelectedIndex = 0;
-
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             this.Cursor = Cursors.Default;
         }
     }

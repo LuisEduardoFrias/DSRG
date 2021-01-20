@@ -1,12 +1,12 @@
 ﻿
 namespace DSG
 {
-    using System;
     using System.Collections.Generic;
-    using System.Data;
     using System.Data.SqlClient;
     using System.Threading.Tasks;
-
+    //
+    using Models;
+    //
 
     public class ConnectionString
     {
@@ -126,49 +126,31 @@ namespace DSG
                "database=" + database + "; " +
                (credentials == true ? "Trusted_connection=True;" : " User Id=" + user + "; Password=" + password + ";"));
 
-
             List<Table> Tables = new List<Table>();
 
             SqlCommand sqlComd;
 
-            Tables.Add(new Table
-            {
-                TableName = string.Empty,
-                PropertyName = string.Empty,
-                PropertyType = string.Empty
-            });
-
             foreach (string tableName in tables)
             {
-                sqlComd = new SqlCommand("Select * from " + tableName, sqlCon);
+                sqlComd = new SqlCommand("SELECT COLUMN_NAME, DATA_TYPE, CHARACTER_OCTET_LENGTH " +
+                                            " FROM Information_Schema.Columns " +
+                                            " WHERE TABLE_NAME = '" + tableName + @"' "+
+                                            " ORDER BY COLUMN_NAME ", sqlCon);
 
                 sqlCon.Open();
 
                 SqlDataReader reader = await sqlComd.ExecuteReaderAsync();
 
-                string name;
-                for(int i = 0; i < reader.FieldCount - 1; i++)
+                while (await reader.ReadAsync())
                 {
-                    if (i == 0)
-                        name = tableName;
-                    else
-                        name = string.Empty;
-
                     Tables.Add(new Table
                     {
-                        TableName = name,
-                        PropertyName = reader.GetName(i),
-                        PropertyType = reader.GetDataTypeName(i)
+                        TableName = tableName,
+                        PropertyName = reader["COLUMN_NAME"].ToString(),
+                        PropertyType = reader["DATA_TYPE"].ToString(),
+                        PropertyLeangth = reader["CHARACTER_OCTET_LENGTH"].ToString(),
                     });
                 }
-
-                Tables.Add(new Table
-                {
-                    TableName = string.Empty,
-                    PropertyName = string.Empty,
-                    PropertyType = string.Empty
-                }); 
-
 
                 sqlCon.Close();
             }
