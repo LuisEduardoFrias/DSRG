@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="_UpgradeWizard_Files\UpgradeWizardLog.xslt"?>
+<log>
+  <event>Get project references.</event>
+  <event action="Analyze" type="Success" name="Assembly References" path="D:\DSG\DSG\DSG.csproj" />
+  <event action="Analyze" type="Success" name="Assembly References" path="D:\DSG\DSG\App.config" />
+  <event action="Analyze" type="Success" name="Http Handlers" path="D:\DSG\DSG\App.config" />
+  <event action="Analyze" type="Success" name="Handlers (IIS7+)" path="D:\DSG\DSG\App.config" />
+  <event action="Analyze" type="Success" name="Config Sections" path="D:\DSG\DSG\App.config" />
+  <event action="Analyze" type="Success" name="Render Extensions" path="D:\DSG\DSG\App.config" />
+  <event action="Analyze" type="Success" name="Session State Providers" path="D:\DSG\DSG\App.config" />
+  <event action="Analyze" type="Success" name="App.config" path="D:\DSG\DSG\App.config" />
+  <event action="Analyze" type="Success" name="DSG.resx" path="D:\DSG\DSG\Forms\DSG.resx" />
+  <event action="Analyze" type="Success" name="FromReport.resx" path="D:\DSG\DSG\Forms\FromReport.resx" />
+  <event action="Analyze" type="Success" name="Resources.resx" path="D:\DSG\DSG\Properties\Resources.resx" />
+  <event action="Analyze" type="Success" name="Report.resx" path="D:\DSG\DSG\Reports\Report.resx" />
+  <event action="Analyze" type="Success" name="DSG" path="D:\DSG\DSG\DSG.csproj" />
+  <event>Get project references.</event>
+  <event action="Analyze" type="Success" name="Assembly References" path="D:\DSG\DSG\Controles_Personalizado\Controles_Personalizado.csproj" />
+  <event action="Analyze" type="Success" name="Resources.resx" path="D:\DSG\DSG\Controles_Personalizado\Properties\Resources.resx" />
+  <event action="Analyze" type="Success" name="TextBoxIEP.resx" path="D:\DSG\DSG\Controles_Personalizado\TextBoxIEP.resx" />
+  <event action="Analyze" type="Success" name="Controles_Personalizado" path="D:\DSG\DSG\Controles_Personalizado\Controles_Personalizado.csproj" />
+  <event action="Analyze" type="Success" name="DSG" path="D:\DSG\DSG.sln" />
+  <event action="Backup" type="Success" name="DSG" path="D:\DSG\DSG\DSG.csproj" />
+  <event action="Upgrade" type="Success" name="Assembly References" path="D:\DSG\DSG\DSG.csproj" />
+  <event action="Upgrade" type="Success" name="DSG" path="D:\DSG\DSG\DSG.csproj" />
+  <event action="Upgrade" type="Success" name="DSG" path="D:\DSG\DSG.sln" />
+</log>

@@ -44,21 +44,44 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="Telerik.Reporting, Version=13.0.19.116, Culture=neutral, PublicKeyToken=a9d7983dfcc261be">
+      <HintPath>C:\Program Files (x86)\Progress\Telerik Reporting R1 2019\bin\Telerik.Reporting.dll</HintPath>
+      <SpecificVersion>True</SpecificVersion>
+    </Reference>
+    <Reference Include="Telerik.ReportViewer.WinForms, Version=13.0.19.116, Culture=neutral, PublicKeyToken=a9d7983dfcc261be">
+      <SpecificVersion>True</SpecificVersion>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ButtonExtensiones.cs" />
-    <Compile Include="Connecciones.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="Extensions\ButtonExtensiones.cs" />
+    <Compile Include="Data\Connecciones.cs" />
+    <Compile Include="Forms\DSG.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Forms\DSG.Designer.cs">
+      <DependentUpon>DSG.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\Table2.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Models\Property.cs" />
+    <Compile Include="Forms\FromReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FromReport.Designer.cs">
+      <DependentUpon>FromReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Table.cs" />
+    <Compile Include="Reports\Report.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Report.Designer.cs">
+      <DependentUpon>Report.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Forms\DSG.resx">
+      <DependentUpon>DSG.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -69,6 +92,12 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Forms\FromReport.resx">
+      <DependentUpon>FromReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Report.resx">
+      <DependentUpon>Report.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
