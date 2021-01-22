@@ -20,19 +20,21 @@ namespace DSG
             CBView.SelectedIndex = 0;
         }
 
-        private void CBSinCredenciales_CheckedChanged(object sender, System.EventArgs e)
+        private void RBAutenticacionW_CheckedChanged(object sender, System.EventArgs e)
         {
-            if(CBSinCredenciales.Checked == true)
+            if (RBAutenticacionW.Checked == true)
             {
                 TBUsuario.Enabled = false;
                 TBContraseña.Enabled = false;
-                CBSinCredenciales.BackColor = Color.FromArgb(109, 168, 68);
+                RBAutenticacionW.BackColor = Color.FromArgb(109, 168, 68);
+                RBAutenticacionS.BackColor = Color.White;
             }
             else
             {
                 TBUsuario.Enabled = true;
                 TBContraseña.Enabled = true;
-                CBSinCredenciales.BackColor = Color.White;
+                RBAutenticacionS.BackColor = Color.FromArgb(109, 168, 68);
+                RBAutenticacionW.BackColor = Color.White;
             }
         }
 
@@ -47,7 +49,7 @@ namespace DSG
                CBBBaseDatos.SelectedIndex == 0
             )
             {
-                if (CBSinCredenciales.Checked == false)
+                if (RBAutenticacionW.Checked == false)
                 {
                     TBUsuario.IsEmptyErrorProvider();
                     TBContraseña.IsEmptyErrorProvider();
@@ -60,7 +62,7 @@ namespace DSG
             }
             else
             {
-                 if (CBSinCredenciales.Checked == false)
+                 if (RBAutenticacionW.Checked == false)
                  {
                      if
                      (
@@ -88,7 +90,7 @@ namespace DSG
             {
                 foreach (string tableName in await ConnectionString
                          .GetInstance()
-                         .GetTables(TBServidor.Text_, CBBBaseDatos.Text, CBSinCredenciales.Checked, CBView.Text, TBUsuario.Text_, TBContraseña.Text_))
+                         .GetTables(TBServidor.Text_, CBBBaseDatos.Text, RBAutenticacionW.Checked, CBView.Text, TBUsuario.Text_, TBContraseña.Text_))
                 {
                     ListCBTablas.Items.Add(tableName);
                 }
@@ -136,33 +138,41 @@ namespace DSG
                     
                     var listTable = await ConnectionString
                     .GetInstance()
-                    .GetTablesProperty(TBServidor.Text_, CBBBaseDatos.Text, CBSinCredenciales.Checked, tables, TBUsuario.Text_, TBContraseña.Text_);
+                    .GetTablesProperty(TBServidor.Text_, CBBBaseDatos.Text, RBAutenticacionW.Checked, tables, TBUsuario.Text_, TBContraseña.Text_);
 
-                    FromReport FromReport = new FromReport();
+                    if(listTable != null)
+                    {
+                        FromReport FromReport = new FromReport();
 
-                    Reports.Report report = new Reports.Report();
+                        Reports.Report report = new Reports.Report();
 
-                    report.TBCompanyName.Value = TBCompanyName.Text_;
+                        report.TBCompanyName.Value = TBCompanyName.Text_;
 
-                    report.objectDataSource.DataSource = listTable;
+                        report.objectDataSource.DataSource = listTable;
 
 
-                    report.reportNameTextBox.Value = "Resporte de tabla : Servidor = " +
-                                                            TBServidor.Text_ + "; " +
-                                                            "Base de datos = " +
-                                                            CBBBaseDatos.Text + ";";
+                        report.reportNameTextBox.Value = "Resporte de tabla : Servidor = " +
+                                                                TBServidor.Text_ + "; " +
+                                                                "Base de datos = " +
+                                                                CBBBaseDatos.Text + ";";
 
-                    FromReport.reportViewer.ShowPrintPreviewButton = true;
-                    FromReport.reportViewer.Report = report;// reportTables;
-                    FromReport.reportViewer.RefreshReport();
+                        FromReport.reportViewer.ShowPrintPreviewButton = true;
+                        FromReport.reportViewer.Report = report;// reportTables;
+                        FromReport.reportViewer.RefreshReport();
 
-                    this.Cursor = Cursors.Default;
+                        this.Cursor = Cursors.Default;
 
-                    FromReport.Show();
+                        FromReport.Show();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
+
                 }
                 catch (System.Exception ex)
                 {
-                    MessageBox.Show(ex.Message.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else
@@ -183,7 +193,7 @@ namespace DSG
 
                 foreach (string tableName in await ConnectionString
                 .GetInstance()
-                .GetDataBases(TBServidor.Text_, CBSinCredenciales.Checked, TBUsuario.Text_, TBContraseña.Text_))
+                .GetDataBases(TBServidor.Text_, RBAutenticacionW.Checked, TBUsuario.Text_, TBContraseña.Text_))
                 {
                     CBBBaseDatos.Items.Add(tableName);
                 }
@@ -196,6 +206,11 @@ namespace DSG
                 MessageBox.Show(ex.Message.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             this.Cursor = Cursors.Default;
+        }
+
+        private void CBView_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            BTConeccion.Text = "Buscar " + CBView.SelectedItem;
         }
     }
 }

@@ -1,8 +1,11 @@
 ﻿
 namespace DSG
 {
+    using System;
     using System.Collections.Generic;
     using System.Data.SqlClient;
+    using System.Data.SqlTypes;
+    using System.Linq;
     using System.Threading.Tasks;
     //
     using Models;
@@ -66,7 +69,7 @@ namespace DSG
                 case "Tablas":
                     {
                         /*--La consulta muestra todas las tablas de la base de datos*/
-                        sqlComd = new SqlCommand("Select name from sysobjects where type='U'", sqlCon);
+                        sqlComd = new SqlCommand("select name from sysobjects where type='U' and name <> '__EFMigrationsHistory'", sqlCon);
 
                         break;
                     }
@@ -128,18 +131,29 @@ namespace DSG
 
             List<Table> Tables = new List<Table>();
 
-            SqlCommand sqlComd;
+            SqlCommand sqlComd = null;
 
             foreach (string tableName in tables)
             {
-                sqlComd = new SqlCommand("SELECT COLUMN_NAME, DATA_TYPE, CHARACTER_OCTET_LENGTH " +
-                                            " FROM Information_Schema.Columns " +
-                                            " WHERE TABLE_NAME = '" + tableName + @"' "+
-                                            " ORDER BY COLUMN_NAME ", sqlCon);
+                Tables = await ObtenerClausila(sqlCon, sqlComd, tableName, 
+                    await ObtenerCompas(sqlCon, sqlComd, tableName, Tables));
+            }
+
+            return Tables;
+        }
+
+
+        private async Task<List<Table>> ObtenerCompas(SqlConnection sqlCon,SqlCommand sqlComd, string tableName, List<Table> Tables)
+        {
+            try
+            {
+                sqlComd = new SqlCommand(
+                 " SELECT COLUMN_NAME, DATA_TYPE, CHARACTER_OCTET_LENGTH, IS_NULLABLE from Information_Schema.Columns "
+              + $" WHERE TABLE_NAME = '{tableName}' ORDER BY COLUMN_NAME", sqlCon);
 
                 sqlCon.Open();
 
-                SqlDataReader reader = await sqlComd.ExecuteReaderAsync();
+                SqlDataReader reader = sqlComd.ExecuteReader();
 
                 while (await reader.ReadAsync())
                 {
@@ -148,12 +162,49 @@ namespace DSG
                         TableName = tableName,
                         PropertyName = reader["COLUMN_NAME"].ToString(),
                         PropertyType = reader["DATA_TYPE"].ToString(),
-                        PropertyLeangth = reader["CHARACTER_OCTET_LENGTH"].ToString(),
+                        PropertyLeangth = reader["CHARACTER_OCTET_LENGTH"].ToString() == "-1" ? "MAX" : reader["CHARACTER_OCTET_LENGTH"].ToString(),
+                        IsNullable = reader["IS_NULLABLE"].ToString()
                     });
                 }
-
-                sqlCon.Close();
             }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+
+                return null;
+            }
+
+            sqlCon.Close();
+
+            return Tables;
+        }
+
+        private async Task<List<Table>> ObtenerClausila(SqlConnection sqlCon, SqlCommand sqlComd, string tableName, List<Table> Tables)
+        {
+            try
+            {
+                sqlComd = new SqlCommand(
+                    " SELECT COLUMN_NAME, CONSTRAINT_NAME FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE" +
+                    $" WHERE TABLE_NAME = '{ tableName }' ", sqlCon);
+
+                sqlCon.Open();
+
+                SqlDataReader reader = sqlComd.ExecuteReader();
+
+                while (await reader.ReadAsync())
+                {
+                    Tables.Where(x => x.TableName == tableName).First(x => x.PropertyName == reader["COLUMN_NAME"].ToString())
+                        .ConstraintName = reader["CONSTRAINT_NAME"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+
+                return null;
+            }
+
+            sqlCon.Close();
 
             return Tables;
         }

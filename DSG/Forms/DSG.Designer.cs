@@ -35,9 +35,10 @@ namespace DSG
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.GBCredenciales = new System.Windows.Forms.GroupBox();
+            this.RBAutenticacionW = new System.Windows.Forms.RadioButton();
+            this.RBAutenticacionS = new System.Windows.Forms.RadioButton();
             this.TBUsuario = new Controles_Personalizado.TextBoxIEP();
             this.TBContraseña = new Controles_Personalizado.TextBoxIEP();
-            this.CBSinCredenciales = new System.Windows.Forms.CheckBox();
             this.ListCBTablas = new System.Windows.Forms.CheckedListBox();
             this.GBDatosConexion = new System.Windows.Forms.GroupBox();
             this.CBBBaseDatos = new System.Windows.Forms.ComboBox();
@@ -95,9 +96,10 @@ namespace DSG
             // 
             // GBCredenciales
             // 
+            this.GBCredenciales.Controls.Add(this.RBAutenticacionW);
+            this.GBCredenciales.Controls.Add(this.RBAutenticacionS);
             this.GBCredenciales.Controls.Add(this.TBUsuario);
             this.GBCredenciales.Controls.Add(this.TBContraseña);
-            this.GBCredenciales.Controls.Add(this.CBSinCredenciales);
             this.GBCredenciales.Controls.Add(this.label3);
             this.GBCredenciales.Controls.Add(this.label4);
             this.GBCredenciales.Location = new System.Drawing.Point(313, 19);
@@ -106,6 +108,30 @@ namespace DSG
             this.GBCredenciales.TabIndex = 3;
             this.GBCredenciales.TabStop = false;
             this.GBCredenciales.Text = "Credenciales";
+            // 
+            // RBAutenticacionW
+            // 
+            this.RBAutenticacionW.AutoSize = true;
+            this.RBAutenticacionW.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(168)))), ((int)(((byte)(68)))));
+            this.RBAutenticacionW.Checked = true;
+            this.RBAutenticacionW.Location = new System.Drawing.Point(6, 124);
+            this.RBAutenticacionW.Name = "RBAutenticacionW";
+            this.RBAutenticacionW.Size = new System.Drawing.Size(147, 17);
+            this.RBAutenticacionW.TabIndex = 6;
+            this.RBAutenticacionW.TabStop = true;
+            this.RBAutenticacionW.Text = "Autenticacón de windows";
+            this.RBAutenticacionW.UseVisualStyleBackColor = false;
+            this.RBAutenticacionW.CheckedChanged += new System.EventHandler(this.RBAutenticacionW_CheckedChanged);
+            // 
+            // RBAutenticacionS
+            // 
+            this.RBAutenticacionS.AutoSize = true;
+            this.RBAutenticacionS.Location = new System.Drawing.Point(6, 148);
+            this.RBAutenticacionS.Name = "RBAutenticacionS";
+            this.RBAutenticacionS.Size = new System.Drawing.Size(155, 17);
+            this.RBAutenticacionS.TabIndex = 6;
+            this.RBAutenticacionS.Text = "Autenticacón de Sql Server";
+            this.RBAutenticacionS.UseVisualStyleBackColor = true;
             // 
             // TBUsuario
             // 
@@ -126,7 +152,7 @@ namespace DSG
             this.TBUsuario.ReadOnly = false;
             this.TBUsuario.Size = new System.Drawing.Size(218, 25);
             this.TBUsuario.TabIndex = 3;
-            this.TBUsuario.Text_ = "USUARIO";
+            this.TBUsuario.Text_ = "";
             this.TBUsuario.UseSystemPasswordChar = false;
             // 
             // TBContraseña
@@ -148,26 +174,8 @@ namespace DSG
             this.TBContraseña.ReadOnly = false;
             this.TBContraseña.Size = new System.Drawing.Size(218, 25);
             this.TBContraseña.TabIndex = 4;
-            this.TBContraseña.Text_ = "123";
+            this.TBContraseña.Text_ = "";
             this.TBContraseña.UseSystemPasswordChar = true;
-            // 
-            // CBSinCredenciales
-            // 
-            this.CBSinCredenciales.Appearance = System.Windows.Forms.Appearance.Button;
-            this.CBSinCredenciales.AutoSize = true;
-            this.CBSinCredenciales.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(168)))), ((int)(((byte)(68)))));
-            this.CBSinCredenciales.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.CBSinCredenciales.Checked = true;
-            this.CBSinCredenciales.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.CBSinCredenciales.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.CBSinCredenciales.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.CBSinCredenciales.Location = new System.Drawing.Point(6, 134);
-            this.CBSinCredenciales.Name = "CBSinCredenciales";
-            this.CBSinCredenciales.Size = new System.Drawing.Size(96, 23);
-            this.CBSinCredenciales.TabIndex = 5;
-            this.CBSinCredenciales.Text = "Sin Credenciales";
-            this.CBSinCredenciales.UseVisualStyleBackColor = false;
-            this.CBSinCredenciales.CheckedChanged += new System.EventHandler(this.CBSinCredenciales_CheckedChanged);
             // 
             // ListCBTablas
             // 
@@ -211,7 +219,6 @@ namespace DSG
             this.CBBBaseDatos.Name = "CBBBaseDatos";
             this.CBBBaseDatos.Size = new System.Drawing.Size(271, 21);
             this.CBBBaseDatos.TabIndex = 1;
-            this.CBBBaseDatos.Text = "blue-tech";
             // 
             // label6
             // 
@@ -240,7 +247,7 @@ namespace DSG
             this.TBCompanyName.ReadOnly = false;
             this.TBCompanyName.Size = new System.Drawing.Size(271, 25);
             this.TBCompanyName.TabIndex = 2;
-            this.TBCompanyName.Text_ = "TRIDENTE SRL";
+            this.TBCompanyName.Text_ = "";
             this.TBCompanyName.UseSystemPasswordChar = false;
             // 
             // TBServidor
@@ -261,7 +268,7 @@ namespace DSG
             this.TBServidor.ReadOnly = false;
             this.TBServidor.Size = new System.Drawing.Size(271, 25);
             this.TBServidor.TabIndex = 0;
-            this.TBServidor.Text_ = "10.0.0.108";
+            this.TBServidor.Text_ = "";
             this.TBServidor.UseSystemPasswordChar = false;
             // 
             // BTBuscarBaseDatos
@@ -274,7 +281,7 @@ namespace DSG
             this.BTBuscarBaseDatos.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BTBuscarBaseDatos.Location = new System.Drawing.Point(22, 214);
             this.BTBuscarBaseDatos.Name = "BTBuscarBaseDatos";
-            this.BTBuscarBaseDatos.Size = new System.Drawing.Size(230, 29);
+            this.BTBuscarBaseDatos.Size = new System.Drawing.Size(271, 29);
             this.BTBuscarBaseDatos.TabIndex = 6;
             this.BTBuscarBaseDatos.TabStop = false;
             this.BTBuscarBaseDatos.Text = "Buscar Base de datos";
@@ -294,7 +301,7 @@ namespace DSG
             this.BTConeccion.Size = new System.Drawing.Size(230, 29);
             this.BTConeccion.TabIndex = 6;
             this.BTConeccion.TabStop = false;
-            this.BTConeccion.Text = "Conectarse";
+            this.BTConeccion.Text = "Buscar";
             this.BTConeccion.UseVisualStyleBackColor = true;
             this.BTConeccion.Click += new System.EventHandler(this.BTConeccion_Click);
             // 
@@ -327,6 +334,7 @@ namespace DSG
             this.CBView.Size = new System.Drawing.Size(103, 21);
             this.CBView.TabIndex = 7;
             this.CBView.TabStop = false;
+            this.CBView.SelectedIndexChanged += new System.EventHandler(this.CBView_SelectedIndexChanged);
             // 
             // CBMarcarTodasTablas
             // 
@@ -412,7 +420,6 @@ namespace DSG
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.GroupBox GBCredenciales;
-        private System.Windows.Forms.CheckBox CBSinCredenciales;
         private System.Windows.Forms.CheckedListBox ListCBTablas;
         private System.Windows.Forms.GroupBox GBDatosConexion;
         private System.Windows.Forms.GroupBox GBBaseDatos;
@@ -426,6 +433,8 @@ namespace DSG
         private System.Windows.Forms.ComboBox CBView;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox CBBBaseDatos;
+        private System.Windows.Forms.RadioButton RBAutenticacionW;
+        private System.Windows.Forms.RadioButton RBAutenticacionS;
     }
 }
 
