@@ -38,7 +38,7 @@ namespace DSG
             }
         }
 
-        private async void BTConeccion_Click(object sender, System.EventArgs e)
+        private void BTConeccion_Click(object sender, System.EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
 
@@ -110,7 +110,7 @@ namespace DSG
             }
         }
 
-        private async void BTGenerarReporte_Click(object sender, System.EventArgs e)
+        private void BTGenerarReporte_Click(object sender, System.EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
 
@@ -133,47 +133,53 @@ namespace DSG
 
             if (tables.Length > 0)
             {
-                try
+                switch (CBView.SelectedItem)
                 {
-                    
-                    var listTable = await ConnectionString
-                    .GetInstance()
-                    .GetTablesProperty(TBServidor.Text_, CBBBaseDatos.Text, RBAutenticacionW.Checked, tables, TBUsuario.Text_, TBContraseña.Text_);
+                    case "Tablas":
+                        {
+                            /*--La consulta muestra todas las tablas de la base de datos*/
+                            PropertyTables(tables);
 
-                    if(listTable != null)
-                    {
-                        FromReport FromReport = new FromReport();
+                            break;
+                        }
+                    case "Vistas":
+                        {
+                            /*--La consulta muestra todas las vistas de la base de datos*/
+                            StructureViews(tables);
 
-                        Reports.Report report = new Reports.Report();
+                            break;
+                        }
+                    case "Procedimientos":
+                        {
+                            /*--La consulta muestra todos los procedimientos de la base de datos*/
+                            StructureProcedure(tables);
 
-                        report.TBCompanyName.Value = TBCompanyName.Text_;
+                            break;
+                        }
+                    case "Triggers":
+                        {
+                            /*--La consulta muestra todos los triggers de la base de datos*/
+                            StructureTriggers(tables);
 
-                        report.objectDataSource.DataSource = listTable;
+                            break;
+                        }
+                    case "Functions":
+                        {
+                            /*--La consulta muestra todos los Functions de la base de datos*/
 
+                            StructureFunctions(tables);
 
-                        report.reportNameTextBox.Value = "Resporte de tabla : Servidor = " +
-                                                                TBServidor.Text_ + "; " +
-                                                                "Base de datos = " +
-                                                                CBBBaseDatos.Text + ";";
+                            break;
+                        }
+                    default:
+                        {
+                            PropertyTables(tables);
 
-                        FromReport.reportViewer.ShowPrintPreviewButton = true;
-                        FromReport.reportViewer.Report = report;// reportTables;
-                        FromReport.reportViewer.RefreshReport();
-
-                        this.Cursor = Cursors.Default;
-
-                        FromReport.Show();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Error", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-
+                            break;
+                        }
 
                 }
-                catch (System.Exception ex)
-                {
-                }
+
             }
             else
             {
@@ -183,6 +189,78 @@ namespace DSG
             this.Cursor = Cursors.Default;
         }
 
+
+        private async void PropertyTables(string[] tables)
+        {
+            try
+            {
+                var listTable = await ConnectionString
+                .GetInstance()
+                .GetTablesProperty(TBServidor.Text_, CBBBaseDatos.Text, RBAutenticacionW.Checked, tables, TBUsuario.Text_, TBContraseña.Text_);
+
+                if (listTable != null)
+                {
+                    FromReport FromReport = new FromReport();
+
+                    Reports.Report report = new Reports.Report();
+
+                    report.TBCompanyName.Value = TBCompanyName.Text_;
+
+                    report.objectDataSource.DataSource = listTable;
+
+
+                    report.reportNameTextBox.Value = "Resporte de tabla : Servidor = " +
+                                                            TBServidor.Text_ + "; " +
+                                                            "Base de datos = " +
+                                                            CBBBaseDatos.Text + ";";
+
+     
+                    FromReport.reportViewer.ShowPrintPreviewButton = true;
+                    FromReport.reportViewer.ReportSource = report;
+                    FromReport.reportViewer.RefreshReport();
+
+                    this.Cursor = Cursors.Default;
+
+                    FromReport.Show();
+                }
+                else
+                {
+                    MessageBox.Show("Error", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch
+            {
+            }
+        }
+
+        private async void StructureViews(string[] tables)
+        {
+            var listTable = await ConnectionString
+                .GetInstance()
+                .GetStructureViews(TBServidor.Text_, CBBBaseDatos.Text, RBAutenticacionW.Checked, tables, TBUsuario.Text_, TBContraseña.Text_);
+        }
+
+        private async void StructureProcedure(string[] tables)
+        {
+            var listTable = await ConnectionString
+                .GetInstance()
+                .GetStructureProcedures(TBServidor.Text_, CBBBaseDatos.Text, RBAutenticacionW.Checked, tables, TBUsuario.Text_, TBContraseña.Text_);
+        }
+
+        private async void StructureTriggers(string[] tables)
+        {
+            var listTable = await ConnectionString
+                .GetInstance()
+                .GetStructureTriggers(TBServidor.Text_, CBBBaseDatos.Text, RBAutenticacionW.Checked, tables, TBUsuario.Text_, TBContraseña.Text_);
+        }
+
+        private async void StructureFunctions(string[] tables)
+        {
+            var listTable = await ConnectionString
+                .GetInstance()
+                .GetStructureFunctions(TBServidor.Text_, CBBBaseDatos.Text, RBAutenticacionW.Checked, tables, TBUsuario.Text_, TBContraseña.Text_);
+        }
+        
         private async void BTBuscarBaseDatos_Click(object sender, System.EventArgs e)
         {
             try

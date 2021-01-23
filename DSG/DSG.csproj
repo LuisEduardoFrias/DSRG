@@ -92,6 +92,7 @@
     <Compile Include="Forms\DSG.Designer.cs">
       <DependentUpon>DSG.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\Trigger.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Forms\FromReport.cs">

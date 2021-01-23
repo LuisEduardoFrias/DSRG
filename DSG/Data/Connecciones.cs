@@ -135,12 +135,150 @@ namespace DSG
 
             foreach (string tableName in tables)
             {
-                Tables = await ObtenerClausila(sqlCon, sqlComd, tableName, 
+                Tables = await ObtenerClausula(sqlCon, sqlComd, tableName, 
                     await ObtenerCompas(sqlCon, sqlComd, tableName, Tables));
             }
 
             return Tables;
         }
+
+        public async Task<List<string>> GetStructureViews(string server, string database, bool credentials, string[] views, string user = null, string password = null)
+        {
+            SqlConnection sqlCon = new SqlConnection(
+                  "Server=" + server + "; " +
+                  "database=" + database + "; " +
+                  (credentials == true ? "Trusted_connection=True;" : " User Id=" + user + "; Password=" + password + ";"));
+
+            List<string> Listviews = new List<string>();
+
+            SqlCommand sqlComd = null;
+
+            foreach (string viewsName in views)
+            {
+                try
+                {
+                    sqlComd = new SqlCommand($"EXEC sp_helptext N'{database}.dbo.{viewsName}';", sqlCon);
+
+                    sqlCon.Open();
+
+                    SqlDataReader reader = sqlComd.ExecuteReader();
+
+                    while (await reader.ReadAsync())
+                    {
+                        Listviews.Add(reader["Text"].ToString());
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ex.Message.ToString();
+
+                    return null;
+                }
+
+                sqlCon.Close();
+
+                return Listviews;
+            }
+
+            return Listviews;
+        }
+
+        public async Task<List<string>> GetStructureProcedures(string server, string database, bool credentials, string[] procedures, string user = null, string password = null)
+        {
+            SqlConnection sqlCon = new SqlConnection(
+               "Server=" + server + "; " +
+               "database=" + database + "; " +
+               (credentials == true ? "Trusted_connection=True;" : " User Id=" + user + "; Password=" + password + ";"));
+
+            List<string> Listprocedures = new List<string>();
+
+            SqlCommand sqlComd = null;
+
+            foreach (string proceduresName in procedures)
+            {
+                try
+                {
+                    sqlComd = new SqlCommand($"EXEC sp_helptext N'{database}.dbo.{proceduresName}';", sqlCon);
+
+                    sqlCon.Open();
+
+                    SqlDataReader reader = sqlComd.ExecuteReader();
+
+                    while (await reader.ReadAsync())
+                    {
+                        Listprocedures.Add(reader["Text"].ToString());
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ex.Message.ToString();
+
+                    return null;
+                }
+
+                sqlCon.Close();
+
+                return Listprocedures;
+            }
+
+            return Listprocedures;
+        }
+
+        public async Task<List<string>> GetStructureTriggers(string server, string database, bool credentials, string[] triggers, string user = null, string password = null)
+        {
+            SqlConnection sqlCon = new SqlConnection(
+                          "Server=" + server + "; " +
+                          "database=" + database + "; " +
+                          (credentials == true ? "Trusted_connection=True;" : " User Id=" + user + "; Password=" + password + ";"));
+
+            List<string> Listtriggers = new List<string>();
+
+            SqlCommand sqlComd = null;
+
+            foreach (string triggersName in triggers)
+            {
+                try
+                {
+                    sqlComd = new SqlCommand($" SELECT " +
+                                              " Object_name(so.parent_object_id) TableName, " +
+                                              " so.name TrigerName, " +
+                                              " so.create_date[CreateDate], " +
+                                              " sm.definition[Text] " +
+                                              " FROM   sys.objects so " +
+                                              " INNER JOIN sys.sql_modules sm " +
+                                              " ON so.object_id = sm.object_id " +
+                                              " WHERE  so.type = 'TR' ", sqlCon);
+
+                    sqlCon.Open();
+
+                    SqlDataReader reader = sqlComd.ExecuteReader();
+
+                    while (await reader.ReadAsync())
+                    {
+                        Listtriggers.Add(reader["Text"].ToString());
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ex.Message.ToString();
+
+                    return null;
+                }
+
+                sqlCon.Close();
+
+                return Listtriggers;
+            }
+
+            return Listtriggers;
+        }
+
+        public async Task<List<string>> GetStructureFunctions(string server, string database, bool credentials, string[] triggers, string user = null, string password = null)
+        {
+            //https://docs.microsoft.com/es-es/sql/relational-databases/user-defined-functions/view-user-defined-functions?view=sql-server-ver15
+            return new List<string> { };
+        }
+
 
 
         private async Task<List<Table>> ObtenerCompas(SqlConnection sqlCon,SqlCommand sqlComd, string tableName, List<Table> Tables)
@@ -179,7 +317,7 @@ namespace DSG
             return Tables;
         }
 
-        private async Task<List<Table>> ObtenerClausila(SqlConnection sqlCon, SqlCommand sqlComd, string tableName, List<Table> Tables)
+        private async Task<List<Table>> ObtenerClausula(SqlConnection sqlCon, SqlCommand sqlComd, string tableName, List<Table> Tables)
         {
             try
             {
