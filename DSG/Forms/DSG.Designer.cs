@@ -41,6 +41,7 @@ namespace DSG
             this.TBContraseña = new Controles_Personalizado.TextBoxIEP();
             this.ListCBTablas = new System.Windows.Forms.CheckedListBox();
             this.GBDatosConexion = new System.Windows.Forms.GroupBox();
+            this.CBGuardarDatos = new System.Windows.Forms.CheckBox();
             this.CBBBaseDatos = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.TBCompanyName = new Controles_Personalizado.TextBoxIEP();
@@ -61,7 +62,7 @@ namespace DSG
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(19, 38);
+            this.label1.Location = new System.Drawing.Point(19, 57);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(46, 13);
             this.label1.TabIndex = 1;
@@ -70,7 +71,7 @@ namespace DSG
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(19, 94);
+            this.label2.Location = new System.Drawing.Point(19, 113);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(75, 13);
             this.label2.TabIndex = 1;
@@ -79,7 +80,7 @@ namespace DSG
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(13, 21);
+            this.label3.Location = new System.Drawing.Point(13, 22);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(48, 13);
             this.label3.TabIndex = 1;
@@ -88,7 +89,7 @@ namespace DSG
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(13, 75);
+            this.label4.Location = new System.Drawing.Point(13, 76);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(61, 13);
             this.label4.TabIndex = 1;
@@ -104,7 +105,7 @@ namespace DSG
             this.GBCredenciales.Controls.Add(this.label4);
             this.GBCredenciales.Location = new System.Drawing.Point(313, 19);
             this.GBCredenciales.Name = "GBCredenciales";
-            this.GBCredenciales.Size = new System.Drawing.Size(230, 176);
+            this.GBCredenciales.Size = new System.Drawing.Size(230, 189);
             this.GBCredenciales.TabIndex = 3;
             this.GBCredenciales.TabStop = false;
             this.GBCredenciales.Text = "Credenciales";
@@ -114,7 +115,8 @@ namespace DSG
             this.RBAutenticacionW.AutoSize = true;
             this.RBAutenticacionW.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(168)))), ((int)(((byte)(68)))));
             this.RBAutenticacionW.Checked = true;
-            this.RBAutenticacionW.Location = new System.Drawing.Point(6, 124);
+            this.RBAutenticacionW.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.RBAutenticacionW.Location = new System.Drawing.Point(6, 129);
             this.RBAutenticacionW.Name = "RBAutenticacionW";
             this.RBAutenticacionW.Size = new System.Drawing.Size(147, 17);
             this.RBAutenticacionW.TabIndex = 6;
@@ -126,7 +128,8 @@ namespace DSG
             // RBAutenticacionS
             // 
             this.RBAutenticacionS.AutoSize = true;
-            this.RBAutenticacionS.Location = new System.Drawing.Point(6, 148);
+            this.RBAutenticacionS.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.RBAutenticacionS.Location = new System.Drawing.Point(6, 153);
             this.RBAutenticacionS.Name = "RBAutenticacionS";
             this.RBAutenticacionS.Size = new System.Drawing.Size(155, 17);
             this.RBAutenticacionS.TabIndex = 6;
@@ -140,7 +143,7 @@ namespace DSG
             this.TBUsuario.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.TBUsuario.Enabled = false;
             this.TBUsuario.ErrorProvider = true;
-            this.TBUsuario.Location = new System.Drawing.Point(6, 37);
+            this.TBUsuario.Location = new System.Drawing.Point(6, 38);
             this.TBUsuario.MaxLength = 32767;
             this.TBUsuario.Multiline = false;
             this.TBUsuario.Name = "TBUsuario";
@@ -162,7 +165,7 @@ namespace DSG
             this.TBContraseña.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.TBContraseña.Enabled = false;
             this.TBContraseña.ErrorProvider = true;
-            this.TBContraseña.Location = new System.Drawing.Point(6, 91);
+            this.TBContraseña.Location = new System.Drawing.Point(6, 92);
             this.TBContraseña.MaxLength = 32767;
             this.TBContraseña.Multiline = false;
             this.TBContraseña.Name = "TBContraseña";
@@ -196,6 +199,7 @@ namespace DSG
             // 
             // GBDatosConexion
             // 
+            this.GBDatosConexion.Controls.Add(this.CBGuardarDatos);
             this.GBDatosConexion.Controls.Add(this.CBBBaseDatos);
             this.GBDatosConexion.Controls.Add(this.label6);
             this.GBDatosConexion.Controls.Add(this.TBCompanyName);
@@ -205,17 +209,28 @@ namespace DSG
             this.GBDatosConexion.Controls.Add(this.GBCredenciales);
             this.GBDatosConexion.Controls.Add(this.label2);
             this.GBDatosConexion.Controls.Add(this.label1);
-            this.GBDatosConexion.Location = new System.Drawing.Point(12, 12);
+            this.GBDatosConexion.Location = new System.Drawing.Point(12, 19);
             this.GBDatosConexion.Name = "GBDatosConexion";
             this.GBDatosConexion.Size = new System.Drawing.Size(555, 259);
             this.GBDatosConexion.TabIndex = 4;
             this.GBDatosConexion.TabStop = false;
             this.GBDatosConexion.Text = "Datos de conexión";
             // 
+            // CBGuardarDatos
+            // 
+            this.CBGuardarDatos.AutoSize = true;
+            this.CBGuardarDatos.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.CBGuardarDatos.Location = new System.Drawing.Point(22, 27);
+            this.CBGuardarDatos.Name = "CBGuardarDatos";
+            this.CBGuardarDatos.Size = new System.Drawing.Size(128, 17);
+            this.CBGuardarDatos.TabIndex = 9;
+            this.CBGuardarDatos.Text = "Guardar ultimos datos";
+            this.CBGuardarDatos.UseVisualStyleBackColor = true;
+            // 
             // CBBBaseDatos
             // 
             this.CBBBaseDatos.FormattingEnabled = true;
-            this.CBBBaseDatos.Location = new System.Drawing.Point(22, 110);
+            this.CBBBaseDatos.Location = new System.Drawing.Point(22, 129);
             this.CBBBaseDatos.Name = "CBBBaseDatos";
             this.CBBBaseDatos.Size = new System.Drawing.Size(271, 21);
             this.CBBBaseDatos.TabIndex = 1;
@@ -223,7 +238,7 @@ namespace DSG
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(19, 148);
+            this.label6.Location = new System.Drawing.Point(19, 167);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(119, 13);
             this.label6.TabIndex = 8;
@@ -235,7 +250,7 @@ namespace DSG
             this.TBCompanyName.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("TBCompanyName.BackgroundImage")));
             this.TBCompanyName.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.TBCompanyName.ErrorProvider = true;
-            this.TBCompanyName.Location = new System.Drawing.Point(22, 164);
+            this.TBCompanyName.Location = new System.Drawing.Point(22, 183);
             this.TBCompanyName.MaxLength = 32767;
             this.TBCompanyName.Multiline = false;
             this.TBCompanyName.Name = "TBCompanyName";
@@ -256,7 +271,7 @@ namespace DSG
             this.TBServidor.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("TBServidor.BackgroundImage")));
             this.TBServidor.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.TBServidor.ErrorProvider = true;
-            this.TBServidor.Location = new System.Drawing.Point(22, 56);
+            this.TBServidor.Location = new System.Drawing.Point(22, 75);
             this.TBServidor.MaxLength = 32767;
             this.TBServidor.Multiline = false;
             this.TBServidor.Name = "TBServidor";
@@ -279,7 +294,7 @@ namespace DSG
             this.BTBuscarBaseDatos.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.BTBuscarBaseDatos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTBuscarBaseDatos.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BTBuscarBaseDatos.Location = new System.Drawing.Point(22, 214);
+            this.BTBuscarBaseDatos.Location = new System.Drawing.Point(22, 219);
             this.BTBuscarBaseDatos.Name = "BTBuscarBaseDatos";
             this.BTBuscarBaseDatos.Size = new System.Drawing.Size(271, 29);
             this.BTBuscarBaseDatos.TabIndex = 6;
@@ -296,7 +311,7 @@ namespace DSG
             this.BTConeccion.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.BTConeccion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTConeccion.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BTConeccion.Location = new System.Drawing.Point(313, 214);
+            this.BTConeccion.Location = new System.Drawing.Point(313, 219);
             this.BTConeccion.Name = "BTConeccion";
             this.BTConeccion.Size = new System.Drawing.Size(230, 29);
             this.BTConeccion.TabIndex = 6;
@@ -313,7 +328,7 @@ namespace DSG
             this.GBBaseDatos.Controls.Add(this.label7);
             this.GBBaseDatos.Controls.Add(this.label5);
             this.GBBaseDatos.Controls.Add(this.ListCBTablas);
-            this.GBBaseDatos.Location = new System.Drawing.Point(12, 286);
+            this.GBBaseDatos.Location = new System.Drawing.Point(12, 292);
             this.GBBaseDatos.Name = "GBBaseDatos";
             this.GBBaseDatos.Size = new System.Drawing.Size(555, 321);
             this.GBBaseDatos.TabIndex = 5;
@@ -435,6 +450,7 @@ namespace DSG
         private System.Windows.Forms.ComboBox CBBBaseDatos;
         private System.Windows.Forms.RadioButton RBAutenticacionW;
         private System.Windows.Forms.RadioButton RBAutenticacionS;
+        private System.Windows.Forms.CheckBox CBGuardarDatos;
     }
 }
 

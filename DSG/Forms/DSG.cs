@@ -1,7 +1,11 @@
 ﻿
 namespace DSG
 {
+    using global::DSG.Models;
+    using Newtonsoft.Json;
+    using System;
     using System.Drawing;
+    using System.IO;
     using System.Windows.Forms;
     //
 
@@ -18,6 +22,29 @@ namespace DSG
             BTBuscarBaseDatos.Temas(tema);
 
             CBView.SelectedIndex = 0;
+
+
+            if(!Directory.Exists(Directory.GetCurrentDirectory() + @"\Datos"))
+            {
+                Directory.CreateDirectory(Directory.GetCurrentDirectory() + @"\Datos");
+
+                File.Create(Directory.GetCurrentDirectory() + @"\Datos\Datos.json").Close();
+            }
+
+            DatosCredenciales obj = JsonConvert.DeserializeObject<DatosCredenciales>(
+                File.ReadAllText(Directory.GetCurrentDirectory() +  @"\Datos\Datos.json", System.Text.Encoding.UTF8));
+
+            if(obj != null)
+            {
+                TBServidor.Text_ = decrypt(obj.Servidor);
+                CBBBaseDatos.Text = decrypt(obj.BaseDatos);
+                TBUsuario.Text_ = decrypt(obj.Usuario);
+                TBContraseña.Text_ = decrypt(obj.Contraseña);
+                RBAutenticacionW.Checked = obj.AutenticacionWindows == null ? true : obj.AutenticacionWindows;
+                RBAutenticacionS.Checked = !obj.AutenticacionWindows == null ? false : !obj.AutenticacionWindows;
+                TBCompanyName.Text_ = decrypt(obj.NombreEmpresa);
+                CBGuardarDatos.Checked = obj.GuardarDatos == null ? false : obj.GuardarDatos;
+            }
         }
 
         private void RBAutenticacionW_CheckedChanged(object sender, System.EventArgs e)
@@ -57,7 +84,7 @@ namespace DSG
 
                 if(CBBBaseDatos.Text == string.Empty | CBBBaseDatos.SelectedIndex == 0) 
                 {
-                    MessageBox.Show("escriba una base de datos o busque una para lesecionar", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Escriba un nombre de una base de datos o busque una para seleccionar", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             else
@@ -94,6 +121,23 @@ namespace DSG
                 {
                     ListCBTablas.Items.Add(tableName);
                 }
+
+                if(CBGuardarDatos.Checked == true)
+                    using (StreamWriter file = File.CreateText(Directory.GetCurrentDirectory() +  @"\Datos\Datos.json"))
+                    {
+                        JsonSerializer serializer = new JsonSerializer();
+                        serializer.Serialize(file, new DatosCredenciales
+                        {
+                            Servidor = Encrypt(TBServidor.Text_),
+                            BaseDatos = Encrypt(CBBBaseDatos.Text),
+                            Usuario = Encrypt(TBUsuario.Text_),
+                            Contraseña = Encrypt(TBContraseña.Text_),
+                            AutenticacionWindows = RBAutenticacionW.Checked,
+                            NombreEmpresa = Encrypt(TBCompanyName.Text_),
+                            GuardarDatos = CBGuardarDatos.Checked
+                        });
+                    }
+
             }
             catch (System.Exception ex)
             {
@@ -101,7 +145,48 @@ namespace DSG
             }
         }
 
+        #region Encriptaciones
 
+        public string Encrypt(string _stringToEncrypt)
+        {
+            if (!string.IsNullOrEmpty(_stringToEncrypt))
+            {
+                string result = string.Empty;
+
+                byte[] encryted = System.Text.Encoding.Unicode.GetBytes(_stringToEncrypt);
+
+                result = Convert.ToBase64String(encryted);
+
+                return result;
+            }
+
+            return _stringToEncrypt;
+        }
+
+        public string decrypt(string _stringToDecrypt)
+        {
+            if (!string.IsNullOrEmpty(_stringToDecrypt))
+            {
+                try
+                {
+                    string result = string.Empty;
+
+                    byte[] decryted = Convert.FromBase64String(_stringToDecrypt);
+
+                    result = System.Text.Encoding.Unicode.GetString(decryted);
+
+                    return result;
+                }
+                catch
+                {
+                   //return Resource.CorruptedData + _stringToDecrypt;
+                }
+            }
+
+            return _stringToDecrypt;
+        }
+
+        #endregion
         private void CBMarcarTodasTablas_CheckedChanged(object sender, System.EventArgs e)
         {
             for (int i = 0; i < ListCBTablas.Items.Count; i++)
@@ -290,5 +375,6 @@ namespace DSG
         {
             BTConeccion.Text = "Buscar " + CBView.SelectedItem;
         }
+
     }
 }
