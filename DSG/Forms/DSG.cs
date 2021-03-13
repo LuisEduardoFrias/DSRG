@@ -6,6 +6,7 @@ namespace DSG
     using System;
     using System.Drawing;
     using System.IO;
+    using System.Security.Principal;
     using System.Windows.Forms;
     //
 
@@ -274,7 +275,10 @@ namespace DSG
             this.Cursor = Cursors.Default;
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tables"></param>
         private async void PropertyTables(string[] tables)
         {
             try
@@ -318,6 +322,10 @@ namespace DSG
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tables"></param>
         private async void StructureViews(string[] tables)
         {
             var listTable = await ConnectionString
@@ -325,6 +333,10 @@ namespace DSG
                 .GetStructureViews(TBServidor.Text_, CBBBaseDatos.Text, RBAutenticacionW.Checked, tables, TBUsuario.Text_, TBContraseña.Text_);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tables"></param>
         private async void StructureProcedure(string[] tables)
         {
             var listTable = await ConnectionString
@@ -332,6 +344,10 @@ namespace DSG
                 .GetStructureProcedures(TBServidor.Text_, CBBBaseDatos.Text, RBAutenticacionW.Checked, tables, TBUsuario.Text_, TBContraseña.Text_);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tables"></param>
         private async void StructureTriggers(string[] tables)
         {
             var listTable = await ConnectionString
@@ -339,6 +355,10 @@ namespace DSG
                 .GetStructureTriggers(TBServidor.Text_, CBBBaseDatos.Text, RBAutenticacionW.Checked, tables, TBUsuario.Text_, TBContraseña.Text_);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tables"></param>
         private async void StructureFunctions(string[] tables)
         {
             var listTable = await ConnectionString
@@ -346,23 +366,47 @@ namespace DSG
                 .GetStructureFunctions(TBServidor.Text_, CBBBaseDatos.Text, RBAutenticacionW.Checked, tables, TBUsuario.Text_, TBContraseña.Text_);
         }
         
+
+
         private async void BTBuscarBaseDatos_Click(object sender, System.EventArgs e)
         {
             try
             {
-                this.Cursor = Cursors.WaitCursor;
-
-                CBBBaseDatos.Items.Add("Seleccione una Base de datos");
-
-                foreach (string tableName in await ConnectionString
-                .GetInstance()
-                .GetDataBases(TBServidor.Text_, RBAutenticacionW.Checked, TBUsuario.Text_, TBContraseña.Text_))
+                if(TBServidor.IsEmpty())
                 {
-                    CBBBaseDatos.Items.Add(tableName);
+                    if (RBAutenticacionW.Checked == false)
+                    {
+                        TBUsuario.IsEmptyErrorProvider();
+                        TBContraseña.IsEmptyErrorProvider();
+                    }
+
+                    if (TBServidor.IsEmpty())
+                    {
+                        MessageBox.Show("El campo servidor esta en blanco.\nInserte algunos de los nombres locales.\n\n" +
+                            $"- {WindowsIdentity.GetCurrent().Name}\n" +
+                            "- .\n" +
+                            "- local"
+                            , "Información",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                 }
+                else
+                {
+                    this.Cursor = Cursors.WaitCursor;
 
-                CBBBaseDatos.SelectedIndex = 0;
+                    CBBBaseDatos.Items.Clear();
 
+                    CBBBaseDatos.Items.Add("Seleccione una Base de datos");
+
+                    foreach (string tableName in await ConnectionString
+                    .GetInstance()
+                    .GetDataBases(TBServidor.Text_, RBAutenticacionW.Checked, TBUsuario.Text_, TBContraseña.Text_))
+                    {
+                        CBBBaseDatos.Items.Add(tableName);
+                    }
+
+                    CBBBaseDatos.SelectedIndex = 0;
+                }
             }
             catch (System.Exception ex)
             {

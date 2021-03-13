@@ -31,11 +31,11 @@ namespace DSG
         public async Task<List<string>> GetDataBases(string server, bool credentials, string user = null, string password = null)
         {
             SqlConnection sqlCon = new SqlConnection(
-                "Server=" + server + "; " +
+               $"Server={server}; " +
                 "database=; " +
-                (credentials == true ? "Trusted_connection=True;" : " User Id=" + user + "; Password=" + password + ";"));
+                (credentials == true ? "Trusted_connection=True;" : $" User Id={user}; Password={password};"));
 
-            SqlCommand sqlComd = new SqlCommand("SELECT  * FROM sys.databases WHERE database_id > 4 ORDER BY database_id  ASC; ", sqlCon);
+            SqlCommand sqlComd = new SqlCommand("SELECT * FROM sys.databases WHERE database_id > 4 ORDER BY database_id  ASC; ", sqlCon);
 
             sqlCon.Open();
 
