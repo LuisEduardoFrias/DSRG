@@ -4,11 +4,9 @@ namespace DSG
     using System;
     using System.Collections.Generic;
     using System.Data.SqlClient;
-    using System.Data.SqlTypes;
     using System.Linq;
     using System.Threading.Tasks;
-    //
-    using Models;
+    using DSRG.Models;
     //
 
     public class ConnectionString
@@ -62,7 +60,7 @@ namespace DSG
                 "database=" + database + "; " + 
                 (credentials == true ? "Trusted_connection=True;" : " User Id=" + user + "; Password=" + password + ";"));
 
-            SqlCommand sqlComd = null;
+            SqlCommand sqlComd;
 
             switch (obtener)
             {
@@ -151,7 +149,7 @@ namespace DSG
 
             List<string> Listviews = new List<string>();
 
-            SqlCommand sqlComd = null;
+            SqlCommand sqlComd;
 
             foreach (string viewsName in views)
             {
@@ -192,7 +190,7 @@ namespace DSG
 
             List<string> Listprocedures = new List<string>();
 
-            SqlCommand sqlComd = null;
+            SqlCommand sqlComd;
 
             foreach (string proceduresName in procedures)
             {
@@ -233,7 +231,7 @@ namespace DSG
 
             List<string> Listtriggers = new List<string>();
 
-            SqlCommand sqlComd = null;
+            SqlCommand sqlComd;
 
             foreach (string triggersName in triggers)
             {

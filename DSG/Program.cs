@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace DSG
+﻿
+namespace DSRG
 {
+    using System;
+    using System.Windows.Forms;
+    //
+
     static class Program
     {
         /// <summary>
@@ -16,7 +15,7 @@ namespace DSG
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new DSG());
+            Application.Run(new DSRG());
         }
     }
 }

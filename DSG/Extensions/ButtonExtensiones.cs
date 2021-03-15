@@ -1,26 +1,23 @@
 ﻿
-namespace DSG
+namespace DSRG
 {
     using System;
     using System.Windows.Forms;
-
-
-    public enum Tema
-    {
-        Negro,
-        Blanco,
-        Azul,
-        Verde,
-        Gris,
-        Naranja,
-        Amarillo,
-        DarMode
-    }
+    using static global::DSRG.Services.Enums;
 
     static class ButtonExtensiones
     {
-        public static void Temas(this Button Button, Tema tema_)
+        private static Theme _Tema;
+        public static Theme Tema(this Button Button)
         {
+            return _Tema;
+        }
+
+
+        public static void Temas(this Button Button, Theme tema)
+        {
+            _Tema = tema;
+
             Button.BackColor = System.Drawing.Color.Transparent;
             Button.BackgroundImage = global::DSG.Properties.Resources.ButtomBackgroundBlue1;
             Button.BackgroundImageLayout = ImageLayout.Stretch;
@@ -34,52 +31,52 @@ namespace DSG
 
             Button.ForeColor = System.Drawing.Color.Black;
 
-            switch (tema_)
+            switch (tema)
             {
-                case Tema.Azul:
+                case Theme.Azul:
                     {
                         Button.BackgroundImage = global::DSG.Properties.Resources.ButtomBackgroundBlue3;
 
                         break;
                     }
-                case Tema.Blanco:
+                case Theme.Blanco:
                     {
                         Button.BackgroundImage = global::DSG.Properties.Resources.ButtomBackgroundWhite3;
 
                         break;
                     }
-                case Tema.Amarillo:
+                case Theme.Amarillo:
                     {
                         Button.BackgroundImage = global::DSG.Properties.Resources.ButtomBackgroundYellow3;
 
                         break;
                     }
-                case Tema.Gris:
+                case Theme.Gris:
                     {
                         Button.BackgroundImage = global::DSG.Properties.Resources.ButtomBackgroundGray3;
 
                         break;
                     }
-                case Tema.Negro:
+                case Theme.Negro:
                     {
                         Button.BackgroundImage = global::DSG.Properties.Resources.ButtomBackgroundBlack3;
                         Button.ForeColor = System.Drawing.Color.White;
 
                         break;
                     }
-                case Tema.Naranja:
+                case Theme.Naranja:
                     {
                         Button.BackgroundImage = global::DSG.Properties.Resources.ButtomBackgroundOrange3;
 
                         break;
                     }
-                case Tema.Verde:
+                case Theme.Verde:
                     {
                         Button.BackgroundImage = global::DSG.Properties.Resources.ButtomBackgroundGreen3;
 
                         break;
                     }
-                case Tema.DarMode:
+                case Theme.DarMode:
                     {
                         Button.BackgroundImage = global::DSG.Properties.Resources.ButtomBackgroundWhite3;
 
@@ -92,52 +89,52 @@ namespace DSG
             {
                 Button.ForeColor = System.Drawing.Color.Black;
 
-                switch (tema_)
+                switch (tema)
                 {
-                    case Tema.Azul:
+                    case Theme.Azul:
                         {
                             ((Button)sender).BackgroundImage = global::DSG.Properties.Resources.ButtomBackgroundBlue3;
 
                             break;
                         }
-                    case Tema.Blanco:
+                    case Theme.Blanco:
                         {
                             ((Button)sender).BackgroundImage = global::DSG.Properties.Resources.ButtomBackgroundWhite3;
 
                             break;
                         }
-                    case Tema.Amarillo:
+                    case Theme.Amarillo:
                         {
                             ((Button)sender).BackgroundImage = global::DSG.Properties.Resources.ButtomBackgroundYellow3;
 
                             break;
                         }
-                    case Tema.Gris:
+                    case Theme.Gris:
                         {
                             ((Button)sender).BackgroundImage = global::DSG.Properties.Resources.ButtomBackgroundGray3;
 
                             break;
                         }
-                    case Tema.Negro:
+                    case Theme.Negro:
                         {
                             ((Button)sender).BackgroundImage = global::DSG.Properties.Resources.ButtomBackgroundBlack3;
                             ((Button)sender).ForeColor = System.Drawing.Color.White;
 
                             break;
                         }
-                    case Tema.Naranja:
+                    case Theme.Naranja:
                         {
                             ((Button)sender).BackgroundImage = global::DSG.Properties.Resources.ButtomBackgroundOrange3;
 
                             break;
                         }
-                    case Tema.Verde:
+                    case Theme.Verde:
                         {
                             ((Button)sender).BackgroundImage = global::DSG.Properties.Resources.ButtomBackgroundGreen3;
 
                             break;
                         }
-                    case Tema.DarMode:
+                    case Theme.DarMode:
                         {
                             Button.BackgroundImage = global::DSG.Properties.Resources.ButtomBackgroundWhite3;
 
@@ -151,52 +148,52 @@ namespace DSG
             {
                 Button.ForeColor = System.Drawing.Color.Black;
 
-                switch (tema_)
+                switch (tema)
                 {
-                    case Tema.Azul:
+                    case Theme.Azul:
                         {
                             ((Button)sender).BackgroundImage = global::DSG.Properties.Resources.ButtomBackgroundBlue2;
 
                             break;
                         }
-                    case Tema.Blanco:
+                    case Theme.Blanco:
                         {
                             ((Button)sender).BackgroundImage = global::DSG.Properties.Resources.ButtomBackgroundWhite2;
 
                             break;
                         }
-                    case Tema.Amarillo:
+                    case Theme.Amarillo:
                         {
                             ((Button)sender).BackgroundImage = global::DSG.Properties.Resources.ButtomBackgroundYellow2;
 
                             break;
                         }
-                    case Tema.Gris:
+                    case Theme.Gris:
                         {
                             ((Button)sender).BackgroundImage = global::DSG.Properties.Resources.ButtomBackgroundGray2;
 
                             break;
                         }
-                    case Tema.Negro:
+                    case Theme.Negro:
                         {
                             ((Button)sender).BackgroundImage = global::DSG.Properties.Resources.ButtomBackgroundBlack2;
                             ((Button)sender).ForeColor = System.Drawing.Color.White;
 
                             break;
                         }
-                    case Tema.Naranja:
+                    case Theme.Naranja:
                         {
                             ((Button)sender).BackgroundImage = global::DSG.Properties.Resources.ButtomBackgroundOrange2;
 
                             break;
                         }
-                    case Tema.Verde:
+                    case Theme.Verde:
                         {
                             ((Button)sender).BackgroundImage = global::DSG.Properties.Resources.ButtomBackgroundGreen2;
 
                             break;
                         }
-                    case Tema.DarMode:
+                    case Theme.DarMode:
                         {
                             Button.BackgroundImage = global::DSG.Properties.Resources.ButtomBackgroundWhite3;
 
@@ -210,52 +207,52 @@ namespace DSG
             {
                 Button.ForeColor = System.Drawing.Color.Black;
 
-                switch (tema_)
+                switch (tema)
                 {
-                    case Tema.Azul:
+                    case Theme.Azul:
                         {
                             ((Button)sender).BackgroundImage = global::DSG.Properties.Resources.ButtomBackgroundBlue1;
 
                             break;
                         }
-                    case Tema.Blanco:
+                    case Theme.Blanco:
                         {
                             ((Button)sender).BackgroundImage = global::DSG.Properties.Resources.ButtomBackgroundWhite1;
 
                             break;
                         }
-                    case Tema.Amarillo:
+                    case Theme.Amarillo:
                         {
                             ((Button)sender).BackgroundImage = global::DSG.Properties.Resources.ButtomBackgroundYellow1;
 
                             break;
                         }
-                    case Tema.Gris:
+                    case Theme.Gris:
                         {
                             ((Button)sender).BackgroundImage = global::DSG.Properties.Resources.ButtomBackgroundGray1;
 
                             break;
                         }
-                    case Tema.Negro:
+                    case Theme.Negro:
                         {
                             ((Button)sender).BackgroundImage = global::DSG.Properties.Resources.ButtomBackgroundBlack1;
                             ((Button)sender).ForeColor = System.Drawing.Color.White;
 
                             break;
                         }
-                    case Tema.Naranja:
+                    case Theme.Naranja:
                         {
                             ((Button)sender).BackgroundImage = global::DSG.Properties.Resources.ButtomBackgroundOrange1;
 
                             break;
                         }
-                    case Tema.Verde:
+                    case Theme.Verde:
                         {
                             ((Button)sender).BackgroundImage = global::DSG.Properties.Resources.ButtomBackgroundGreen1;
 
                             break;
                         }
-                    case Tema.DarMode:
+                    case Theme.DarMode:
                         {
                             Button.BackgroundImage = global::DSG.Properties.Resources.ButtomBackgroundWhite3;
 
@@ -269,52 +266,52 @@ namespace DSG
             {
                 Button.ForeColor = System.Drawing.Color.Black;
 
-                switch (tema_)
+                switch (tema)
                 {
-                    case Tema.Azul:
+                    case Theme.Azul:
                         {
                             ((Button)sender).BackgroundImage = global::DSG.Properties.Resources.ButtomBackgroundBlue2;
 
                             break;
                         }
-                    case Tema.Blanco:
+                    case Theme.Blanco:
                         {
                             ((Button)sender).BackgroundImage = global::DSG.Properties.Resources.ButtomBackgroundWhite2;
 
                             break;
                         }
-                    case Tema.Amarillo:
+                    case Theme.Amarillo:
                         {
                             ((Button)sender).BackgroundImage = global::DSG.Properties.Resources.ButtomBackgroundYellow2;
 
                             break;
                         }
-                    case Tema.Gris:
+                    case Theme.Gris:
                         {
                             ((Button)sender).BackgroundImage = global::DSG.Properties.Resources.ButtomBackgroundGray2;
 
                             break;
                         }
-                    case Tema.Negro:
+                    case Theme.Negro:
                         {
                             ((Button)sender).BackgroundImage = global::DSG.Properties.Resources.ButtomBackgroundBlack2;
                             ((Button)sender).ForeColor = System.Drawing.Color.White;
 
                             break;
                         }
-                    case Tema.Naranja:
+                    case Theme.Naranja:
                         {
                             ((Button)sender).BackgroundImage = global::DSG.Properties.Resources.ButtomBackgroundOrange2;
 
                             break;
                         }
-                    case Tema.Verde:
+                    case Theme.Verde:
                         {
                             ((Button)sender).BackgroundImage = global::DSG.Properties.Resources.ButtomBackgroundGreen2;
 
                             break;
                         }
-                    case Tema.DarMode:
+                    case Theme.DarMode:
                         {
                             Button.BackgroundImage = global::DSG.Properties.Resources.ButtomBackgroundWhite3;
 
@@ -324,6 +321,7 @@ namespace DSG
 
             });
 
+            
         }
 
     }

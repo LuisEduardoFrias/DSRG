@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DSG", "DSG\DSG.csproj", "{81F669FD-EB44-4D93-873F-B80FF96F5949}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DSRG", "DSG\DSRG.csproj", "{81F669FD-EB44-4D93-873F-B80FF96F5949}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Controles_Personalizado", "DSG\Controles_Personalizado\Controles_Personalizado.csproj", "{C1640024-9A81-4016-A138-1C144EEBE48C}"
 EndProject

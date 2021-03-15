@@ -109,6 +109,32 @@ namespace Controles_Personalizado
             }
         }
 
+        public Color ForeColor
+        {
+            get
+            {
+                return TextBox_.ForeColor;
+            }
+
+            set
+            {
+                TextBox_.ForeColor = value;
+            }
+        }
+
+        public Color BackColor
+        {
+            get
+            {
+                return TextBox_.BackColor;
+            }
+
+            set
+            {
+                TextBox_.BackColor = value;
+            }
+        }
+
         public bool ReadOnly
         {
             get

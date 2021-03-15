@@ -1,5 +1,5 @@
 
-namespace DSG.Reports
+namespace DSRG.Reports
 {
     /// <summary>
     /// Summary description for Report1.

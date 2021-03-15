@@ -1,5 +1,5 @@
 ﻿
-namespace DSG.Models
+namespace DSRG.Models
 {
     public class Table
     {

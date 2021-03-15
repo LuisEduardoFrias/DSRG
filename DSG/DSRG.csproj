@@ -13,7 +13,7 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>C:\Users\Luis\Desktop\DCG\</PublishUrl>
+    <PublishUrl>C:\Users\Desarrollador 1\Desktop\DSG exe\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -23,7 +23,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>3</ApplicationRevision>
+    <ApplicationRevision>5</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -64,11 +64,19 @@
     <SignManifests>false</SignManifests>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Guna.UI">
+      <HintPath>..\packages\Guna.UI\Lib\Guna.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Guna.UI2">
+      <HintPath>..\..\..\Downloads\_Getintopc.com_Guna_UI_Framework_Ultimate_v2.0.0.1\Guna_UI_Framework_Ultimate_v2.0.0.1\Guna.UI-Framework-Lib-master\Guna.UI2 WinForms\.net 4.0\Guna.UI2.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -89,11 +97,18 @@
   <ItemGroup>
     <Compile Include="Extensions\ButtonExtensiones.cs" />
     <Compile Include="Data\Connecciones.cs" />
-    <Compile Include="Forms\DSG.cs">
+    <Compile Include="Extensions\FormExtensiones.cs" />
+    <Compile Include="Forms\DSRG.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\DSG.Designer.cs">
-      <DependentUpon>DSG.cs</DependentUpon>
+    <Compile Include="Forms\DSRG.Designer.cs">
+      <DependentUpon>DSRG.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Tema.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Tema.Designer.cs">
+      <DependentUpon>Tema.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\DatosCredenciales.cs" />
     <Compile Include="Models\Trigger.cs" />
@@ -112,8 +127,12 @@
     <Compile Include="Reports\Report.Designer.cs">
       <DependentUpon>Report.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Forms\DSG.resx">
-      <DependentUpon>DSG.cs</DependentUpon>
+    <Compile Include="Services\Services.cs" />
+    <EmbeddedResource Include="Forms\DSRG.resx">
+      <DependentUpon>DSRG.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Tema.resx">
+      <DependentUpon>Tema.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -132,7 +151,6 @@
     <EmbeddedResource Include="Reports\Report.resx">
       <DependentUpon>Report.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="DSG_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -189,6 +207,14 @@
     <Content Include="Recursos\ButtomBackgroundYellow3.png" />
     <Content Include="Recursos\Report.png" />
     <Content Include="Report.ico" />
+    <None Include="Resources\Normal White.png" />
+    <None Include="Resources\Minimize White.png" />
+    <None Include="Resources\Maximize White.png" />
+    <None Include="Resources\Close White.png" />
+    <None Include="Resources\Normal Black.png" />
+    <None Include="Resources\Minimize Black.png" />
+    <None Include="Resources\Maximize Black.png" />
+    <None Include="Resources\Close Black.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

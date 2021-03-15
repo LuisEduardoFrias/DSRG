@@ -1,5 +1,5 @@
 
-namespace DSG.Reports
+namespace DSRG.Reports
 {
     partial class Report
     {
@@ -18,6 +18,7 @@ namespace DSG.Reports
             Telerik.Reporting.Drawing.StyleRule styleRule4 = new Telerik.Reporting.Drawing.StyleRule();
             Telerik.Reporting.Drawing.StyleRule styleRule5 = new Telerik.Reporting.Drawing.StyleRule();
             this.tableNameGroupFooterSection = new Telerik.Reporting.GroupFooterSection();
+            this.textBox8 = new Telerik.Reporting.TextBox();
             this.tableNameGroupHeaderSection = new Telerik.Reporting.GroupHeaderSection();
             this.textBox1 = new Telerik.Reporting.TextBox();
             this.textBox2 = new Telerik.Reporting.TextBox();
@@ -26,6 +27,8 @@ namespace DSG.Reports
             this.propertyNameCaptionTextBox = new Telerik.Reporting.TextBox();
             this.propertyTypeCaptionTextBox = new Telerik.Reporting.TextBox();
             this.textBox4 = new Telerik.Reporting.TextBox();
+            this.textBox11 = new Telerik.Reporting.TextBox();
+            this.textBox9 = new Telerik.Reporting.TextBox();
             this.objectDataSource = new Telerik.Reporting.ObjectDataSource();
             this.pageHeader = new Telerik.Reporting.PageHeaderSection();
             this.reportNameTextBox = new Telerik.Reporting.TextBox();
@@ -40,11 +43,9 @@ namespace DSG.Reports
             this.propertyNameDataTextBox = new Telerik.Reporting.TextBox();
             this.propertyTypeDataTextBox = new Telerik.Reporting.TextBox();
             this.textBox5 = new Telerik.Reporting.TextBox();
-            this.textBox8 = new Telerik.Reporting.TextBox();
             this.textBox10 = new Telerik.Reporting.TextBox();
-            this.textBox11 = new Telerik.Reporting.TextBox();
             this.textBox12 = new Telerik.Reporting.TextBox();
-            this.textBox9 = new Telerik.Reporting.TextBox();
+            this.textBox6 = new Telerik.Reporting.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             // 
             // tableNameGroupFooterSection
@@ -62,9 +63,25 @@ namespace DSG.Reports
             this.tableNameGroupFooterSection.Style.BorderWidth.Left = Telerik.Reporting.Drawing.Unit.Point(1D);
             this.tableNameGroupFooterSection.Style.BorderWidth.Right = Telerik.Reporting.Drawing.Unit.Point(1D);
             // 
+            // textBox8
+            // 
+            this.textBox8.CanGrow = true;
+            this.textBox8.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Cm(0.3D), Telerik.Reporting.Drawing.Unit.Cm(0.026D));
+            this.textBox8.Name = "textBox8";
+            this.textBox8.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Cm(19.1D), Telerik.Reporting.Drawing.Unit.Cm(0.6D));
+            this.textBox8.Style.BorderStyle.Default = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.textBox8.Style.BorderStyle.Left = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.textBox8.Style.BorderStyle.Right = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.textBox8.Style.BorderStyle.Top = Telerik.Reporting.Drawing.BorderType.None;
+            this.textBox8.Style.BorderWidth.Bottom = Telerik.Reporting.Drawing.Unit.Point(1D);
+            this.textBox8.Style.Font.Name = "Arial";
+            this.textBox8.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(10D);
+            this.textBox8.StyleName = "Data";
+            this.textBox8.Value = "";
+            // 
             // tableNameGroupHeaderSection
             // 
-            this.tableNameGroupHeaderSection.Height = Telerik.Reporting.Drawing.Unit.Cm(1.44D);
+            this.tableNameGroupHeaderSection.Height = Telerik.Reporting.Drawing.Unit.Cm(0.9D);
             this.tableNameGroupHeaderSection.Items.AddRange(new Telerik.Reporting.ReportItemBase[] {
             this.textBox1,
             this.textBox2});
@@ -81,7 +98,7 @@ namespace DSG.Reports
             // textBox1
             // 
             this.textBox1.CanGrow = true;
-            this.textBox1.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Cm(0.3D), Telerik.Reporting.Drawing.Unit.Cm(0.84D));
+            this.textBox1.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Cm(0.3D), Telerik.Reporting.Drawing.Unit.Cm(0.24D));
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Cm(1.5D), Telerik.Reporting.Drawing.Unit.Cm(0.6D));
             this.textBox1.Style.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(134)))), ((int)(((byte)(67)))));
@@ -98,7 +115,7 @@ namespace DSG.Reports
             // textBox2
             // 
             this.textBox2.CanGrow = true;
-            this.textBox2.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Cm(1.8D), Telerik.Reporting.Drawing.Unit.Cm(0.84D));
+            this.textBox2.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Cm(1.8D), Telerik.Reporting.Drawing.Unit.Cm(0.24D));
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Cm(17.6D), Telerik.Reporting.Drawing.Unit.Cm(0.6D));
             this.textBox2.Style.BorderStyle.Bottom = Telerik.Reporting.Drawing.BorderType.None;
@@ -119,6 +136,8 @@ namespace DSG.Reports
             // labelsGroupFooterSection
             // 
             this.labelsGroupFooterSection.Height = Telerik.Reporting.Drawing.Unit.Cm(0.132D);
+            this.labelsGroupFooterSection.Items.AddRange(new Telerik.Reporting.ReportItemBase[] {
+            this.textBox6});
             this.labelsGroupFooterSection.Name = "labelsGroupFooterSection";
             this.labelsGroupFooterSection.Style.BorderStyle.Default = Telerik.Reporting.Drawing.BorderType.None;
             this.labelsGroupFooterSection.Style.BorderStyle.Left = Telerik.Reporting.Drawing.BorderType.None;
@@ -195,6 +214,38 @@ namespace DSG.Reports
             this.textBox4.StyleName = "Caption";
             this.textBox4.Value = "Longitud";
             // 
+            // textBox11
+            // 
+            this.textBox11.CanGrow = true;
+            this.textBox11.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Cm(17.4D), Telerik.Reporting.Drawing.Unit.Cm(0D));
+            this.textBox11.Name = "textBox11";
+            this.textBox11.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Cm(2D), Telerik.Reporting.Drawing.Unit.Cm(0.6D));
+            this.textBox11.Style.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(134)))), ((int)(((byte)(67)))));
+            this.textBox11.Style.BorderStyle.Default = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.textBox11.Style.BorderWidth.Default = Telerik.Reporting.Drawing.Unit.Point(0D);
+            this.textBox11.Style.BorderWidth.Right = Telerik.Reporting.Drawing.Unit.Point(1D);
+            this.textBox11.Style.Color = System.Drawing.Color.Black;
+            this.textBox11.Style.Font.Bold = true;
+            this.textBox11.Style.Font.Name = "Times New Roman";
+            this.textBox11.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(13D);
+            this.textBox11.StyleName = "Caption";
+            this.textBox11.Value = "Es Null";
+            // 
+            // textBox9
+            // 
+            this.textBox9.CanGrow = true;
+            this.textBox9.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Cm(0.3D), Telerik.Reporting.Drawing.Unit.Cm(0D));
+            this.textBox9.Name = "textBox9";
+            this.textBox9.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Cm(5.5D), Telerik.Reporting.Drawing.Unit.Cm(0.6D));
+            this.textBox9.Style.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(134)))), ((int)(((byte)(67)))));
+            this.textBox9.Style.BorderStyle.Left = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.textBox9.Style.Color = System.Drawing.Color.Black;
+            this.textBox9.Style.Font.Bold = true;
+            this.textBox9.Style.Font.Name = "Times New Roman";
+            this.textBox9.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(13D);
+            this.textBox9.StyleName = "Caption";
+            this.textBox9.Value = " Nombre de restricción";
+            // 
             // objectDataSource
             // 
             this.objectDataSource.Name = "objectDataSource";
@@ -258,7 +309,7 @@ namespace DSG.Reports
             // 
             // reportHeader
             // 
-            this.reportHeader.Height = Telerik.Reporting.Drawing.Unit.Cm(2.053D);
+            this.reportHeader.Height = Telerik.Reporting.Drawing.Unit.Cm(1.386D);
             this.reportHeader.Items.AddRange(new Telerik.Reporting.ReportItemBase[] {
             this.TBCompanyName});
             this.reportHeader.Name = "reportHeader";
@@ -271,7 +322,7 @@ namespace DSG.Reports
             this.TBCompanyName.Style.Color = System.Drawing.Color.Black;
             this.TBCompanyName.Style.Font.Bold = true;
             this.TBCompanyName.Style.Font.Name = "Times New Roman";
-            this.TBCompanyName.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(20D);
+            this.TBCompanyName.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(30D);
             this.TBCompanyName.StyleName = "Title";
             this.TBCompanyName.Value = "Nombre de la empresa";
             // 
@@ -347,22 +398,6 @@ namespace DSG.Reports
             this.textBox5.StyleName = "Data";
             this.textBox5.Value = "= Fields.PropertyLeangth";
             // 
-            // textBox8
-            // 
-            this.textBox8.CanGrow = true;
-            this.textBox8.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Cm(0.3D), Telerik.Reporting.Drawing.Unit.Cm(0.026D));
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Cm(19.1D), Telerik.Reporting.Drawing.Unit.Cm(0.6D));
-            this.textBox8.Style.BorderStyle.Default = Telerik.Reporting.Drawing.BorderType.Solid;
-            this.textBox8.Style.BorderStyle.Left = Telerik.Reporting.Drawing.BorderType.Solid;
-            this.textBox8.Style.BorderStyle.Right = Telerik.Reporting.Drawing.BorderType.Solid;
-            this.textBox8.Style.BorderStyle.Top = Telerik.Reporting.Drawing.BorderType.None;
-            this.textBox8.Style.BorderWidth.Bottom = Telerik.Reporting.Drawing.Unit.Point(1D);
-            this.textBox8.Style.Font.Name = "Arial";
-            this.textBox8.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(10D);
-            this.textBox8.StyleName = "Data";
-            this.textBox8.Value = "";
-            // 
             // textBox10
             // 
             this.textBox10.CanGrow = true;
@@ -378,23 +413,6 @@ namespace DSG.Reports
             this.textBox10.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(10D);
             this.textBox10.StyleName = "Data";
             this.textBox10.Value = "=Fields.ConstraintName";
-            // 
-            // textBox11
-            // 
-            this.textBox11.CanGrow = true;
-            this.textBox11.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Cm(17.4D), Telerik.Reporting.Drawing.Unit.Cm(0D));
-            this.textBox11.Name = "textBox11";
-            this.textBox11.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Cm(2D), Telerik.Reporting.Drawing.Unit.Cm(0.6D));
-            this.textBox11.Style.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(134)))), ((int)(((byte)(67)))));
-            this.textBox11.Style.BorderStyle.Default = Telerik.Reporting.Drawing.BorderType.Solid;
-            this.textBox11.Style.BorderWidth.Default = Telerik.Reporting.Drawing.Unit.Point(0D);
-            this.textBox11.Style.BorderWidth.Right = Telerik.Reporting.Drawing.Unit.Point(1D);
-            this.textBox11.Style.Color = System.Drawing.Color.Black;
-            this.textBox11.Style.Font.Bold = true;
-            this.textBox11.Style.Font.Name = "Times New Roman";
-            this.textBox11.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(13D);
-            this.textBox11.StyleName = "Caption";
-            this.textBox11.Value = "Es Null";
             // 
             // textBox12
             // 
@@ -413,20 +431,22 @@ namespace DSG.Reports
             this.textBox12.StyleName = "Data";
             this.textBox12.Value = "= Fields.IsNullable";
             // 
-            // textBox9
+            // textBox6
             // 
-            this.textBox9.CanGrow = true;
-            this.textBox9.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Cm(0.3D), Telerik.Reporting.Drawing.Unit.Cm(0D));
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Cm(5.5D), Telerik.Reporting.Drawing.Unit.Cm(0.6D));
-            this.textBox9.Style.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(134)))), ((int)(((byte)(67)))));
-            this.textBox9.Style.BorderStyle.Left = Telerik.Reporting.Drawing.BorderType.Solid;
-            this.textBox9.Style.Color = System.Drawing.Color.Black;
-            this.textBox9.Style.Font.Bold = true;
-            this.textBox9.Style.Font.Name = "Times New Roman";
-            this.textBox9.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(13D);
-            this.textBox9.StyleName = "Caption";
-            this.textBox9.Value = " Nombre de restricción";
+            this.textBox6.CanGrow = true;
+            this.textBox6.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Cm(0.3D), Telerik.Reporting.Drawing.Unit.Cm(0D));
+            this.textBox6.Name = "textBox6";
+            this.textBox6.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Cm(19.1D), Telerik.Reporting.Drawing.Unit.Cm(0.132D));
+            this.textBox6.Style.BorderStyle.Bottom = Telerik.Reporting.Drawing.BorderType.None;
+            this.textBox6.Style.BorderStyle.Default = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.textBox6.Style.BorderStyle.Left = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.textBox6.Style.BorderStyle.Right = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.textBox6.Style.BorderStyle.Top = Telerik.Reporting.Drawing.BorderType.None;
+            this.textBox6.Style.BorderWidth.Bottom = Telerik.Reporting.Drawing.Unit.Point(1D);
+            this.textBox6.Style.Font.Name = "Arial";
+            this.textBox6.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(10D);
+            this.textBox6.StyleName = "Data";
+            this.textBox6.Value = "";
             // 
             // Report
             // 
@@ -526,5 +546,6 @@ namespace DSG.Reports
         private Telerik.Reporting.TextBox textBox11;
         private Telerik.Reporting.TextBox textBox12;
         private Telerik.Reporting.TextBox textBox9;
+        private Telerik.Reporting.TextBox textBox6;
     }
 }

@@ -1,5 +1,5 @@
 ﻿
-namespace DSG
+namespace DSRG
 {
     partial class FromReport
     {
@@ -29,6 +29,7 @@ namespace DSG
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FromReport));
             this.reportViewer = new Telerik.ReportViewer.WinForms.ReportViewer();
             this.SuspendLayout();
             // 
@@ -47,6 +48,7 @@ namespace DSG
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.reportViewer);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FromReport";
             this.Text = "Report";
             this.ResumeLayout(false);
