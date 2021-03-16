@@ -3,41 +3,44 @@ namespace DSG
 {
     using System;
     using System.Collections.Generic;
-    using System.Data.SqlClient;
+    using sql = System.Data.SqlClient;
     using System.Linq;
     using System.Threading.Tasks;
     using DSRG.Models;
+    using DSG.Interfaces;
+    using System.Data.SqlClient;
+
     //
 
-    public class ConnectionString
+    public class SqlServerConnection : IConnection<sql.SqlConnection, sql.SqlCommand>
     {
-        private static ConnectionString Instance;
+        private static SqlServerConnection Instance;
 
-        public static ConnectionString GetInstance()
+        public static SqlServerConnection GetInstance()
         {
             if (Instance == null)
-                Instance = new ConnectionString();
+                Instance = new SqlServerConnection();
 
             return Instance;
         }
 
-        public ConnectionString()
+        private SqlServerConnection()
         {
         }
 
 
         public async Task<List<string>> GetDataBases(string server, bool credentials, string user = null, string password = null)
         {
-            SqlConnection sqlCon = new SqlConnection(
+            sql.SqlConnection sqlCon = new sql.SqlConnection(
                $"Server={server}; " +
                 "database=; " +
                 (credentials == true ? "Trusted_connection=True;" : $" User Id={user}; Password={password};"));
 
-            SqlCommand sqlComd = new SqlCommand("SELECT * FROM sys.databases WHERE database_id > 4 ORDER BY database_id  ASC; ", sqlCon);
+            sql.SqlCommand sqlComd = new sql.SqlCommand("SELECT * FROM sys.databases WHERE database_id > 4 ORDER BY database_id  ASC; ", sqlCon);
 
             sqlCon.Open();
 
-            SqlDataReader reader = await sqlComd.ExecuteReaderAsync();
+            sql.SqlDataReader reader = await sqlComd.ExecuteReaderAsync();
 
             List<string> databases = new List<string>();
 
@@ -55,47 +58,47 @@ namespace DSG
 
         public async Task<List<string>> GetTables(string server, string database, bool credentials, string obtener, string user = null, string password = null)
         {
-            SqlConnection sqlCon = new SqlConnection(
+            sql.SqlConnection sqlCon = new sql.SqlConnection(
                 "Server=" + server + "; " +
                 "database=" + database + "; " + 
                 (credentials == true ? "Trusted_connection=True;" : " User Id=" + user + "; Password=" + password + ";"));
 
-            SqlCommand sqlComd;
+            sql.SqlCommand sqlComd;
 
             switch (obtener)
             {
                 case "Tablas":
                     {
                         /*--La consulta muestra todas las tablas de la base de datos*/
-                        sqlComd = new SqlCommand("select name from sysobjects where type='U' and name <> '__EFMigrationsHistory'", sqlCon);
+                        sqlComd = new sql.SqlCommand("select name from sysobjects where type='U' and name <> '__EFMigrationsHistory'", sqlCon);
 
                         break;
                     }
                 case "Vistas":
                     {
                         /*--La consulta muestra todas las vistas de la base de datos*/
-                        sqlComd = new SqlCommand("select name from sysobjects where type='V'", sqlCon);
+                        sqlComd = new sql.SqlCommand("select name from sysobjects where type='V'", sqlCon);
 
                         break;
                     }
                 case "Procedimientos":
                     {
                         /*--La consulta muestra todos los procedimientos de la base de datos*/
-                        sqlComd = new SqlCommand("select name from sysobjects where type='P'", sqlCon);
+                        sqlComd = new sql.SqlCommand("select name from sysobjects where type='P'", sqlCon);
 
                         break;
                     }
                 case "Triggers":
                     {
                         /*--La consulta muestra todos los triggers de la base de datos*/
-                        sqlComd = new SqlCommand("select name from sysobjects where type='T'", sqlCon);
+                        sqlComd = new sql.SqlCommand("select name from sysobjects where type='T'", sqlCon);
 
                         break;
                     }
                 default :
                     {
                         /*--La consulta muestra todas las tablas de la base de datos*/
-                        sqlComd = new SqlCommand("Select name from sysobjects where type='U'", sqlCon);
+                        sqlComd = new sql.SqlCommand("Select name from sysobjects where type='U'", sqlCon);
 
                         break;
                     }
@@ -104,7 +107,7 @@ namespace DSG
 
             sqlCon.Open();
 
-            SqlDataReader reader = await sqlComd.ExecuteReaderAsync();
+            sql.SqlDataReader reader = await sqlComd.ExecuteReaderAsync();
 
             List<string> tables = new List<string>();
 
@@ -122,14 +125,14 @@ namespace DSG
 
         public async Task<List<Table>> GetTablesProperty(string server, string database, bool credentials, string[] tables, string user = null, string password = null)
         {
-            SqlConnection sqlCon = new SqlConnection(
+            sql.SqlConnection sqlCon = new sql.SqlConnection(
                "Server=" + server + "; " +
                "database=" + database + "; " +
                (credentials == true ? "Trusted_connection=True;" : " User Id=" + user + "; Password=" + password + ";"));
 
             List<Table> Tables = new List<Table>();
 
-            SqlCommand sqlComd = null;
+            sql.SqlCommand sqlComd = null;
 
             foreach (string tableName in tables)
             {
@@ -142,24 +145,24 @@ namespace DSG
 
         public async Task<List<string>> GetStructureViews(string server, string database, bool credentials, string[] views, string user = null, string password = null)
         {
-            SqlConnection sqlCon = new SqlConnection(
+            sql.SqlConnection sqlCon = new sql.SqlConnection(
                   "Server=" + server + "; " +
                   "database=" + database + "; " +
                   (credentials == true ? "Trusted_connection=True;" : " User Id=" + user + "; Password=" + password + ";"));
 
             List<string> Listviews = new List<string>();
 
-            SqlCommand sqlComd;
+            sql.SqlCommand sqlComd;
 
             foreach (string viewsName in views)
             {
                 try
                 {
-                    sqlComd = new SqlCommand($"EXEC sp_helptext N'{database}.dbo.{viewsName}';", sqlCon);
+                    sqlComd = new sql.SqlCommand($"EXEC sp_helptext N'{database}.dbo.{viewsName}';", sqlCon);
 
                     sqlCon.Open();
 
-                    SqlDataReader reader = sqlComd.ExecuteReader();
+                    sql.SqlDataReader reader = sqlComd.ExecuteReader();
 
                     while (await reader.ReadAsync())
                     {
@@ -183,24 +186,24 @@ namespace DSG
 
         public async Task<List<string>> GetStructureProcedures(string server, string database, bool credentials, string[] procedures, string user = null, string password = null)
         {
-            SqlConnection sqlCon = new SqlConnection(
+            sql.SqlConnection sqlCon = new sql.SqlConnection(
                "Server=" + server + "; " +
                "database=" + database + "; " +
                (credentials == true ? "Trusted_connection=True;" : " User Id=" + user + "; Password=" + password + ";"));
 
             List<string> Listprocedures = new List<string>();
 
-            SqlCommand sqlComd;
+            sql.SqlCommand sqlComd;
 
             foreach (string proceduresName in procedures)
             {
                 try
                 {
-                    sqlComd = new SqlCommand($"EXEC sp_helptext N'{database}.dbo.{proceduresName}';", sqlCon);
+                    sqlComd = new sql.SqlCommand($"EXEC sp_helptext N'{database}.dbo.{proceduresName}';", sqlCon);
 
                     sqlCon.Open();
 
-                    SqlDataReader reader = sqlComd.ExecuteReader();
+                    sql.SqlDataReader reader = sqlComd.ExecuteReader();
 
                     while (await reader.ReadAsync())
                     {
@@ -224,20 +227,20 @@ namespace DSG
 
         public async Task<List<string>> GetStructureTriggers(string server, string database, bool credentials, string[] triggers, string user = null, string password = null)
         {
-            SqlConnection sqlCon = new SqlConnection(
+            sql.SqlConnection sqlCon = new sql.SqlConnection(
                           "Server=" + server + "; " +
                           "database=" + database + "; " +
                           (credentials == true ? "Trusted_connection=True;" : " User Id=" + user + "; Password=" + password + ";"));
 
             List<string> Listtriggers = new List<string>();
 
-            SqlCommand sqlComd;
+            sql.SqlCommand sqlComd;
 
             foreach (string triggersName in triggers)
             {
                 try
                 {
-                    sqlComd = new SqlCommand($" SELECT " +
+                    sqlComd = new sql.SqlCommand($" SELECT " +
                                               " Object_name(so.parent_object_id) TableName, " +
                                               " so.name TrigerName, " +
                                               " so.create_date[CreateDate], " +
@@ -249,7 +252,7 @@ namespace DSG
 
                     sqlCon.Open();
 
-                    SqlDataReader reader = sqlComd.ExecuteReader();
+                    sql.SqlDataReader reader = sqlComd.ExecuteReader();
 
                     while (await reader.ReadAsync())
                     {
@@ -278,18 +281,17 @@ namespace DSG
         }
 
 
-
-        private async Task<List<Table>> ObtenerCompas(SqlConnection sqlCon,SqlCommand sqlComd, string tableName, List<Table> Tables)
+        public async Task<List<Table>> ObtenerCompas(sql.SqlConnection sqlCon, sql.SqlCommand sqlComd, string tableName, List<Table> Tables)
         {
             try
             {
-                sqlComd = new SqlCommand(
+                sqlComd = new sql.SqlCommand(
                  " SELECT COLUMN_NAME, DATA_TYPE, CHARACTER_OCTET_LENGTH, IS_NULLABLE from Information_Schema.Columns "
               + $" WHERE TABLE_NAME = '{tableName}' ORDER BY COLUMN_NAME", sqlCon);
 
                 sqlCon.Open();
 
-                SqlDataReader reader = sqlComd.ExecuteReader();
+                sql.SqlDataReader reader = sqlComd.ExecuteReader();
 
                 while (await reader.ReadAsync())
                 {
@@ -315,17 +317,17 @@ namespace DSG
             return Tables;
         }
 
-        private async Task<List<Table>> ObtenerClausula(SqlConnection sqlCon, SqlCommand sqlComd, string tableName, List<Table> Tables)
+        public async Task<List<Table>> ObtenerClausula(sql.SqlConnection sqlCon, sql.SqlCommand sqlComd, string tableName, List<Table> Tables)
         {
             try
             {
-                sqlComd = new SqlCommand(
+                sqlComd = new sql.SqlCommand(
                     " SELECT COLUMN_NAME, CONSTRAINT_NAME FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE" +
                     $" WHERE TABLE_NAME = '{ tableName }' ", sqlCon);
 
                 sqlCon.Open();
 
-                SqlDataReader reader = sqlComd.ExecuteReader();
+                sql.SqlDataReader reader = sqlComd.ExecuteReader();
 
                 while (await reader.ReadAsync())
                 {

@@ -2,6 +2,7 @@
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
+    <LangVersion>9.0</LangVersion>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{81F669FD-EB44-4D93-873F-B80FF96F5949}</ProjectGuid>
@@ -65,18 +66,37 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Guna.UI">
-      <HintPath>..\packages\Guna.UI\Lib\Guna.UI.dll</HintPath>
+      <HintPath>..\packages\Guna.UI\lib\Guna.UI.dll</HintPath>
     </Reference>
     <Reference Include="Guna.UI2">
       <HintPath>..\..\..\Downloads\_Getintopc.com_Guna_UI_Framework_Ultimate_v2.0.0.1\Guna_UI_Framework_Ultimate_v2.0.0.1\Guna.UI-Framework-Lib-master\Guna.UI2 WinForms\.net 4.0\Guna.UI2.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="MySqlConnector, Version=0.30.0.0, Culture=neutral, PublicKeyToken=d33d3e53aa5f8c92, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySqlConnector.0.30.0\lib\net46\MySqlConnector.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="OptimizedDataReader, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\OptimizedDataReader.1.1.0\lib\net46\OptimizedDataReader.dll</HintPath>
+    </Reference>
+    <Reference Include="Savage.Data, Version=5.4.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Savage.Data.5.4.2\lib\net46\Savage.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Savage.Data.MySqlClient, Version=5.4.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySqlClient.5.4.2\lib\net46\Savage.Data.MySqlClient.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.3.0\lib\netstandard1.1\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.Core" />
     <Reference Include="System.Management" />
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.1.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.3.0\lib\portable-net45+win8+wp8+wpa81\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -95,8 +115,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\MySqlConnection.cs" />
     <Compile Include="Extensions\ButtonExtensiones.cs" />
-    <Compile Include="Data\Connecciones.cs" />
+    <Compile Include="Data\SqlServerConnection.cs" />
+    <Compile Include="Extensions\ComboBoxExtension.cs" />
     <Compile Include="Extensions\FormExtensiones.cs" />
     <Compile Include="Forms\DSRG.cs">
       <SubType>Form</SubType>
@@ -110,6 +132,7 @@
     <Compile Include="Forms\Tema.Designer.cs">
       <DependentUpon>Tema.cs</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\IConnection.cs" />
     <Compile Include="Models\DatosCredenciales.cs" />
     <Compile Include="Models\Trigger.cs" />
     <Compile Include="Program.cs" />

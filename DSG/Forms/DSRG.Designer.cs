@@ -458,7 +458,7 @@ namespace DSRG
             this.PanelBar.ShadowDecoration.BorderRadius = 0;
             this.PanelBar.ShadowDecoration.Enabled = true;
             this.PanelBar.ShadowDecoration.Parent = this.PanelBar;
-            this.PanelBar.Size = new System.Drawing.Size(656, 30);
+            this.PanelBar.Size = new System.Drawing.Size(661, 30);
             this.PanelBar.TabIndex = 6;
             // 
             // BTClose
@@ -480,7 +480,7 @@ namespace DSRG
             this.BTClose.HoverState.FillColor = System.Drawing.Color.Gray;
             this.BTClose.HoverState.Parent = this.BTClose;
             this.BTClose.Image = global::DSG.Properties.Resources.Close_White;
-            this.BTClose.Location = new System.Drawing.Point(616, 0);
+            this.BTClose.Location = new System.Drawing.Point(621, 0);
             this.BTClose.Name = "BTClose";
             this.BTClose.PressedColor = System.Drawing.Color.Silver;
             this.BTClose.PressedDepth = 20;
@@ -507,7 +507,7 @@ namespace DSRG
             this.BTMinimize.HoverState.FillColor = System.Drawing.Color.Gray;
             this.BTMinimize.HoverState.Parent = this.BTMinimize;
             this.BTMinimize.Image = global::DSG.Properties.Resources.Minimize_White;
-            this.BTMinimize.Location = new System.Drawing.Point(544, 0);
+            this.BTMinimize.Location = new System.Drawing.Point(549, 0);
             this.BTMinimize.Name = "BTMinimize";
             this.BTMinimize.PressedColor = System.Drawing.Color.Silver;
             this.BTMinimize.PressedDepth = 20;
@@ -559,7 +559,7 @@ namespace DSRG
             this.BTMaximize.HoverState.FillColor = System.Drawing.Color.Gray;
             this.BTMaximize.HoverState.Parent = this.BTMaximize;
             this.BTMaximize.Image = global::DSG.Properties.Resources.Maximize_White;
-            this.BTMaximize.Location = new System.Drawing.Point(580, 0);
+            this.BTMaximize.Location = new System.Drawing.Point(585, 0);
             this.BTMaximize.Name = "BTMaximize";
             this.BTMaximize.PressedColor = System.Drawing.Color.Silver;
             this.BTMaximize.PressedDepth = 20;
@@ -586,7 +586,7 @@ namespace DSRG
             this.BTNormal.HoverState.FillColor = System.Drawing.Color.Gray;
             this.BTNormal.HoverState.Parent = this.BTNormal;
             this.BTNormal.Image = global::DSG.Properties.Resources.Normal_White;
-            this.BTNormal.Location = new System.Drawing.Point(580, 0);
+            this.BTNormal.Location = new System.Drawing.Point(585, 0);
             this.BTNormal.Name = "BTNormal";
             this.BTNormal.PressedColor = System.Drawing.Color.Silver;
             this.BTNormal.PressedDepth = 20;
@@ -601,7 +601,7 @@ namespace DSRG
             this.panel1.BackColor = System.Drawing.Color.Transparent;
             this.panel1.Controls.Add(this.GBDatosConexion);
             this.panel1.Controls.Add(this.GBBaseDatos);
-            this.panel1.Location = new System.Drawing.Point(10, 41);
+            this.panel1.Location = new System.Drawing.Point(14, 41);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(557, 596);
             this.panel1.TabIndex = 7;
@@ -658,12 +658,12 @@ namespace DSRG
             this.BTAjustes.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.BTAjustes.Click += new System.EventHandler(this.BTAjustes_Click);
             // 
-            // DSG
+            // DSRG
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(656, 653);
+            this.ClientSize = new System.Drawing.Size(661, 649);
             this.ControlBox = false;
             this.Controls.Add(this.PanelOpciones);
             this.Controls.Add(this.panel1);
@@ -672,7 +672,7 @@ namespace DSRG
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "DSG";
+            this.Name = "DSRG";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = " ";

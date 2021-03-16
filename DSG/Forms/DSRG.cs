@@ -2,6 +2,7 @@
 namespace DSRG
 {
     using DSG;
+    using DSG.Extensions;
     using Extensions;
     using Forms;
     using Models;
@@ -34,7 +35,7 @@ namespace DSRG
             DatosCredenciales obj = JsonConvert.DeserializeObject<DatosCredenciales>(
                 File.ReadAllText(Directory.GetCurrentDirectory() +  @"\Datos\Datos.json", System.Text.Encoding.UTF8));
 
-            if(obj != null)
+            if(obj is not null)
             {
                 TBServidor.Text_ =          Decrypt(obj.Servidor);
                 CBBBaseDatos.Text =         Decrypt(obj.BaseDatos);
@@ -55,7 +56,7 @@ namespace DSRG
 
         #region tema
 
-        private async void ConfiguracionTema(bool Dart,Theme tema = Theme.Verde)
+        private void ConfiguracionTema(bool Dart,Theme tema = Theme.Verde)
         {
             BTGenerarReporte.Temas(tema);
             BTConeccion.Temas(tema);
@@ -64,19 +65,13 @@ namespace DSRG
             _DartLight = Dart;
 
             if (Dart)
-            {
                 DarMode();
-            }
             else
-            {
                 LightMode();
-            }
 
-            if (CBGuardarDatos.Checked == true)
+            if (CBGuardarDatos.Checked is true)
                 using (StreamWriter file = File.CreateText(Directory.GetCurrentDirectory() + @"\Datos\Datos.json"))
-                {
-                    JsonSerializer serializer = new JsonSerializer();
-                    serializer.Serialize(file, new DatosCredenciales
+                    new JsonSerializer().Serialize(file, new DatosCredenciales
                     {
                         Servidor = Encrypt(TBServidor.Text_),
                         BaseDatos = Encrypt(CBBBaseDatos.Text),
@@ -88,7 +83,6 @@ namespace DSRG
                         Tema = Encrypt(tema.ToString()),
                         Dart = Dart
                     });
-                }
 
         }
 
@@ -288,7 +282,7 @@ namespace DSRG
         /// <param name="e"></param>
         private void RBAutenticacionW_CheckedChanged(object sender, System.EventArgs e)
         {
-            if (RBAutenticacionW.Checked == true)
+            if (RBAutenticacionW.Checked is true)
             {
                 TBUsuario.Enabled = false;
                 TBContraseña.Enabled = false;
@@ -313,12 +307,7 @@ namespace DSRG
         {
             this.Cursor = Cursors.WaitCursor;
 
-            if
-            (
-               TBServidor.IsEmptyErrorProvider() |
-               CBBBaseDatos.Text == string.Empty |
-               CBBBaseDatos.SelectedIndex == 0
-            )
+            if(TBServidor.IsEmptyErrorProvider() | CBBBaseDatos.IsEmpty())
             {
                 if (RBAutenticacionW.Checked == false)
                 {
@@ -326,28 +315,18 @@ namespace DSRG
                     TBContraseña.IsEmptyErrorProvider();
                 }
 
-                if(CBBBaseDatos.Text == string.Empty | CBBBaseDatos.SelectedIndex == 0) 
-                {
+                if(CBBBaseDatos.IsEmpty()) 
                     MessageBox.Show("Escriba un nombre de una base de datos o busque una para seleccionar", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
             }
             else
             {
-                 if (RBAutenticacionW.Checked == false)
+                 if (RBAutenticacionW.Checked is false)
                  {
-                     if
-                     (
-                         !TBUsuario.IsEmptyErrorProvider() |
-                         !TBContraseña.IsEmptyErrorProvider()
-                     )
-                     {
+                    if (!TBUsuario.IsEmptyErrorProvider() | !TBContraseña.IsEmptyErrorProvider())
                         GetTables();
-                     }
                  }
                  else
-                 {
                     GetTables();
-                 }
             }
 
             this.Cursor = Cursors.Default;
@@ -362,18 +341,16 @@ namespace DSRG
 
             try
             {
-                foreach (string tableName in await ConnectionString
+                foreach (string tableName in await SqlServerConnection
                          .GetInstance()
                          .GetTables(TBServidor.Text_, CBBBaseDatos.Text, RBAutenticacionW.Checked, CBView.Text, TBUsuario.Text_, TBContraseña.Text_))
                 {
                     ListCBTablas.Items.Add(tableName);
                 }
 
-                if(CBGuardarDatos.Checked == true)
+                if(CBGuardarDatos.Checked is true)
                     using (StreamWriter file = File.CreateText(Directory.GetCurrentDirectory() +  @"\Datos\Datos.json"))
-                    {
-                        JsonSerializer serializer = new JsonSerializer();
-                        serializer.Serialize(file, new DatosCredenciales
+                        new JsonSerializer().Serialize(file, new DatosCredenciales
                         {
                             Servidor = Encrypt(TBServidor.Text_),
                             BaseDatos = Encrypt(CBBBaseDatos.Text),
@@ -383,7 +360,6 @@ namespace DSRG
                             NombreEmpresa = Encrypt(TBCompanyName.Text_),
                             GuardarDatos = CBGuardarDatos.Checked
                         });
-                    }
 
             }
             catch (System.Exception ex)
@@ -440,9 +416,7 @@ namespace DSRG
         private void CBMarcarTodasTablas_CheckedChanged(object sender, System.EventArgs e)
         {
             for (int i = 0; i < ListCBTablas.Items.Count; i++)
-            {
                 ListCBTablas.SetItemChecked(i, CBMarcarTodasTablas.Checked);
-            }
         }
 
         private void BTGenerarReporte_Click(object sender, System.EventArgs e)
@@ -460,66 +434,55 @@ namespace DSRG
             }
 
             for (int i = 0; i < ListCBTablas.Items.Count; i++)
-            {
                 ListCBTablas.SetItemChecked(i, false);
-            }
 
             CBMarcarTodasTablas.Checked = false;
 
+            void action()
+            {
+                PropertyTables(tables);
+            }
+
             if (tables.Length > 0)
             {
-                switch (CBView.SelectedItem)
+                _ = CBView.SelectedItem switch
                 {
-                    case "Tablas":
-                        {
-                            /*--La consulta muestra todas las tablas de la base de datos*/
-                            PropertyTables(tables);
+                    "Tablas" => () =>
+                    {
+                        /*--La consulta muestra todas las tablas de la base de datos*/
+                        PropertyTables(tables);
+                    }
+                    ,
+                    "Vistas" => () =>
+                    {
+                        /*--La consulta muestra todas las vistas de la base de datos*/
+                        StructureViews(tables);
+                    }
+                    ,
+                    "Procedimientos" => () =>
+                    {
+                        /*--La consulta muestra todos los procedimientos de la base de datos*/
+                        StructureProcedure(tables);
+                    }
+                    ,
+                    "Triggers" => () =>
+                    {
+                        /*--La consulta muestra todos los triggers de la base de datos*/
+                        StructureTriggers(tables);
+                    }
+                    ,
+                    "Functions" => () =>
+                    {
+                        /*--La consulta muestra todos los Functions de la base de datos*/
 
-                            break;
-                        }
-                    case "Vistas":
-                        {
-                            /*--La consulta muestra todas las vistas de la base de datos*/
-                            StructureViews(tables);
-
-                            break;
-                        }
-                    case "Procedimientos":
-                        {
-                            /*--La consulta muestra todos los procedimientos de la base de datos*/
-                            StructureProcedure(tables);
-
-                            break;
-                        }
-                    case "Triggers":
-                        {
-                            /*--La consulta muestra todos los triggers de la base de datos*/
-                            StructureTriggers(tables);
-
-                            break;
-                        }
-                    case "Functions":
-                        {
-                            /*--La consulta muestra todos los Functions de la base de datos*/
-
-                            StructureFunctions(tables);
-
-                            break;
-                        }
-                    default:
-                        {
-                            PropertyTables(tables);
-
-                            break;
-                        }
-
-                }
-
+                        StructureFunctions(tables);
+                    }
+                    ,
+                    _ => (Action)action
+                };
             }
             else
-            {
                 MessageBox.Show("No hay opciones marcadas", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
 
             this.Cursor = Cursors.Default;
         }
@@ -532,11 +495,11 @@ namespace DSRG
         {
             try
             {
-                var listTable = await ConnectionString
+                var listTable = await SqlServerConnection
                 .GetInstance()
                 .GetTablesProperty(TBServidor.Text_, CBBBaseDatos.Text, RBAutenticacionW.Checked, tables, TBUsuario.Text_, TBContraseña.Text_);
 
-                if (listTable != null)
+                if (listTable is not null)
                 {
                     FromReport FromReport = new FromReport();
 
@@ -546,12 +509,7 @@ namespace DSRG
 
                     report.objectDataSource.DataSource = listTable;
 
-
-                    report.reportNameTextBox.Value = "Resporte de tabla : Servidor = " +
-                                                            TBServidor.Text_ + "; " +
-                                                            "Base de datos = " +
-                                                            CBBBaseDatos.Text + ";";
-
+                    report.reportNameTextBox.Value = $"Resporte de tabla : Servidor = {TBServidor.Text_};  base de datos = {CBBBaseDatos.Text};";
      
                     FromReport.reportViewer.ShowPrintPreviewButton = true;
                     FromReport.reportViewer.ReportSource = report;
@@ -562,14 +520,13 @@ namespace DSRG
                     FromReport.Show();
                 }
                 else
-                {
                     MessageBox.Show("Error", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
             }
-            catch
-            {
-            }
+            catch{}
         }
+
+
+        #region sin completar
 
         /// <summary>
         /// 
@@ -577,7 +534,7 @@ namespace DSRG
         /// <param name="tables"></param>
         private async void StructureViews(string[] tables)
         {
-            var listTable = await ConnectionString
+            var listTable = await SqlServerConnection
                 .GetInstance()
                 .GetStructureViews(TBServidor.Text_, CBBBaseDatos.Text, RBAutenticacionW.Checked, tables, TBUsuario.Text_, TBContraseña.Text_);
         }
@@ -588,7 +545,7 @@ namespace DSRG
         /// <param name="tables"></param>
         private async void StructureProcedure(string[] tables)
         {
-            var listTable = await ConnectionString
+            var listTable = await SqlServerConnection
                 .GetInstance()
                 .GetStructureProcedures(TBServidor.Text_, CBBBaseDatos.Text, RBAutenticacionW.Checked, tables, TBUsuario.Text_, TBContraseña.Text_);
         }
@@ -599,7 +556,7 @@ namespace DSRG
         /// <param name="tables"></param>
         private async void StructureTriggers(string[] tables)
         {
-            var listTable = await ConnectionString
+            var listTable = await SqlServerConnection
                 .GetInstance()
                 .GetStructureTriggers(TBServidor.Text_, CBBBaseDatos.Text, RBAutenticacionW.Checked, tables, TBUsuario.Text_, TBContraseña.Text_);
         }
@@ -610,11 +567,13 @@ namespace DSRG
         /// <param name="tables"></param>
         private async void StructureFunctions(string[] tables)
         {
-            var listTable = await ConnectionString
+            var listTable = await SqlServerConnection
                 .GetInstance()
                 .GetStructureFunctions(TBServidor.Text_, CBBBaseDatos.Text, RBAutenticacionW.Checked, tables, TBUsuario.Text_, TBContraseña.Text_);
         }
-        
+
+        #endregion
+
 
         /// <summary>
         /// 
@@ -627,21 +586,19 @@ namespace DSRG
             {
                 if (TBServidor.IsEmpty())
                 {
-                    if (RBAutenticacionW.Checked == false)
+                    if (RBAutenticacionW.Checked is false)
                     {
                         TBUsuario.IsEmptyErrorProvider();
                         TBContraseña.IsEmptyErrorProvider();
                     }
 
                     if (TBServidor.IsEmpty())
-                    {
                         MessageBox.Show("El campo servidor está en blanco.\nInserte algunos de los nombres locales.\n\n" +
                             $"- {WindowsIdentity.GetCurrent().Name}\n" +
                             "- .\n" +
                             "- local"
                             , "Información",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
                 }
                 else
                 {
@@ -651,7 +608,7 @@ namespace DSRG
 
                     CBBBaseDatos.Items.Add("Seleccione una Base de datos");
 
-                    foreach (string tableName in await ConnectionString
+                    foreach (string tableName in await SqlServerConnection
                     .GetInstance()
                     .GetDataBases(TBServidor.Text_, RBAutenticacionW.Checked, TBUsuario.Text_, TBContraseña.Text_))
                     {
@@ -665,22 +622,22 @@ namespace DSRG
             {
                 MessageBox.Show($"{ex.Message}\nEste error puede deberse a un error en las credenciales o conexión a internet.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
             this.Cursor = Cursors.Default;
+
         }
 
 
         private void CBView_SelectedIndexChanged(object sender, System.EventArgs e)
         {
-            BTConeccion.Text = "Buscar " + CBView.SelectedItem;
+            BTConeccion.Text = $"Buscar {CBView.SelectedItem}";
             GBBaseDatos.Text = $"{CBView.SelectedItem}";
         }
 
         private void Close_Click(object sender, EventArgs e)
         {
             if (DialogResult.Yes == MessageBox.Show("¿SEGURO QUE DESEA CERRAR LA APLICACIÓN?", "Pregunta", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
-            {
                 Application.Exit();
-            }
         }
 
         private void Maximize_Click(object sender, EventArgs e)
@@ -707,9 +664,8 @@ namespace DSRG
             Size = new Size(593, 680);
 
             if (DesktopLocation.Y <= 0)
-            {
                 Location = new Point(Location.X, Location.Y + 50);
-            }
+
         }
 
         private void Logo_Click(object sender, EventArgs e)
