@@ -13,6 +13,7 @@ namespace DSRG
     using System.Security.Principal;
     using System.Windows.Forms;
     using static Services.Enums;
+    using SpreadsheetLight;
     //
 
     public partial class DSRG : Form
@@ -525,6 +526,37 @@ namespace DSRG
             catch{}
         }
 
+        private void ExcelFile()
+        {
+            FolderBrowserDialog openFile = new FolderBrowserDialog();
+            DialogResult file = openFile.ShowDialog();
+
+            SLDocument document = new SLDocument();
+
+            System.Data.DataTable table = new System.Data.DataTable();
+
+            //columnas 
+            string[] columns = new string[] { "cl1", "cl2", "cl3", "cl4", "cl5" };
+
+            foreach(var column in columns)
+                table.Columns.Add(column, typeof(string));
+
+            //row 
+            var rows = new []
+            { 
+                new string[] { "val1-1", "val2-1", "val3-1" },
+                new string[] { "val1-2", "val2-2", "val3-2" },
+                new string[] { "val1-3", "val2-3", "val3-3" } 
+            };
+
+            foreach (var row in rows)
+                table.Rows.Add(row[0], row[1], row[2]);
+
+            document.ImportDataTable(2, 2, table, true);
+
+            document.SaveAs(Path.Combine(openFile.SelectedPath,"Tablas.xlsx"));
+
+        }
 
         #region sin completar
 
@@ -586,6 +618,8 @@ namespace DSRG
             {
                 if (TBServidor.IsEmpty())
                 {
+                    ExcelFile();
+
                     if (RBAutenticacionW.Checked is false)
                     {
                         TBUsuario.IsEmptyErrorProvider();

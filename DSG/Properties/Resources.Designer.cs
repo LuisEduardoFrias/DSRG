@@ -293,6 +293,16 @@ namespace DSG.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ImageTextBox {
+            get {
+                object obj = ResourceManager.GetObject("ImageTextBox", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Maximize_Black {
             get {
                 object obj = ResourceManager.GetObject("Maximize Black", resourceCulture);
