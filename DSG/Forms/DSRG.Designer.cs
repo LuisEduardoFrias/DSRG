@@ -50,6 +50,7 @@ namespace DSRG
             this.BTBuscarBaseDatos = new System.Windows.Forms.Button();
             this.BTConeccion = new System.Windows.Forms.Button();
             this.GBBaseDatos = new System.Windows.Forms.GroupBox();
+            this.LBTablaSelect = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.CBBTipoReporte = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -70,7 +71,6 @@ namespace DSRG
             this.PanelOpciones = new System.Windows.Forms.Panel();
             this.BTAcercaDe = new Guna.UI2.WinForms.Guna2Button();
             this.BTAjustes = new Guna.UI2.WinForms.Guna2Button();
-            this.LBTablaSelect = new System.Windows.Forms.Label();
             this.GBCredenciales.SuspendLayout();
             this.GBDatosConexion.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -404,6 +404,17 @@ namespace DSRG
             this.GBBaseDatos.TabStop = false;
             this.GBBaseDatos.Text = "Base de Datos : ";
             // 
+            // LBTablaSelect
+            // 
+            this.LBTablaSelect.AutoSize = true;
+            this.LBTablaSelect.BackColor = System.Drawing.Color.Transparent;
+            this.LBTablaSelect.ForeColor = System.Drawing.Color.Black;
+            this.LBTablaSelect.Location = new System.Drawing.Point(7, 308);
+            this.LBTablaSelect.Name = "LBTablaSelect";
+            this.LBTablaSelect.Size = new System.Drawing.Size(122, 13);
+            this.LBTablaSelect.TabIndex = 16;
+            this.LBTablaSelect.Text = "Tablas seleccionadas: 0";
+            // 
             // panel4
             // 
             this.panel4.BackgroundImage = global::DSG.Properties.Resources.ImageTextBox;
@@ -545,7 +556,7 @@ namespace DSRG
             this.PanelBar.ShadowDecoration.BorderRadius = 0;
             this.PanelBar.ShadowDecoration.Enabled = true;
             this.PanelBar.ShadowDecoration.Parent = this.PanelBar;
-            this.PanelBar.Size = new System.Drawing.Size(655, 30);
+            this.PanelBar.Size = new System.Drawing.Size(651, 30);
             this.PanelBar.TabIndex = 6;
             // 
             // BTClose
@@ -567,7 +578,7 @@ namespace DSRG
             this.BTClose.HoverState.FillColor = System.Drawing.Color.Gray;
             this.BTClose.HoverState.Parent = this.BTClose;
             this.BTClose.Image = global::DSG.Properties.Resources.Close_White;
-            this.BTClose.Location = new System.Drawing.Point(615, 0);
+            this.BTClose.Location = new System.Drawing.Point(611, 0);
             this.BTClose.Name = "BTClose";
             this.BTClose.PressedColor = System.Drawing.Color.Silver;
             this.BTClose.PressedDepth = 20;
@@ -594,7 +605,7 @@ namespace DSRG
             this.BTMinimize.HoverState.FillColor = System.Drawing.Color.Gray;
             this.BTMinimize.HoverState.Parent = this.BTMinimize;
             this.BTMinimize.Image = global::DSG.Properties.Resources.Minimize_White;
-            this.BTMinimize.Location = new System.Drawing.Point(543, 0);
+            this.BTMinimize.Location = new System.Drawing.Point(539, 0);
             this.BTMinimize.Name = "BTMinimize";
             this.BTMinimize.PressedColor = System.Drawing.Color.Silver;
             this.BTMinimize.PressedDepth = 20;
@@ -646,7 +657,7 @@ namespace DSRG
             this.BTMaximize.HoverState.FillColor = System.Drawing.Color.Gray;
             this.BTMaximize.HoverState.Parent = this.BTMaximize;
             this.BTMaximize.Image = global::DSG.Properties.Resources.Maximize_White;
-            this.BTMaximize.Location = new System.Drawing.Point(579, 0);
+            this.BTMaximize.Location = new System.Drawing.Point(575, 0);
             this.BTMaximize.Name = "BTMaximize";
             this.BTMaximize.PressedColor = System.Drawing.Color.Silver;
             this.BTMaximize.PressedDepth = 20;
@@ -673,7 +684,7 @@ namespace DSRG
             this.BTNormal.HoverState.FillColor = System.Drawing.Color.Gray;
             this.BTNormal.HoverState.Parent = this.BTNormal;
             this.BTNormal.Image = global::DSG.Properties.Resources.Normal_White;
-            this.BTNormal.Location = new System.Drawing.Point(579, 0);
+            this.BTNormal.Location = new System.Drawing.Point(575, 0);
             this.BTNormal.Name = "BTNormal";
             this.BTNormal.PressedColor = System.Drawing.Color.Silver;
             this.BTNormal.PressedDepth = 20;
@@ -745,23 +756,12 @@ namespace DSRG
             this.BTAjustes.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.BTAjustes.Click += new System.EventHandler(this.BTAjustes_Click);
             // 
-            // LBTablaSelect
-            // 
-            this.LBTablaSelect.AutoSize = true;
-            this.LBTablaSelect.BackColor = System.Drawing.Color.Transparent;
-            this.LBTablaSelect.ForeColor = System.Drawing.Color.Black;
-            this.LBTablaSelect.Location = new System.Drawing.Point(7, 308);
-            this.LBTablaSelect.Name = "LBTablaSelect";
-            this.LBTablaSelect.Size = new System.Drawing.Size(116, 13);
-            this.LBTablaSelect.TabIndex = 16;
-            this.LBTablaSelect.Text = "Tablas selecionadas: 0";
-            // 
             // DSRG
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(655, 631);
+            this.ClientSize = new System.Drawing.Size(651, 627);
             this.ControlBox = false;
             this.Controls.Add(this.PanelOpciones);
             this.Controls.Add(this.panel1);

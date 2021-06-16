@@ -985,7 +985,7 @@ namespace DSRG
             else
                 BTGenerarReporte.Enabled = false;
 
-            LBTablaSelect.Text = $"Tablas selecionadas: {ListCBTablas.CheckedItems.Count}";
+            LBTablaSelect.Text = $"Tablas seleccionadas: {ListCBTablas.CheckedItems.Count}";
         }
 
         private void TBServidor_TextBoxIEP_TextChanged(object sender, EventArgs e)
