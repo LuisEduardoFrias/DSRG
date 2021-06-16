@@ -32,6 +32,20 @@ namespace Controles_Personalizado
             }
         }
 
+        public CharacterCasing CharacterCasing
+        {
+            get
+            {
+                return TextBox_.CharacterCasing;
+            }
+
+            set
+            {
+                TextBox_.CharacterCasing = value;
+            }
+        }
+
+
         public string Name_
         { 
             get

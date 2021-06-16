@@ -14,6 +14,9 @@ namespace DSRG
     using System.Windows.Forms;
     using static Services.Enums;
     using SpreadsheetLight;
+    using System.Collections.Generic;
+    using System.Linq;
+
     //
 
     public partial class DSRG : Form
@@ -24,9 +27,12 @@ namespace DSRG
         {
             InitializeComponent();
 
-            CBView.SelectedIndex = 0;
+            TBServidor_TextBoxIEP_TextChanged(null, null);
 
-            if(!Directory.Exists(Directory.GetCurrentDirectory() + @"\Datos"))
+            CBView.SelectedIndex = 0;
+            CBBTipoReporte.SelectedIndex = 0;
+
+            if (!Directory.Exists(Directory.GetCurrentDirectory() + @"\Datos"))
             {
                 Directory.CreateDirectory(Directory.GetCurrentDirectory() + @"\Datos");
 
@@ -144,7 +150,7 @@ namespace DSRG
             this.LBObtener.ForeColor = System.Drawing.Color.White;//black
             // 
             // LBTablas
-            this.LBTablas.ForeColor = System.Drawing.Color.White;//black
+            // this.LBTablas.ForeColor = System.Drawing.Color.White;//black
             // 
             // LBLogo
             this.LBObtener.ForeColor = System.Drawing.Color.White;//black
@@ -230,7 +236,7 @@ namespace DSRG
             this.LBObtener.ForeColor = System.Drawing.Color.Black;
             // 
             // LBTablas
-            this.LBTablas.ForeColor = System.Drawing.Color.Black;
+            // this.LBTablas.ForeColor = System.Drawing.Color.Black;
             // 
             // LBLogo
             this.LBObtener.ForeColor = System.Drawing.Color.Black;
@@ -362,6 +368,7 @@ namespace DSRG
                             GuardarDatos = CBGuardarDatos.Checked
                         });
 
+                TablasCount.Text = $"Tablas: {ListCBTablas.Items.Count}";
             }
             catch (System.Exception ex)
             {
@@ -446,41 +453,50 @@ namespace DSRG
 
             if (tables.Length > 0)
             {
-                _ = CBView.SelectedItem switch
+                if (CBBTipoReporte.SelectedIndex == 0)
                 {
-                    "Tablas" => () =>
+                    PropertyTablesForExcel(tables);
+                }
+                else
+                {
+                    //_ = CBView.SelectedItem switch
+                    switch(CBView.SelectedItem)
                     {
-                        /*--La consulta muestra todas las tablas de la base de datos*/
-                        PropertyTables(tables);
-                    }
-                    ,
-                    "Vistas" => () =>
-                    {
-                        /*--La consulta muestra todas las vistas de la base de datos*/
-                        StructureViews(tables);
-                    }
-                    ,
-                    "Procedimientos" => () =>
-                    {
-                        /*--La consulta muestra todos los procedimientos de la base de datos*/
-                        StructureProcedure(tables);
-                    }
-                    ,
-                    "Triggers" => () =>
-                    {
-                        /*--La consulta muestra todos los triggers de la base de datos*/
-                        StructureTriggers(tables);
-                    }
-                    ,
-                    "Functions" => () =>
-                    {
-                        /*--La consulta muestra todos los Functions de la base de datos*/
+                        case "Tablas":// => () =>
+                        {
+                            /*--La consulta muestra todas las tablas de la base de datos*/
+                            PropertyTables(tables);
+                                break;
+                        }
+                        case "Vistas":// => () =>
+                        {
+                            /*--La consulta muestra todas las vistas de la base de datos*/
+                            StructureViews(tables);
+                                break;
+                        }
+                        case "Procedimientos":// => () =>
+                        {
+                            /*--La consulta muestra todos los procedimientos de la base de datos*/
+                            StructureProcedure(tables);
+                                break;
+                        }
+                        case "Triggers":// => () =>
+                        {
+                            /*--La consulta muestra todos los triggers de la base de datos*/
+                            StructureTriggers(tables);
+                                break;
+                        }
+                        case "Functions":// => () =>
+                        {
+                            /*--La consulta muestra todos los Functions de la base de datos*/
 
-                        StructureFunctions(tables);
-                    }
-                    ,
-                    _ => (Action)action
-                };
+                            StructureFunctions(tables);
+                                break;
+                        }
+                        //_ => (Action)action
+                    };
+
+                }
             }
             else
                 MessageBox.Show("No hay opciones marcadas", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -496,7 +512,7 @@ namespace DSRG
         {
             try
             {
-                var listTable = await SqlServerConnection
+                List<Table> listTable = await SqlServerConnection
                 .GetInstance()
                 .GetTablesProperty(TBServidor.Text_, CBBBaseDatos.Text, RBAutenticacionW.Checked, tables, TBUsuario.Text_, TBContraseña.Text_);
 
@@ -526,36 +542,254 @@ namespace DSRG
             catch{}
         }
 
-        private void ExcelFile()
+
+        private async void PropertyTablesForExcel(string[] tables)
         {
-            FolderBrowserDialog openFile = new FolderBrowserDialog();
-            DialogResult file = openFile.ShowDialog();
+            try
+            {
+                List<Table> listTable = await SqlServerConnection
+                .GetInstance()
+                .GetTablesProperty(TBServidor.Text_, CBBBaseDatos.Text, RBAutenticacionW.Checked, tables, TBUsuario.Text_, TBContraseña.Text_);
 
-            SLDocument document = new SLDocument();
+                if (listTable is not null)
+                {
+                    ExcelFile(listTable);
+                }
+                else
+                    MessageBox.Show("Error", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch { }
+        }
 
-            System.Data.DataTable table = new System.Data.DataTable();
 
-            //columnas 
-            string[] columns = new string[] { "cl1", "cl2", "cl3", "cl4", "cl5" };
+        private void ExcelFile(List<Table> listTable)
+        {   
+            try
+            {
+                this.UseWaitCursor = true;
 
-            foreach(var column in columns)
-                table.Columns.Add(column, typeof(string));
+                FolderBrowserDialog openFile = new FolderBrowserDialog();
+                openFile.ShowDialog();
 
-            //row 
-            var rows = new []
-            { 
-                new string[] { "val1-1", "val2-1", "val3-1" },
-                new string[] { "val1-2", "val2-2", "val3-2" },
-                new string[] { "val1-3", "val2-3", "val3-3" } 
-            };
+                List<System.Data.DataTable> tables = new List<System.Data.DataTable>();
+                System.Data.DataTable dataTable = new System.Data.DataTable();
+                SLDocument document = new SLDocument();
 
-            foreach (var row in rows)
-                table.Rows.Add(row[0], row[1], row[2]);
+                //----------------------- Styles ---------------------------//
+               
+                SLPageSettings ps = new SLPageSettings();
 
-            document.ImportDataTable(2, 2, table, true);
+                SLStyle style = document.CreateStyle();
+                SLStyle fontBold = document.CreateStyle();
+                SLStyle font = document.CreateStyle();
+                SLStyle fontColor = document.CreateStyle();
+                SLStyle headerBackGroudColor = document.CreateStyle();
+                SLStyle backGroudColor = document.CreateStyle();
+                SLStyle border = document.CreateStyle();
+                SLStyle topBorder = document.CreateStyle();
+                SLStyle leftBorder = document.CreateStyle();
+                SLStyle rightBorder = document.CreateStyle();
+                SLStyle bottomBorder = document.CreateStyle();
 
-            document.SaveAs(Path.Combine(openFile.SelectedPath,"Tablas.xlsx"));
+                fontBold.SetFontBold(true);
+                fontBold.Font.FontName = "Times New Roman";
 
+                font.Font.FontName = "Times New Roman";
+
+                fontColor.Font.FontColor = Color.White;
+
+                headerBackGroudColor.Fill.SetPattern(DocumentFormat.OpenXml.Spreadsheet.PatternValues.Solid, Color.FromArgb(34, 43, 53), Color.FromArgb(34, 43, 53));
+
+                backGroudColor.Fill.SetPattern(DocumentFormat.OpenXml.Spreadsheet.PatternValues.Solid, Color.White, Color.Black);
+
+                border.Border.BottomBorder.BorderStyle = DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Dotted;
+
+                topBorder.Border.TopBorder.BorderStyle = DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thick;
+                leftBorder.Border.LeftBorder.BorderStyle = DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thick;
+                rightBorder.Border.RightBorder.BorderStyle = DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thick;
+                bottomBorder.Border.BottomBorder.BorderStyle = DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thick;
+
+                style.SetWrapText(true);
+                style.Fill.SetPatternBackgroundColor(Color.White);
+                style.Alignment.Horizontal = DocumentFormat.OpenXml.Spreadsheet.HorizontalAlignmentValues.Center;
+                style.Alignment.Vertical = DocumentFormat.OpenXml.Spreadsheet.VerticalAlignmentValues.Bottom;
+                style.Alignment.ReadingOrder = SLAlignmentReadingOrderValues.LeftToRight;
+                style.Alignment.ShrinkToFit = false;
+                style.Alignment.WrapText = false;
+                style.SetWrapText(true);
+
+                //----------------------- Index ----------------------------//
+
+                Tuple<string, Type>[] columnsForIndex = new Tuple<string, Type>[]
+                {
+                    Tuple.Create("Número", typeof(int)),
+                    Tuple.Create("Tabla", typeof(string)),
+                    Tuple.Create("Descripción", typeof(string)),
+                    Tuple.Create("Subsistema", typeof(string)),
+                    Tuple.Create("Descripción de sistema", typeof(string)),
+                    Tuple.Create("Detallada", typeof(string)),
+                    Tuple.Create("Analizada", typeof(string)),
+                    Tuple.Create("Rediseñada", typeof(string)),
+                    Tuple.Create("Comentario", typeof(string))
+                };
+                
+                foreach (Tuple<string, Type> column in columnsForIndex)
+                {
+                    dataTable.Columns.Add(column.Item1, column.Item2);
+                }
+
+                int index = 1;
+                foreach (var table in listTable)
+                {
+                    bool insert = true;
+
+                    foreach (System.Data.DataRow row in dataTable.Rows)
+                        if (row[1].ToString() == table.TableName)
+                            insert = false;
+
+                    if (insert == true) 
+                    {
+                        dataTable.Rows.Add(index, table.TableName, "", "", "", "SI", "NO", "NO", "");
+                        index++;
+                    }
+                }
+
+                document.AddWorksheet("Indice");
+
+                document.ImportDataTable(4, 3, dataTable, true);
+
+                //fuente 
+                document.SetCellStyle(3, 2, 3 + dataTable.Rows.Count, 12, font);
+
+                //fondo blanco
+                document.SetCellStyle(3, 2, 5 + dataTable.Rows.Count, 12, backGroudColor);
+
+                //border al rededor
+                document.SetCellStyle(3, 2, 3, 12, topBorder);
+                document.SetCellStyle(3, 2, 5 + dataTable.Rows.Count, 2, leftBorder);
+                document.SetCellStyle(3, 12, 5 + dataTable.Rows.Count, 12, rightBorder);
+                document.SetCellStyle(5 + dataTable.Rows.Count, 2, 5 + dataTable.Rows.Count, 12, bottomBorder);
+
+                //cabecera 
+                //document.SetCellStyle(4, 4, 6, 7, style);
+                document.SetCellStyle(4, 3, 4, 11, fontColor);
+                document.SetCellStyle(4, 3, 4, 11, headerBackGroudColor);
+                document.SetCellStyle(4, 3, 4, 11, fontBold);
+
+                //campos
+                document.SetCellStyle(5, 3, 4 + dataTable.Rows.Count, 11, border);
+                document.SetCellStyle(5, 8, 5 + dataTable.Rows.Count, 11, style);
+                document.SetCellStyle(5, 3, 5 + dataTable.Rows.Count, 11, backGroudColor);
+
+                //agrandar columnas y filas
+                document.SetRowHeight(5, 4 + dataTable.Rows.Count, 25.0D);
+                document.AutoFitColumn(4, 11);
+
+                // ----------------------- tablas ---------------------------//
+
+                tables = new List<System.Data.DataTable>();
+                dataTable = new System.Data.DataTable();
+
+                Tuple<string, Type>[] columns = new Tuple<string, Type>[] 
+                { 
+                    Tuple.Create("Campo", typeof(string)),
+                    Tuple.Create("Tipo de datos", typeof(string)),
+                    Tuple.Create("Longitud", typeof(string)),
+                    Tuple.Create("Null", typeof(string)),
+                    Tuple.Create("Default", typeof(string)),
+                    Tuple.Create("Restricción", typeof(string)),
+                    Tuple.Create("Descripción", typeof(string))
+                };
+
+                foreach (var table in listTable)
+                {
+                    if (!tables.Any(x => x.TableName == table.TableName))
+                    {
+                        tables.Add(new System.Data.DataTable { TableName = table.TableName});
+                    
+                        dataTable = tables.FirstOrDefault(x => x.TableName == table.TableName);
+
+                        foreach(Tuple<string, Type> column in columns)
+                        {
+                            dataTable.Columns.Add(column.Item1, column.Item2);
+                        }   
+                    }
+
+                    string precision = table.PropertyPrecision == null ? string.Empty : table.PropertyPrecision;
+                    string scale = table.PropertyScale == null ? string.Empty : table.PropertyScale;
+
+                    string type = StringToUpperCase(table.PropertyType);
+
+                    dataTable.Rows.Add(
+                        table.PropertyName,
+                        type, 
+                        table.PropertyLeangth   is null or "" ?
+                        (type is "INT" ? string.Empty : (table.PropertyPrecision is null or "" ? string.Empty : $"({precision})({scale})")) : table.PropertyLeangth,
+                        table.IsNullable, 
+                        table.ColumnDefault == null ? string.Empty : table.ColumnDefault,
+                        table.ConstraintName == null ? string.Empty : table.ConstraintName);
+                }
+
+                foreach (var table in tables)
+                {
+                    document.AddWorksheet(table.TableName);
+
+                    //Color de hoja.
+                    ps = document.GetPageSettings();
+                    ps.TabColor = Color.Red;
+                    document.SetPageSettings(ps);
+
+                    document.SetCellValue(3, 3, $"Tabla");
+                    document.SetCellValue(3, 4, $"{table.TableName}");
+                    
+                    document.SetCellValue(4, 3, "Descripcion");
+                    
+                    document.ImportDataTable(6, 3, table, true);
+
+                    //fuente 
+                    document.SetCellStyle(2, 2, 8 + table.Rows.Count, 10, font);
+
+                    //fondo blanco
+                    document.SetCellStyle(2, 2, 8 + table.Rows.Count, 10, backGroudColor);
+
+                    //border al rededor
+                    document.SetCellStyle(2, 2, 2, 10, topBorder);
+                    document.SetCellStyle(2, 2, 8 + table.Rows.Count, 2, leftBorder);
+                    document.SetCellStyle(2, 10, 8 + table.Rows.Count, 10, rightBorder);
+                    document.SetCellStyle(8 + table.Rows.Count, 2, 8 + table.Rows.Count, 10, bottomBorder);
+
+                    //nombre tabla
+                    document.SetCellStyle(3, 3, 4, 3, fontBold);
+
+                    //cabecera 
+                    document.SetCellStyle(6, 4, 6, 7, style);
+                    document.SetCellStyle(6, 3, 6, 9, fontColor);
+                    document.SetCellStyle(6, 3, 6, 9, headerBackGroudColor);
+                    document.SetCellStyle(6, 3, 6, 9, fontBold);
+
+                    //campos
+                    document.SetCellStyle(7, 3, 6 + table.Rows.Count, 9, border);
+                    document.SetCellStyle(7, 4, 7 + table.Rows.Count, 7, style);
+                    document.SetCellStyle(7, 4, 7 + table.Rows.Count, 7, backGroudColor);
+                    
+                    //agrandar columnas y filas
+                    document.SetRowHeight(7, 6 + table.Rows.Count, 25.0D);
+                    document.AutoFitColumn(3, 9);
+                }
+
+                document.SaveAs(Path.Combine(openFile.SelectedPath,"Archivo de tablas.xlsx"));
+     
+                System.Threading.Tasks.Task.Run(() => 
+                { 
+                    MessageBox.Show("Listo.", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                });
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            this.UseWaitCursor = false;
         }
 
         #region sin completar
@@ -606,6 +840,15 @@ namespace DSRG
 
         #endregion
 
+        private string StringToUpperCase(string word)
+        {
+            string newWord = string.Empty;
+
+            foreach (char lyrics in word)
+                newWord += char.ToUpper(lyrics);
+
+            return newWord;
+        }
 
         /// <summary>
         /// 
@@ -618,8 +861,6 @@ namespace DSRG
             {
                 if (TBServidor.IsEmpty())
                 {
-                    ExcelFile();
-
                     if (RBAutenticacionW.Checked is false)
                     {
                         TBUsuario.IsEmptyErrorProvider();
@@ -724,5 +965,40 @@ namespace DSRG
             this.AddOwnedForm(Tema.GetInstance(ConfiguracionTema, _DartLight).ShowTheme());
         }
 
+        private void CBBBaseDatos_DataSourceChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CBBBaseDatos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (CBBBaseDatos.SelectedIndex >= 1)
+                GBBaseDatos.Enabled = true;
+            else
+                GBBaseDatos.Enabled = false;
+        }
+
+        private void ListCBTablas_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ListCBTablas.CheckedItems.Count >= 1)
+                BTGenerarReporte.Enabled = true;
+            else
+                BTGenerarReporte.Enabled = false;
+
+            LBTablaSelect.Text = $"Tablas selecionadas: {ListCBTablas.CheckedItems.Count}";
+        }
+
+        private void TBServidor_TextBoxIEP_TextChanged(object sender, EventArgs e)
+        {
+            if(TBServidor.Text_.Length >= 1)
+                BTBuscarBaseDatos.Enabled = true;
+            else
+                BTBuscarBaseDatos.Enabled = false;
+        }
+
+        private void ListCBTablas_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+   
+        }
     }
 }

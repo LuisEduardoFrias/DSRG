@@ -143,6 +143,7 @@ namespace DSG
             return Tables;
         }
 
+
         public async Task<List<string>> GetStructureViews(string server, string database, bool credentials, string[] views, string user = null, string password = null)
         {
             sql.SqlConnection sqlCon = new sql.SqlConnection(
@@ -286,8 +287,10 @@ namespace DSG
             try
             {
                 sqlComd = new sql.SqlCommand(
-                 " SELECT COLUMN_NAME, DATA_TYPE, CHARACTER_OCTET_LENGTH, IS_NULLABLE from Information_Schema.Columns "
-              + $" WHERE TABLE_NAME = '{tableName}' ORDER BY COLUMN_NAME", sqlCon);
+                 " SELECT COLUMN_NAME, DATA_TYPE, CHARACTER_OCTET_LENGTH, IS_NULLABLE, NUMERIC_PRECISION, NUMERIC_SCALE, COLUMN_DEFAULT from Information_Schema.Columns "
+              + $" WHERE TABLE_NAME = '{tableName}' ORDER BY ORDINAL_POSITION", sqlCon);
+
+                //"NUMERIC_PRECISION, NUMERIC-SCALE
 
                 sqlCon.Open();
 
@@ -301,6 +304,9 @@ namespace DSG
                         PropertyName = reader["COLUMN_NAME"].ToString(),
                         PropertyType = reader["DATA_TYPE"].ToString(),
                         PropertyLeangth = reader["CHARACTER_OCTET_LENGTH"].ToString() == "-1" ? "MAX" : reader["CHARACTER_OCTET_LENGTH"].ToString(),
+                        PropertyPrecision = reader["NUMERIC_PRECISION"].ToString(),
+                        PropertyScale = reader["NUMERIC_SCALE"].ToString(),
+                        ColumnDefault = reader["COLUMN_DEFAULT"].ToString(),
                         IsNullable = reader["IS_NULLABLE"].ToString()
                     });
                 }

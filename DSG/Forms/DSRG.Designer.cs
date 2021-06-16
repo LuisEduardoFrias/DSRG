@@ -29,6 +29,7 @@ namespace DSRG
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DSRG));
             this.LBServidor = new System.Windows.Forms.Label();
             this.LBBaseDatos = new System.Windows.Forms.Label();
             this.LBUsuario = new System.Windows.Forms.Label();
@@ -40,6 +41,8 @@ namespace DSRG
             this.TBContraseña = new Controles_Personalizado.TextBoxIEP();
             this.ListCBTablas = new System.Windows.Forms.CheckedListBox();
             this.GBDatosConexion = new System.Windows.Forms.GroupBox();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.CBBBaseDatos = new System.Windows.Forms.ComboBox();
             this.TBCompanyName = new Controles_Personalizado.TextBoxIEP();
             this.CBGuardarDatos = new System.Windows.Forms.CheckBox();
             this.LBNombreCompañia = new System.Windows.Forms.Label();
@@ -47,35 +50,37 @@ namespace DSRG
             this.BTBuscarBaseDatos = new System.Windows.Forms.Button();
             this.BTConeccion = new System.Windows.Forms.Button();
             this.GBBaseDatos = new System.Windows.Forms.GroupBox();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.CBBTipoReporte = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.TablasCount = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.CBView = new System.Windows.Forms.ComboBox();
             this.CBMarcarTodasTablas = new System.Windows.Forms.CheckBox();
             this.BTGenerarReporte = new System.Windows.Forms.Button();
             this.LBObtener = new System.Windows.Forms.Label();
-            this.LBTablas = new System.Windows.Forms.Label();
             this.PanelBar = new Guna.UI2.WinForms.Guna2GradientPanel();
+            this.BTClose = new Guna.UI2.WinForms.Guna2CircleButton();
+            this.BTMinimize = new Guna.UI2.WinForms.Guna2CircleButton();
+            this.Logo = new Guna.UI2.WinForms.Guna2PictureBox();
             this.LBLogo = new System.Windows.Forms.Label();
+            this.BTMaximize = new Guna.UI2.WinForms.Guna2CircleButton();
+            this.BTNormal = new Guna.UI2.WinForms.Guna2CircleButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.PanelOpciones = new System.Windows.Forms.Panel();
             this.BTAcercaDe = new Guna.UI2.WinForms.Guna2Button();
             this.BTAjustes = new Guna.UI2.WinForms.Guna2Button();
-            this.CBFileExcel = new System.Windows.Forms.CheckBox();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.CBBBaseDatos = new System.Windows.Forms.ComboBox();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.CBView = new System.Windows.Forms.ComboBox();
-            this.BTClose = new Guna.UI2.WinForms.Guna2CircleButton();
-            this.BTMinimize = new Guna.UI2.WinForms.Guna2CircleButton();
-            this.Logo = new Guna.UI2.WinForms.Guna2PictureBox();
-            this.BTMaximize = new Guna.UI2.WinForms.Guna2CircleButton();
-            this.BTNormal = new Guna.UI2.WinForms.Guna2CircleButton();
+            this.LBTablaSelect = new System.Windows.Forms.Label();
             this.GBCredenciales.SuspendLayout();
             this.GBDatosConexion.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.GBBaseDatos.SuspendLayout();
+            this.panel4.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.PanelBar.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Logo)).BeginInit();
             this.panel1.SuspendLayout();
             this.PanelOpciones.SuspendLayout();
-            this.panel3.SuspendLayout();
-            this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Logo)).BeginInit();
             this.SuspendLayout();
             // 
             // LBServidor
@@ -107,9 +112,9 @@ namespace DSRG
             this.LBUsuario.ForeColor = System.Drawing.Color.Black;
             this.LBUsuario.Location = new System.Drawing.Point(13, 22);
             this.LBUsuario.Name = "LBUsuario";
-            this.LBUsuario.Size = new System.Drawing.Size(48, 13);
+            this.LBUsuario.Size = new System.Drawing.Size(43, 13);
             this.LBUsuario.TabIndex = 1;
-            this.LBUsuario.Text = "Usuarios";
+            this.LBUsuario.Text = "Usuario";
             // 
             // LBContrase
             // 
@@ -169,7 +174,9 @@ namespace DSRG
             // 
             // TBUsuario
             // 
+            this.TBUsuario.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("TBUsuario.BackgroundImage")));
             this.TBUsuario.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.TBUsuario.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.TBUsuario.Enabled = false;
             this.TBUsuario.ErrorProvider = true;
             this.TBUsuario.Location = new System.Drawing.Point(6, 38);
@@ -189,7 +196,9 @@ namespace DSRG
             // 
             // TBContraseña
             // 
+            this.TBContraseña.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("TBContraseña.BackgroundImage")));
             this.TBContraseña.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.TBContraseña.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.TBContraseña.Enabled = false;
             this.TBContraseña.ErrorProvider = true;
             this.TBContraseña.Location = new System.Drawing.Point(6, 92);
@@ -223,6 +232,8 @@ namespace DSRG
             this.ListCBTablas.Sorted = true;
             this.ListCBTablas.TabIndex = 3;
             this.ListCBTablas.TabStop = false;
+            this.ListCBTablas.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.ListCBTablas_ItemCheck);
+            this.ListCBTablas.SelectedIndexChanged += new System.EventHandler(this.ListCBTablas_SelectedIndexChanged);
             // 
             // GBDatosConexion
             // 
@@ -244,9 +255,36 @@ namespace DSRG
             this.GBDatosConexion.TabStop = false;
             this.GBDatosConexion.Text = "Datos de conexión";
             // 
+            // panel3
+            // 
+            this.panel3.BackgroundImage = global::DSG.Properties.Resources.ImageTextBox;
+            this.panel3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panel3.Controls.Add(this.CBBBaseDatos);
+            this.panel3.Location = new System.Drawing.Point(22, 129);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(272, 30);
+            this.panel3.TabIndex = 13;
+            // 
+            // CBBBaseDatos
+            // 
+            this.CBBBaseDatos.BackColor = System.Drawing.Color.White;
+            this.CBBBaseDatos.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.CBBBaseDatos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CBBBaseDatos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.CBBBaseDatos.ForeColor = System.Drawing.Color.Black;
+            this.CBBBaseDatos.FormattingEnabled = true;
+            this.CBBBaseDatos.Location = new System.Drawing.Point(4, 5);
+            this.CBBBaseDatos.Name = "CBBBaseDatos";
+            this.CBBBaseDatos.Size = new System.Drawing.Size(263, 21);
+            this.CBBBaseDatos.TabIndex = 1;
+            this.CBBBaseDatos.TabStop = false;
+            this.CBBBaseDatos.SelectedIndexChanged += new System.EventHandler(this.CBBBaseDatos_SelectedIndexChanged);
+            // 
             // TBCompanyName
             // 
+            this.TBCompanyName.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("TBCompanyName.BackgroundImage")));
             this.TBCompanyName.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.TBCompanyName.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.TBCompanyName.ErrorProvider = true;
             this.TBCompanyName.Location = new System.Drawing.Point(22, 183);
             this.TBCompanyName.MaxLength = 32767;
@@ -289,7 +327,9 @@ namespace DSRG
             // 
             // TBServidor
             // 
+            this.TBServidor.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("TBServidor.BackgroundImage")));
             this.TBServidor.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.TBServidor.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.TBServidor.ErrorProvider = true;
             this.TBServidor.Location = new System.Drawing.Point(22, 75);
             this.TBServidor.MaxLength = 32767;
@@ -305,9 +345,11 @@ namespace DSRG
             this.TBServidor.TabIndex = 0;
             this.TBServidor.Text_ = "";
             this.TBServidor.UseSystemPasswordChar = false;
+            this.TBServidor.TextBoxIEP_TextChanged += new System.EventHandler(this.TBServidor_TextBoxIEP_TextChanged);
             // 
             // BTBuscarBaseDatos
             // 
+            this.BTBuscarBaseDatos.Enabled = false;
             this.BTBuscarBaseDatos.FlatAppearance.BorderSize = 0;
             this.BTBuscarBaseDatos.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
             this.BTBuscarBaseDatos.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
@@ -343,14 +385,17 @@ namespace DSRG
             // GBBaseDatos
             // 
             this.GBBaseDatos.BackColor = System.Drawing.Color.Transparent;
-            this.GBBaseDatos.Controls.Add(this.CBFileExcel);
+            this.GBBaseDatos.Controls.Add(this.LBTablaSelect);
+            this.GBBaseDatos.Controls.Add(this.panel4);
+            this.GBBaseDatos.Controls.Add(this.label1);
+            this.GBBaseDatos.Controls.Add(this.TablasCount);
             this.GBBaseDatos.Controls.Add(this.panel2);
             this.GBBaseDatos.Controls.Add(this.CBMarcarTodasTablas);
             this.GBBaseDatos.Controls.Add(this.BTGenerarReporte);
             this.GBBaseDatos.Controls.Add(this.LBObtener);
-            this.GBBaseDatos.Controls.Add(this.LBTablas);
             this.GBBaseDatos.Controls.Add(this.ListCBTablas);
             this.GBBaseDatos.Controls.Add(this.BTConeccion);
+            this.GBBaseDatos.Enabled = false;
             this.GBBaseDatos.ForeColor = System.Drawing.Color.Black;
             this.GBBaseDatos.Location = new System.Drawing.Point(0, 265);
             this.GBBaseDatos.Name = "GBBaseDatos";
@@ -358,6 +403,85 @@ namespace DSRG
             this.GBBaseDatos.TabIndex = 5;
             this.GBBaseDatos.TabStop = false;
             this.GBBaseDatos.Text = "Base de Datos : ";
+            // 
+            // panel4
+            // 
+            this.panel4.BackgroundImage = global::DSG.Properties.Resources.ImageTextBox;
+            this.panel4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panel4.Controls.Add(this.CBBTipoReporte);
+            this.panel4.Location = new System.Drawing.Point(233, 14);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(109, 30);
+            this.panel4.TabIndex = 15;
+            // 
+            // CBBTipoReporte
+            // 
+            this.CBBTipoReporte.BackColor = System.Drawing.Color.White;
+            this.CBBTipoReporte.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.CBBTipoReporte.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CBBTipoReporte.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.CBBTipoReporte.ForeColor = System.Drawing.Color.Black;
+            this.CBBTipoReporte.FormattingEnabled = true;
+            this.CBBTipoReporte.Items.AddRange(new object[] {
+            "Excel",
+            "PDF"});
+            this.CBBTipoReporte.Location = new System.Drawing.Point(3, 5);
+            this.CBBTipoReporte.Name = "CBBTipoReporte";
+            this.CBBTipoReporte.Size = new System.Drawing.Size(103, 21);
+            this.CBBTipoReporte.TabIndex = 7;
+            this.CBBTipoReporte.TabStop = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.ForeColor = System.Drawing.Color.Black;
+            this.label1.Location = new System.Drawing.Point(146, 22);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(84, 13);
+            this.label1.TabIndex = 14;
+            this.label1.Text = "Tipo de Reporte";
+            // 
+            // TablasCount
+            // 
+            this.TablasCount.AutoSize = true;
+            this.TablasCount.BackColor = System.Drawing.Color.Transparent;
+            this.TablasCount.ForeColor = System.Drawing.Color.Black;
+            this.TablasCount.Location = new System.Drawing.Point(7, 291);
+            this.TablasCount.Name = "TablasCount";
+            this.TablasCount.Size = new System.Drawing.Size(51, 13);
+            this.TablasCount.TabIndex = 15;
+            this.TablasCount.Text = "Tablas: 0";
+            // 
+            // panel2
+            // 
+            this.panel2.BackgroundImage = global::DSG.Properties.Resources.ImageTextBox;
+            this.panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panel2.Controls.Add(this.CBView);
+            this.panel2.Location = new System.Drawing.Point(434, 14);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(109, 30);
+            this.panel2.TabIndex = 13;
+            // 
+            // CBView
+            // 
+            this.CBView.BackColor = System.Drawing.Color.White;
+            this.CBView.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.CBView.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CBView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.CBView.ForeColor = System.Drawing.Color.Black;
+            this.CBView.FormattingEnabled = true;
+            this.CBView.Items.AddRange(new object[] {
+            "Tablas",
+            "Vistas",
+            "Procedimientos",
+            "Triggers"});
+            this.CBView.Location = new System.Drawing.Point(3, 5);
+            this.CBView.Name = "CBView";
+            this.CBView.Size = new System.Drawing.Size(103, 21);
+            this.CBView.TabIndex = 7;
+            this.CBView.TabStop = false;
+            this.CBView.SelectedIndexChanged += new System.EventHandler(this.CBView_SelectedIndexChanged);
             // 
             // CBMarcarTodasTablas
             // 
@@ -375,6 +499,7 @@ namespace DSRG
             // 
             // BTGenerarReporte
             // 
+            this.BTGenerarReporte.Enabled = false;
             this.BTGenerarReporte.FlatAppearance.BorderSize = 0;
             this.BTGenerarReporte.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
             this.BTGenerarReporte.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
@@ -401,17 +526,6 @@ namespace DSRG
             this.LBObtener.TabIndex = 4;
             this.LBObtener.Text = "Obtener";
             // 
-            // LBTablas
-            // 
-            this.LBTablas.AutoSize = true;
-            this.LBTablas.BackColor = System.Drawing.Color.Transparent;
-            this.LBTablas.ForeColor = System.Drawing.Color.Black;
-            this.LBTablas.Location = new System.Drawing.Point(7, 35);
-            this.LBTablas.Name = "LBTablas";
-            this.LBTablas.Size = new System.Drawing.Size(39, 13);
-            this.LBTablas.TabIndex = 4;
-            this.LBTablas.Text = "Tablas";
-            // 
             // PanelBar
             // 
             this.PanelBar.BackColor = System.Drawing.Color.Gainsboro;
@@ -431,8 +545,76 @@ namespace DSRG
             this.PanelBar.ShadowDecoration.BorderRadius = 0;
             this.PanelBar.ShadowDecoration.Enabled = true;
             this.PanelBar.ShadowDecoration.Parent = this.PanelBar;
-            this.PanelBar.Size = new System.Drawing.Size(641, 30);
+            this.PanelBar.Size = new System.Drawing.Size(655, 30);
             this.PanelBar.TabIndex = 6;
+            // 
+            // BTClose
+            // 
+            this.BTClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BTClose.Animated = true;
+            this.BTClose.BackColor = System.Drawing.Color.Transparent;
+            this.BTClose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BTClose.BorderColor = System.Drawing.Color.Transparent;
+            this.BTClose.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.ToogleButton;
+            this.BTClose.CheckedState.Parent = this.BTClose;
+            this.BTClose.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BTClose.CustomBorderColor = System.Drawing.Color.Black;
+            this.BTClose.CustomImages.ImageAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.BTClose.CustomImages.Parent = this.BTClose;
+            this.BTClose.FillColor = System.Drawing.Color.Black;
+            this.BTClose.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.BTClose.ForeColor = System.Drawing.Color.White;
+            this.BTClose.HoverState.FillColor = System.Drawing.Color.Gray;
+            this.BTClose.HoverState.Parent = this.BTClose;
+            this.BTClose.Image = global::DSG.Properties.Resources.Close_White;
+            this.BTClose.Location = new System.Drawing.Point(615, 0);
+            this.BTClose.Name = "BTClose";
+            this.BTClose.PressedColor = System.Drawing.Color.Silver;
+            this.BTClose.PressedDepth = 20;
+            this.BTClose.ShadowDecoration.Parent = this.BTClose;
+            this.BTClose.Size = new System.Drawing.Size(30, 30);
+            this.BTClose.TabIndex = 4;
+            this.BTClose.Click += new System.EventHandler(this.Close_Click);
+            // 
+            // BTMinimize
+            // 
+            this.BTMinimize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BTMinimize.Animated = true;
+            this.BTMinimize.BackColor = System.Drawing.Color.Transparent;
+            this.BTMinimize.BorderColor = System.Drawing.Color.Transparent;
+            this.BTMinimize.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.ToogleButton;
+            this.BTMinimize.CheckedState.Parent = this.BTMinimize;
+            this.BTMinimize.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BTMinimize.CustomBorderColor = System.Drawing.Color.Black;
+            this.BTMinimize.CustomImages.ImageAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.BTMinimize.CustomImages.Parent = this.BTMinimize;
+            this.BTMinimize.FillColor = System.Drawing.Color.Black;
+            this.BTMinimize.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.BTMinimize.ForeColor = System.Drawing.Color.White;
+            this.BTMinimize.HoverState.FillColor = System.Drawing.Color.Gray;
+            this.BTMinimize.HoverState.Parent = this.BTMinimize;
+            this.BTMinimize.Image = global::DSG.Properties.Resources.Minimize_White;
+            this.BTMinimize.Location = new System.Drawing.Point(543, 0);
+            this.BTMinimize.Name = "BTMinimize";
+            this.BTMinimize.PressedColor = System.Drawing.Color.Silver;
+            this.BTMinimize.PressedDepth = 20;
+            this.BTMinimize.ShadowDecoration.Parent = this.BTMinimize;
+            this.BTMinimize.Size = new System.Drawing.Size(30, 30);
+            this.BTMinimize.TabIndex = 4;
+            this.BTMinimize.Click += new System.EventHandler(this.Minimize_Click);
+            // 
+            // Logo
+            // 
+            this.Logo.BackgroundImage = global::DSG.Properties.Resources.Report;
+            this.Logo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.Logo.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Logo.Location = new System.Drawing.Point(0, 0);
+            this.Logo.Name = "Logo";
+            this.Logo.ShadowDecoration.Parent = this.Logo;
+            this.Logo.Size = new System.Drawing.Size(30, 30);
+            this.Logo.TabIndex = 0;
+            this.Logo.TabStop = false;
+            this.Logo.Click += new System.EventHandler(this.Logo_Click);
             // 
             // LBLogo
             // 
@@ -446,13 +628,67 @@ namespace DSRG
             this.LBLogo.TabIndex = 1;
             this.LBLogo.Text = "DSRG";
             // 
+            // BTMaximize
+            // 
+            this.BTMaximize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BTMaximize.Animated = true;
+            this.BTMaximize.BackColor = System.Drawing.Color.Transparent;
+            this.BTMaximize.BorderColor = System.Drawing.Color.Transparent;
+            this.BTMaximize.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.ToogleButton;
+            this.BTMaximize.CheckedState.Parent = this.BTMaximize;
+            this.BTMaximize.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BTMaximize.CustomBorderColor = System.Drawing.Color.Black;
+            this.BTMaximize.CustomImages.ImageAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.BTMaximize.CustomImages.Parent = this.BTMaximize;
+            this.BTMaximize.FillColor = System.Drawing.Color.Black;
+            this.BTMaximize.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.BTMaximize.ForeColor = System.Drawing.Color.White;
+            this.BTMaximize.HoverState.FillColor = System.Drawing.Color.Gray;
+            this.BTMaximize.HoverState.Parent = this.BTMaximize;
+            this.BTMaximize.Image = global::DSG.Properties.Resources.Maximize_White;
+            this.BTMaximize.Location = new System.Drawing.Point(579, 0);
+            this.BTMaximize.Name = "BTMaximize";
+            this.BTMaximize.PressedColor = System.Drawing.Color.Silver;
+            this.BTMaximize.PressedDepth = 20;
+            this.BTMaximize.ShadowDecoration.Parent = this.BTMaximize;
+            this.BTMaximize.Size = new System.Drawing.Size(30, 30);
+            this.BTMaximize.TabIndex = 4;
+            this.BTMaximize.Click += new System.EventHandler(this.Maximize_Click);
+            // 
+            // BTNormal
+            // 
+            this.BTNormal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BTNormal.Animated = true;
+            this.BTNormal.BackColor = System.Drawing.Color.Transparent;
+            this.BTNormal.BorderColor = System.Drawing.Color.Transparent;
+            this.BTNormal.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.ToogleButton;
+            this.BTNormal.CheckedState.Parent = this.BTNormal;
+            this.BTNormal.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BTNormal.CustomBorderColor = System.Drawing.Color.Black;
+            this.BTNormal.CustomImages.ImageAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.BTNormal.CustomImages.Parent = this.BTNormal;
+            this.BTNormal.FillColor = System.Drawing.Color.Black;
+            this.BTNormal.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.BTNormal.ForeColor = System.Drawing.Color.White;
+            this.BTNormal.HoverState.FillColor = System.Drawing.Color.Gray;
+            this.BTNormal.HoverState.Parent = this.BTNormal;
+            this.BTNormal.Image = global::DSG.Properties.Resources.Normal_White;
+            this.BTNormal.Location = new System.Drawing.Point(579, 0);
+            this.BTNormal.Name = "BTNormal";
+            this.BTNormal.PressedColor = System.Drawing.Color.Silver;
+            this.BTNormal.PressedDepth = 20;
+            this.BTNormal.ShadowDecoration.Parent = this.BTNormal;
+            this.BTNormal.Size = new System.Drawing.Size(30, 30);
+            this.BTNormal.TabIndex = 4;
+            this.BTNormal.Click += new System.EventHandler(this.Normal_Click);
+            // 
             // panel1
             // 
             this.panel1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.panel1.BackColor = System.Drawing.Color.Transparent;
             this.panel1.Controls.Add(this.GBDatosConexion);
             this.panel1.Controls.Add(this.GBBaseDatos);
-            this.panel1.Location = new System.Drawing.Point(14, 41);
+            this.panel1.Location = new System.Drawing.Point(12, 36);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(557, 596);
             this.panel1.TabIndex = 7;
@@ -509,198 +745,23 @@ namespace DSRG
             this.BTAjustes.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.BTAjustes.Click += new System.EventHandler(this.BTAjustes_Click);
             // 
-            // CBFileExcel
+            // LBTablaSelect
             // 
-            this.CBFileExcel.AutoSize = true;
-            this.CBFileExcel.Location = new System.Drawing.Point(226, 21);
-            this.CBFileExcel.Name = "CBFileExcel";
-            this.CBFileExcel.Size = new System.Drawing.Size(91, 17);
-            this.CBFileExcel.TabIndex = 14;
-            this.CBFileExcel.Text = "Archivo Excel";
-            this.CBFileExcel.UseVisualStyleBackColor = true;
-            // 
-            // panel3
-            // 
-            this.panel3.BackgroundImage = global::DSG.Properties.Resources.ImageTextBox;
-            this.panel3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panel3.Controls.Add(this.CBBBaseDatos);
-            this.panel3.Location = new System.Drawing.Point(22, 129);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(272, 30);
-            this.panel3.TabIndex = 13;
-            // 
-            // CBBBaseDatos
-            // 
-            this.CBBBaseDatos.BackColor = System.Drawing.Color.White;
-            this.CBBBaseDatos.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.CBBBaseDatos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CBBBaseDatos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.CBBBaseDatos.ForeColor = System.Drawing.Color.Black;
-            this.CBBBaseDatos.FormattingEnabled = true;
-            this.CBBBaseDatos.Location = new System.Drawing.Point(4, 5);
-            this.CBBBaseDatos.Name = "CBBBaseDatos";
-            this.CBBBaseDatos.Size = new System.Drawing.Size(263, 21);
-            this.CBBBaseDatos.TabIndex = 1;
-            this.CBBBaseDatos.TabStop = false;
-            // 
-            // panel2
-            // 
-            this.panel2.BackgroundImage = global::DSG.Properties.Resources.ImageTextBox;
-            this.panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panel2.Controls.Add(this.CBView);
-            this.panel2.Location = new System.Drawing.Point(434, 14);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(109, 30);
-            this.panel2.TabIndex = 13;
-            // 
-            // CBView
-            // 
-            this.CBView.BackColor = System.Drawing.Color.White;
-            this.CBView.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.CBView.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CBView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.CBView.ForeColor = System.Drawing.Color.Black;
-            this.CBView.FormattingEnabled = true;
-            this.CBView.Items.AddRange(new object[] {
-            "Tablas",
-            "Vistas",
-            "Procedimientos",
-            "Triggers"});
-            this.CBView.Location = new System.Drawing.Point(3, 5);
-            this.CBView.Name = "CBView";
-            this.CBView.Size = new System.Drawing.Size(103, 21);
-            this.CBView.TabIndex = 7;
-            this.CBView.TabStop = false;
-            this.CBView.SelectedIndexChanged += new System.EventHandler(this.CBView_SelectedIndexChanged);
-            // 
-            // BTClose
-            // 
-            this.BTClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BTClose.Animated = true;
-            this.BTClose.BackColor = System.Drawing.Color.Transparent;
-            this.BTClose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BTClose.BorderColor = System.Drawing.Color.Transparent;
-            this.BTClose.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.ToogleButton;
-            this.BTClose.CheckedState.Parent = this.BTClose;
-            this.BTClose.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BTClose.CustomBorderColor = System.Drawing.Color.Black;
-            this.BTClose.CustomImages.ImageAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.BTClose.CustomImages.Parent = this.BTClose;
-            this.BTClose.FillColor = System.Drawing.Color.Black;
-            this.BTClose.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.BTClose.ForeColor = System.Drawing.Color.White;
-            this.BTClose.HoverState.FillColor = System.Drawing.Color.Gray;
-            this.BTClose.HoverState.Parent = this.BTClose;
-            this.BTClose.Image = global::DSG.Properties.Resources.Close_White;
-            this.BTClose.Location = new System.Drawing.Point(601, 0);
-            this.BTClose.Name = "BTClose";
-            this.BTClose.PressedColor = System.Drawing.Color.Silver;
-            this.BTClose.PressedDepth = 20;
-            this.BTClose.ShadowDecoration.Parent = this.BTClose;
-            this.BTClose.Size = new System.Drawing.Size(30, 30);
-            this.BTClose.TabIndex = 4;
-            this.BTClose.Click += new System.EventHandler(this.Close_Click);
-            // 
-            // BTMinimize
-            // 
-            this.BTMinimize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BTMinimize.Animated = true;
-            this.BTMinimize.BackColor = System.Drawing.Color.Transparent;
-            this.BTMinimize.BorderColor = System.Drawing.Color.Transparent;
-            this.BTMinimize.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.ToogleButton;
-            this.BTMinimize.CheckedState.Parent = this.BTMinimize;
-            this.BTMinimize.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BTMinimize.CustomBorderColor = System.Drawing.Color.Black;
-            this.BTMinimize.CustomImages.ImageAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.BTMinimize.CustomImages.Parent = this.BTMinimize;
-            this.BTMinimize.FillColor = System.Drawing.Color.Black;
-            this.BTMinimize.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.BTMinimize.ForeColor = System.Drawing.Color.White;
-            this.BTMinimize.HoverState.FillColor = System.Drawing.Color.Gray;
-            this.BTMinimize.HoverState.Parent = this.BTMinimize;
-            this.BTMinimize.Image = global::DSG.Properties.Resources.Minimize_White;
-            this.BTMinimize.Location = new System.Drawing.Point(529, 0);
-            this.BTMinimize.Name = "BTMinimize";
-            this.BTMinimize.PressedColor = System.Drawing.Color.Silver;
-            this.BTMinimize.PressedDepth = 20;
-            this.BTMinimize.ShadowDecoration.Parent = this.BTMinimize;
-            this.BTMinimize.Size = new System.Drawing.Size(30, 30);
-            this.BTMinimize.TabIndex = 4;
-            this.BTMinimize.Click += new System.EventHandler(this.Minimize_Click);
-            // 
-            // Logo
-            // 
-            this.Logo.BackgroundImage = global::DSG.Properties.Resources.Report;
-            this.Logo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.Logo.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.Logo.Location = new System.Drawing.Point(0, 0);
-            this.Logo.Name = "Logo";
-            this.Logo.ShadowDecoration.Parent = this.Logo;
-            this.Logo.Size = new System.Drawing.Size(30, 30);
-            this.Logo.TabIndex = 0;
-            this.Logo.TabStop = false;
-            this.Logo.Click += new System.EventHandler(this.Logo_Click);
-            // 
-            // BTMaximize
-            // 
-            this.BTMaximize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BTMaximize.Animated = true;
-            this.BTMaximize.BackColor = System.Drawing.Color.Transparent;
-            this.BTMaximize.BorderColor = System.Drawing.Color.Transparent;
-            this.BTMaximize.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.ToogleButton;
-            this.BTMaximize.CheckedState.Parent = this.BTMaximize;
-            this.BTMaximize.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BTMaximize.CustomBorderColor = System.Drawing.Color.Black;
-            this.BTMaximize.CustomImages.ImageAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.BTMaximize.CustomImages.Parent = this.BTMaximize;
-            this.BTMaximize.FillColor = System.Drawing.Color.Black;
-            this.BTMaximize.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.BTMaximize.ForeColor = System.Drawing.Color.White;
-            this.BTMaximize.HoverState.FillColor = System.Drawing.Color.Gray;
-            this.BTMaximize.HoverState.Parent = this.BTMaximize;
-            this.BTMaximize.Image = global::DSG.Properties.Resources.Maximize_White;
-            this.BTMaximize.Location = new System.Drawing.Point(565, 0);
-            this.BTMaximize.Name = "BTMaximize";
-            this.BTMaximize.PressedColor = System.Drawing.Color.Silver;
-            this.BTMaximize.PressedDepth = 20;
-            this.BTMaximize.ShadowDecoration.Parent = this.BTMaximize;
-            this.BTMaximize.Size = new System.Drawing.Size(30, 30);
-            this.BTMaximize.TabIndex = 4;
-            this.BTMaximize.Click += new System.EventHandler(this.Maximize_Click);
-            // 
-            // BTNormal
-            // 
-            this.BTNormal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BTNormal.Animated = true;
-            this.BTNormal.BackColor = System.Drawing.Color.Transparent;
-            this.BTNormal.BorderColor = System.Drawing.Color.Transparent;
-            this.BTNormal.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.ToogleButton;
-            this.BTNormal.CheckedState.Parent = this.BTNormal;
-            this.BTNormal.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BTNormal.CustomBorderColor = System.Drawing.Color.Black;
-            this.BTNormal.CustomImages.ImageAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.BTNormal.CustomImages.Parent = this.BTNormal;
-            this.BTNormal.FillColor = System.Drawing.Color.Black;
-            this.BTNormal.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.BTNormal.ForeColor = System.Drawing.Color.White;
-            this.BTNormal.HoverState.FillColor = System.Drawing.Color.Gray;
-            this.BTNormal.HoverState.Parent = this.BTNormal;
-            this.BTNormal.Image = global::DSG.Properties.Resources.Normal_White;
-            this.BTNormal.Location = new System.Drawing.Point(565, 0);
-            this.BTNormal.Name = "BTNormal";
-            this.BTNormal.PressedColor = System.Drawing.Color.Silver;
-            this.BTNormal.PressedDepth = 20;
-            this.BTNormal.ShadowDecoration.Parent = this.BTNormal;
-            this.BTNormal.Size = new System.Drawing.Size(30, 30);
-            this.BTNormal.TabIndex = 4;
-            this.BTNormal.Click += new System.EventHandler(this.Normal_Click);
+            this.LBTablaSelect.AutoSize = true;
+            this.LBTablaSelect.BackColor = System.Drawing.Color.Transparent;
+            this.LBTablaSelect.ForeColor = System.Drawing.Color.Black;
+            this.LBTablaSelect.Location = new System.Drawing.Point(7, 308);
+            this.LBTablaSelect.Name = "LBTablaSelect";
+            this.LBTablaSelect.Size = new System.Drawing.Size(116, 13);
+            this.LBTablaSelect.TabIndex = 16;
+            this.LBTablaSelect.Text = "Tablas selecionadas: 0";
             // 
             // DSRG
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(641, 629);
+            this.ClientSize = new System.Drawing.Size(655, 631);
             this.ControlBox = false;
             this.Controls.Add(this.PanelOpciones);
             this.Controls.Add(this.panel1);
@@ -716,15 +777,16 @@ namespace DSRG
             this.GBCredenciales.PerformLayout();
             this.GBDatosConexion.ResumeLayout(false);
             this.GBDatosConexion.PerformLayout();
+            this.panel3.ResumeLayout(false);
             this.GBBaseDatos.ResumeLayout(false);
             this.GBBaseDatos.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
             this.PanelBar.ResumeLayout(false);
             this.PanelBar.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Logo)).EndInit();
             this.panel1.ResumeLayout(false);
             this.PanelOpciones.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.Logo)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -744,7 +806,6 @@ namespace DSRG
         private System.Windows.Forms.GroupBox GBDatosConexion;
         private System.Windows.Forms.GroupBox GBBaseDatos;
         private System.Windows.Forms.Button BTGenerarReporte;
-        private System.Windows.Forms.Label LBTablas;
         private System.Windows.Forms.Button BTConeccion;
         private System.Windows.Forms.CheckBox CBMarcarTodasTablas;
         private System.Windows.Forms.Label LBNombreCompañia;
@@ -769,7 +830,11 @@ namespace DSRG
         private Controles_Personalizado.TextBoxIEP TBCompanyName;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.CheckBox CBFileExcel;
+        private System.Windows.Forms.Label TablasCount;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.ComboBox CBBTipoReporte;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label LBTablaSelect;
     }
 }
 
