@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DSG.Properties {
+namespace DSRG.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

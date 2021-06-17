@@ -1,5 +1,5 @@
 ﻿
-namespace DSG.Extensions
+namespace DSRG.Extensions
 {
     using System.Windows.Forms;
     //

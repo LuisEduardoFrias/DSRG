@@ -1,4 +1,4 @@
-﻿using DSG.Interfaces;
+﻿using DSRG.Interfaces;
 using DSRG.Models;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using mysql = MySql.Data.MySqlClient;
 
-namespace DSG.Data
+namespace DSRG.Data
 {
     public class MySqlConnection : IConnection<mysql.MySqlConnection, mysql.MySqlCommand>
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace DSG.Interfaces
+namespace DSRG.Interfaces
 {
     public interface IConnection<T,J> where T : class
     {

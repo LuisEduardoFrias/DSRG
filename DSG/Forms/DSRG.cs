@@ -1,8 +1,7 @@
 ﻿
 namespace DSRG
 {
-    using DSG;
-    using DSG.Extensions;
+
     using Extensions;
     using Forms;
     using Models;
@@ -16,8 +15,6 @@ namespace DSRG
     using SpreadsheetLight;
     using System.Collections.Generic;
     using System.Linq;
-
-    //
 
     public partial class DSRG : Form
     {
@@ -724,7 +721,7 @@ namespace DSRG
                         table.PropertyName,
                         type, 
                         table.PropertyLeangth   is null or "" ?
-                        (type is "INT" ? string.Empty : (table.PropertyPrecision is null or "" ? string.Empty : $"({precision})({scale})")) : table.PropertyLeangth,
+                        (type is "INT" ? string.Empty : (table.PropertyPrecision is null or "" ? string.Empty : $"({precision}, {scale})")) : table.PropertyLeangth,
                         table.IsNullable, 
                         table.ColumnDefault == null ? string.Empty : table.ColumnDefault,
                         table.ConstraintName == null ? string.Empty : table.ConstraintName);

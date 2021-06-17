@@ -1,16 +1,13 @@
 ﻿
-namespace DSG
+namespace DSRG
 {
     using System;
     using System.Collections.Generic;
     using sql = System.Data.SqlClient;
     using System.Linq;
     using System.Threading.Tasks;
-    using DSRG.Models;
-    using DSG.Interfaces;
-    using System.Data.SqlClient;
-
-    //
+    using Models;
+    using Interfaces;
 
     public class SqlServerConnection : IConnection<sql.SqlConnection, sql.SqlCommand>
     {

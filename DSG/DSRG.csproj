@@ -7,14 +7,14 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{81F669FD-EB44-4D93-873F-B80FF96F5949}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>DSG</RootNamespace>
-    <AssemblyName>DSG</AssemblyName>
+    <RootNamespace>DSRG</RootNamespace>
+    <AssemblyName>DSRG</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>C:\Users\LuisE\OneDrive\Escritorio\DSG\</PublishUrl>
+    <PublishUrl>C:\Users\LuisE\OneDrive\Escritorio\DSRG\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -24,7 +24,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>15</ApplicationRevision>
+    <ApplicationRevision>17</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -39,6 +39,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <DocumentationFile>bin\Debug\DSRG.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -63,6 +65,9 @@
   </PropertyGroup>
   <PropertyGroup>
     <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>DSRG.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DocumentFormat.OpenXml, Version=2.11.3.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
@@ -216,6 +221,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\BTGenerarReporte.BackgroundImage.png" />
+    <None Include="Resources\BTConeccion.BackgroundImage.png" />
+    <None Include="Resources\BTBuscarBaseDatos.BackgroundImage.png" />
+    <None Include="Resources\TBUsuario.BackgroundImage14.png" />
     <None Include="Resources\TBUsuario.BackgroundImage13.png" />
     <None Include="Resources\TBUsuario.BackgroundImage12.png" />
     <None Include="Resources\TBUsuario.BackgroundImage10.png" />

@@ -282,7 +282,7 @@ namespace DSRG.Forms
             this.BTClose.ForeColor = System.Drawing.Color.White;
             this.BTClose.HoverState.FillColor = System.Drawing.Color.Gray;
             this.BTClose.HoverState.Parent = this.BTClose;
-            this.BTClose.Image = global::DSG.Properties.Resources.Close_White;
+            this.BTClose.Image = global::DSRG.Properties.Resources.Close_White;
             this.BTClose.Location = new System.Drawing.Point(194, -1);
             this.BTClose.Name = "BTClose";
             this.BTClose.PressedColor = System.Drawing.Color.Silver;
