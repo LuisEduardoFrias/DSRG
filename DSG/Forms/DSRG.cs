@@ -1,33 +1,32 @@
-﻿
-namespace DSRG
+﻿using CrossCutting.Models;
+using DataAccess.Class;
+using Domainn;
+using DSRG.Extensions;
+using Newtonsoft.Json;
+using Presentation.Recursos;
+using SpreadsheetLight;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Presentation
 {
-
-    using Extensions;
-    using Forms;
-    using Models;
-    using Newtonsoft.Json;
-    using System;
-    using System.Drawing;
-    using System.IO;
-    using System.Security.Principal;
-    using System.Windows.Forms;
-    using static Services.Enums;
-    using SpreadsheetLight;
-    using System.Collections.Generic;
-    using System.Linq;
-
     public partial class DSRG : Form
     {
-        bool _DartLight;
-
+        /// <summary>
+        /// 
+        /// </summary>
         public DSRG()
         {
             InitializeComponent();
 
-            TBServidor_TextBoxIEP_TextChanged(null, null);
-
             CBView.SelectedIndex = 0;
-            CBBTipoReporte.SelectedIndex = 0;
+            CBBReportType.SelectedIndex = 0;
 
             if (!Directory.Exists(Directory.GetCurrentDirectory() + @"\Datos"))
             {
@@ -37,544 +36,257 @@ namespace DSRG
             }
 
             DatosCredenciales obj = JsonConvert.DeserializeObject<DatosCredenciales>(
-                File.ReadAllText(Directory.GetCurrentDirectory() +  @"\Datos\Datos.json", System.Text.Encoding.UTF8));
+                File.ReadAllText(Directory.GetCurrentDirectory() + @"\Datos\Datos.json", System.Text.Encoding.UTF8));
 
-            if(obj is not null)
+            if (obj is not null)
             {
-                TBServidor.Text_ =          Decrypt(obj.Servidor);
-                CBBBaseDatos.Text =         Decrypt(obj.BaseDatos);
-                TBUsuario.Text_ =           Decrypt(obj.Usuario);
-                TBContraseña.Text_ =        Decrypt(obj.Contraseña);
-                RBAutenticacionS.Checked =         !obj.AutenticacionWindows;
-                TBCompanyName.Text_ =       Decrypt(obj.NombreEmpresa);
-                CBGuardarDatos.Checked =            obj.GuardarDatos;
-                ConfiguracionTema(obj.Dart, BuscarTema(Decrypt(obj.Tema)));
+                TBServer.Text = Business.Decrypt(obj.Servidor);
+                CBBDataBase.Text = Business.Decrypt(obj.BaseDatos);
+                TBUser.Text = Business.Decrypt(obj.Usuario);
+                TBPasswork.Text = Business.Decrypt(obj.Contraseña);
+                RBAutenticationS.Checked = !obj.AutenticacionWindows;
+                CBSaveDatas.Checked = obj.GuardarDatos;
             }
-
-            PanelOpciones.Location = new Point(0, 30);
-            this.Size = new Size(590, 700);
-            panel1.Location = new Point(10, 41);
-            GBBaseDatos.Text = $"{CBView.SelectedItem}";
         }
 
+        //private void BTMinimize_Click(object sender, EventArgs e)
+        //{
+        //    WindowState = FormWindowState.Minimized;
+        //}
 
-        #region tema
+        //private void BTNormal_Click(object sender, EventArgs e)
+        //{
+        //    BTNormal.Visible = false;
+        //    BTNormal.Enabled = false;
+        //    BTMaximize.Visible = true;
+        //    BTMaximize.Enabled = true;
+        //    WindowState = FormWindowState.Normal;
+        //}
 
-        private void ConfiguracionTema(bool Dart,Theme tema = Theme.Verde)
+        //private void BTMaximize_Click(object sender, EventArgs e)
+        //{
+        //    BTNormal.Visible = true;
+        //    BTNormal.Enabled = true;
+        //    BTMaximize.Visible = false;
+        //    BTMaximize.Enabled = false;
+        //    WindowState = FormWindowState.Maximized;
+        //}
+
+        //private void BTClose_Click(object sender, EventArgs e)
+        //{
+        //    if (DialogResult.Yes == MessageBox.Show("¿SEGURO QUE DESEA CERRAR LA APLICACIÓN?", "Pregunta", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+        //        Application.Exit();
+        //}
+
+        private void RBAutenticacionW_CheckedChanged(object sender, EventArgs e)
         {
-            BTGenerarReporte.Temas(tema);
-            BTConeccion.Temas(tema);
-            BTBuscarBaseDatos.Temas(tema);
-
-            _DartLight = Dart;
-
-            if (Dart)
-                DarMode();
+            if (RBAutenticationW.Checked is true)
+                GBCredenciales.Enabled = false;
             else
-                LightMode();
+                GBCredenciales.Enabled = true;
+        }
 
-            if (CBGuardarDatos.Checked is true)
-                using (StreamWriter file = File.CreateText(Directory.GetCurrentDirectory() + @"\Datos\Datos.json"))
-                    new JsonSerializer().Serialize(file, new DatosCredenciales
+        private async void TBGetDataBas_Click(object sender, EventArgs e)
+        {
+            if (!TBServer.IsEmptyIconErrorProvider("Servidor") & 
+                (RBAutenticationS.Checked == true ? (!TBPasswork.IsEmptyIconErrorProvider("Contraseña") & !TBUser.IsEmptyIconErrorProvider("Usuario")) : true))
+            {
+                this.Cursor = Cursors.WaitCursor;
+
+                CBBDataBase.Items.Clear();
+                CBBDataBase.Items.Add("Seleccione una Base de datos");
+                CBBDataBase.SelectedIndex = 0;
+
+                List<string> structures = await Connection.GetInstance(TBServer.Text, RBAutenticationW.Checked, null, TBPort.ToInt(), TBUser.Text, TBPasswork.Text).GetConecction().GetDataBases();
+
+                if(!structures.Equals(null))
+                {
+                    foreach (string tableName in structures)
                     {
-                        Servidor = Encrypt(TBServidor.Text_),
-                        BaseDatos = Encrypt(CBBBaseDatos.Text),
-                        Usuario = Encrypt(TBUsuario.Text_),
-                        Contraseña = Encrypt(TBContraseña.Text_),
-                        AutenticacionWindows = RBAutenticacionW.Checked,
-                        NombreEmpresa = Encrypt(TBCompanyName.Text_),
-                        GuardarDatos = CBGuardarDatos.Checked,
-                        Tema = Encrypt(tema.ToString()),
-                        Dart = Dart
-                    });
+                        CBBDataBase.Items.Add(tableName);
+                    }
 
-        }
+                    if (CBSaveDatas.Checked is true)
+                        using (StreamWriter file = File.CreateText(Directory.GetCurrentDirectory() + @"\Datos\Datos.json"))
+                            new JsonSerializer().Serialize(file, new DatosCredenciales
+                            {
+                                Servidor = Business.Encrypt(TBServer.Text),
+                                BaseDatos = Business.Encrypt(CBBDataBase.Text),
+                                Usuario = Business.Encrypt(TBUser.Text),
+                                Contraseña = Business.Encrypt(TBPasswork.Text),
+                                AutenticacionWindows = RBAutenticationW.Checked,
+                                GuardarDatos = CBSaveDatas.Checked
+                            });
 
-        private void DarMode()
-        {
-            // 
-            // LBServidor
-            this.LBServidor.ForeColor = System.Drawing.Color.White;//black
-            // 
-            // LBBaseDatos
-            this.LBBaseDatos.ForeColor = System.Drawing.Color.White;//black
-            // 
-            // LBUsuario
-            this.LBUsuario.ForeColor = System.Drawing.Color.White;//black
-            // 
-            // LBContrase
-            this.LBContrase.ForeColor = System.Drawing.Color.White;//black
-            // 
-            // GBCredenciales
-            this.GBCredenciales.ForeColor = System.Drawing.Color.White;//black
-            // 
-            // RBAutenticacionW
-            this.RBAutenticacionW.ForeColor = System.Drawing.Color.White;//black
-            // 
-            // RBAutenticacionS
-            this.RBAutenticacionS.ForeColor = System.Drawing.Color.White;//black
-            // 
-            // ListCBTablas
-            this.ListCBTablas.BackColor = System.Drawing.Color.Black;//white
-            this.ListCBTablas.ForeColor = System.Drawing.Color.White;//black
-            // 
-            // GBDatosConexion
-            // 
-            this.GBDatosConexion.BackColor = System.Drawing.Color.Black;//white
-            this.GBDatosConexion.ForeColor = System.Drawing.Color.White;//black
-            // 
-            // CBGuardarDatos
-            this.CBGuardarDatos.ForeColor = System.Drawing.Color.White;//black
-            // 
-            // CBBBaseDatos
-            this.CBBBaseDatos.BackColor = System.Drawing.Color.Black;//white
-            this.CBBBaseDatos.ForeColor = System.Drawing.Color.White;//black
-            // 
-            // LBNombreCompañia
-            this.LBNombreCompañia.ForeColor = System.Drawing.Color.White;//black
-            // 
-            // GBBaseDatos
-            this.GBBaseDatos.ForeColor = System.Drawing.Color.White;
-            // 
-            // CBView
-            this.CBView.BackColor = System.Drawing.Color.Black;//white
-            this.CBView.ForeColor = System.Drawing.Color.White;//black
-            // 
-            // CBMarcarTodasTablas
-            this.CBMarcarTodasTablas.ForeColor = System.Drawing.Color.White;//black
-            // 
-            // LBObtener
-            this.LBObtener.ForeColor = System.Drawing.Color.White;//black
-            // 
-            // LBTablas
-            // this.LBTablas.ForeColor = System.Drawing.Color.White;//black
-            // 
-            // LBLogo
-            this.LBObtener.ForeColor = System.Drawing.Color.White;//black
-            //// 
-            //// TBCompanyName
-            //// 
-            //this.TBCompanyName.BackColor = System.Drawing.Color.Black;//white
-            //this.TBCompanyName.ForeColor = System.Drawing.Color.White;//black
-            //// 
-            //// TBServidor
-            //// 
-            //this.TBServidor.BackColor = System.Drawing.Color.Black;//white
-            //this.TBServidor.ForeColor = System.Drawing.Color.White;//black
-            //// 
-            //// TBUsuario
-            //// 
-            //this.TBUsuario.BackColor = System.Drawing.Color.Black;//white
-            //this.TBUsuario.ForeColor = System.Drawing.Color.White;//black
-            //// 
-            //// TBContraseña
-            //this.TBContraseña.BackColor = System.Drawing.Color.Black;//white
-            //this.TBContraseña.ForeColor = System.Drawing.Color.White;//black
-            // 
-            // DSRG
-            this.BackColor = System.Drawing.Color.Black;//white
-            //
-        }
+                    CBBDataBase.Enabled = true;
+                    CBBDataBase.SelectedIndex = 0;
+                }
+                else
+                {
+                    MessageBox.Show("Error inesperado", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
 
-        private void LightMode()
-        {
-            // 
-            // LBServidor
-            this.LBServidor.ForeColor = System.Drawing.Color.Black;
-            // 
-            // LBBaseDatos
-            this.LBBaseDatos.ForeColor = System.Drawing.Color.Black;
-            // 
-            // LBUsuario
-            this.LBUsuario.ForeColor = System.Drawing.Color.Black;
-            // 
-            // LBContrase
-            this.LBContrase.ForeColor = System.Drawing.Color.Black;
-            // 
-            // GBCredenciales
-            this.GBCredenciales.ForeColor = System.Drawing.Color.Black;
-            // 
-            // RBAutenticacionW
-            this.RBAutenticacionW.ForeColor = System.Drawing.Color.Black;
-            // 
-            // RBAutenticacionS
-            this.RBAutenticacionS.ForeColor = System.Drawing.Color.Black;
-            // 
-            // ListCBTablas
-            this.ListCBTablas.BackColor = System.Drawing.Color.White;
-            this.ListCBTablas.ForeColor = System.Drawing.Color.Black;
-            // 
-            // GBDatosConexion
-            // 
-            this.GBDatosConexion.BackColor = System.Drawing.Color.White;
-            this.GBDatosConexion.ForeColor = System.Drawing.Color.Black;
-            // 
-            // CBGuardarDatos
-            this.CBGuardarDatos.ForeColor = System.Drawing.Color.Black;
-            // 
-            // CBBBaseDatos
-            this.CBBBaseDatos.BackColor = System.Drawing.Color.White;
-            this.CBBBaseDatos.ForeColor = System.Drawing.Color.Black;
-            // 
-            // LBNombreCompañia
-            this.LBNombreCompañia.ForeColor = System.Drawing.Color.Black;
-            // 
-            // GBBaseDatos
-            this.GBBaseDatos.ForeColor = System.Drawing.Color.Black;
-            // 
-            // CBView
-            this.CBView.BackColor = System.Drawing.Color.White;
-            this.CBView.ForeColor = System.Drawing.Color.Black;
-            // 
-            // CBMarcarTodasTablas
-            this.CBMarcarTodasTablas.ForeColor = System.Drawing.Color.Black;
-            // 
-            // LBObtener
-            this.LBObtener.ForeColor = System.Drawing.Color.Black;
-            // 
-            // LBTablas
-            // this.LBTablas.ForeColor = System.Drawing.Color.Black;
-            // 
-            // LBLogo
-            this.LBObtener.ForeColor = System.Drawing.Color.Black;
-            // 
-            // TBCompanyName
-            // 
-            this.TBCompanyName.BackColor = System.Drawing.Color.White;
-            this.TBCompanyName.ForeColor = System.Drawing.Color.Black;
-            // 
-            // TBServidor
-            // 
-            this.TBServidor.BackColor = System.Drawing.Color.White;
-            this.TBServidor.ForeColor = System.Drawing.Color.Black;
-            // 
-            // TBUsuario
-            // 
-            this.TBUsuario.BackColor = System.Drawing.Color.White;
-            this.TBUsuario.ForeColor = System.Drawing.Color.Black;
-            // 
-            // TBContraseña
-            this.TBContraseña.BackColor = System.Drawing.Color.White;
-            this.TBContraseña.ForeColor = System.Drawing.Color.Black;
-            // 
-            // DSRG
-            this.BackColor = System.Drawing.Color.White;
-        }
-
-        private Theme BuscarTema(string tema) =>
-            tema switch
-            {
-                "Negro" => Theme.Negro,
-                "Blanco" => Theme.Blanco,
-                "Azul" => Theme.Azul,
-                "Verde" => Theme.Verde,
-                "Gris" => Theme.Gris,
-                "Naranja" => Theme.Naranja,
-                "Amarillo" => Theme.Amarillo,
-                "DarMode" => Theme.DarMode,
-                "LightMode" => Theme.LightMode,
-                _ => Theme.Azul
-            };
-
-        #endregion
-
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void RBAutenticacionW_CheckedChanged(object sender, System.EventArgs e)
-        {
-            if (RBAutenticacionW.Checked is true)
-            {
-                TBUsuario.Enabled = false;
-                TBContraseña.Enabled = false;
-                RBAutenticacionW.BackColor = Color.FromArgb(109, 168, 68);
-                RBAutenticacionS.BackColor = Color.Transparent;
+                this.Cursor = Cursors.Default;
             }
+
+        }
+
+        private void CBBBaseDatos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (CBBDataBase.IsEmpty())
+                ActivarBTConeccion(false);
             else
-            {
-                TBUsuario.Enabled = true;
-                TBContraseña.Enabled = true;
-                RBAutenticacionS.BackColor = Color.FromArgb(109, 168, 68);
-                RBAutenticacionW.BackColor = Color.Transparent;
-            }
+                ActivarBTConeccion(true);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void BTConeccion_Click(object sender, System.EventArgs e)
+        private void CBView_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            BTSearch.Text = $"Buscar {CBView.SelectedItem}";
+        }
+
+        private void BTConeccion_Click(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
 
-            if(TBServidor.IsEmptyErrorProvider() | CBBBaseDatos.IsEmpty())
+            if (!TBServer.IsEmptyIconErrorProvider("Servidor") &
+                (RBAutenticationS.Checked == true ? (!TBPasswork.IsEmptyIconErrorProvider("Contraseña") & !TBUser.IsEmptyIconErrorProvider("Usuario")) : true) &
+                !CBBDataBase.IsEmptyIconErrorProvider("Base de datos"))
             {
-                if (RBAutenticacionW.Checked == false)
-                {
-                    TBUsuario.IsEmptyErrorProvider();
-                    TBContraseña.IsEmptyErrorProvider();
-                }
-
-                if(CBBBaseDatos.IsEmpty()) 
-                    MessageBox.Show("Escriba un nombre de una base de datos o busque una para seleccionar", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else
-            {
-                 if (RBAutenticacionW.Checked is false)
-                 {
-                    if (!TBUsuario.IsEmptyErrorProvider() | !TBContraseña.IsEmptyErrorProvider())
-                        GetTables();
-                 }
-                 else
-                    GetTables();
+                GetStructure();
             }
 
             this.Cursor = Cursors.Default;
         }
 
+        private void CBMarcarTodasTablas_CheckedChanged(object sender, EventArgs e)
+        {
+            for (int i = 0; i < ListCB.Items.Count; i++)
+                ListCB.SetItemChecked(i, ChBMarkAllStructures.Checked);
+        }
+
+        private async void BTGenerarReporte_Click(object sender, EventArgs e)
+        {
+            bool mensaje = false;
+            for (int i = 0; i < ListCB.Items.Count; i++)
+                if (ListCB.GetItemChecked(i))
+                {
+                    await GenerarReporte();
+                    mensaje = false;
+                    break;
+                }
+                else
+                    mensaje = true;
+
+            if(mensaje)
+                MessageBox.Show("No hay tablas seleccionadas.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void ActivarBTConeccion(bool value)
+        {
+            BTSearch.Enabled = value;
+        }
+
+        private async void GetStructure()
+        {
+            ListCB.Items.Clear();
+
+            foreach (string tableName in await Connection.GetInstance(TBServer.Text, RBAutenticationW.Checked, CBBDataBase.Text, TBPort.ToInt(), TBUser.Text, TBPasswork.Text).GetConecction().GetEstructuras(CBView.Text))
+                ListCB.Items.Add(tableName);
+
+            TablasCount.Text = $"Estructuras: {ListCB.Items.Count}";
+        }
+
+        private void Logo_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("DSRG\n\"Database Structure Report Generator.\"\n\nVersión 1.5\n\nDSRG made by Luis Eduardo Frías, es una generado de reporte de base de datos relacionales, actual mente conpatible con Sql Server y  MySql.\n\nCopyRight © 2021\nTodos los derechos reservados.\n" +
+                "Los Programas de Computadora (en lo adelante “software”), definidos en nuestra legislación están protegidos en la República " +
+                "Dominicana a través de la figura del Derecho de Autor, la cual está contemplada en la Ley 65-00 sobre Derecho de Autor.",
+                "Acerca de", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
         /// <summary>
-        /// 
+        /// Determina que metodo ejecutar segun la estructura seleccionada.
         /// </summary>
-        private async void GetTables()
-        {
-            ListCBTablas.Items.Clear();
-
-            try
-            {
-                foreach (string tableName in await SqlServerConnection
-                         .GetInstance()
-                         .GetTables(TBServidor.Text_, CBBBaseDatos.Text, RBAutenticacionW.Checked, CBView.Text, TBUsuario.Text_, TBContraseña.Text_))
-                {
-                    ListCBTablas.Items.Add(tableName);
-                }
-
-                if(CBGuardarDatos.Checked is true)
-                    using (StreamWriter file = File.CreateText(Directory.GetCurrentDirectory() +  @"\Datos\Datos.json"))
-                        new JsonSerializer().Serialize(file, new DatosCredenciales
-                        {
-                            Servidor = Encrypt(TBServidor.Text_),
-                            BaseDatos = Encrypt(CBBBaseDatos.Text),
-                            Usuario = Encrypt(TBUsuario.Text_),
-                            Contraseña = Encrypt(TBContraseña.Text_),
-                            AutenticacionWindows = RBAutenticacionW.Checked,
-                            NombreEmpresa = Encrypt(TBCompanyName.Text_),
-                            GuardarDatos = CBGuardarDatos.Checked
-                        });
-
-                TablasCount.Text = $"Tablas: {ListCBTablas.Items.Count}";
-            }
-            catch (System.Exception ex)
-            {
-                MessageBox.Show(ex.Message.ToString(), "Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
-            }
-        }
-
-
-        #region Encriptaciones
-
-        public string Encrypt(string _stringToEncrypt)
-        {
-            if (!string.IsNullOrEmpty(_stringToEncrypt))
-            {
-                string result;
-
-                byte[] encryted = System.Text.Encoding.Unicode.GetBytes(_stringToEncrypt);
-
-                result = Convert.ToBase64String(encryted);
-
-                return result;
-            }
-
-            return _stringToEncrypt;
-        }
-
-        public string Decrypt(string _stringToDecrypt)
-        {
-            if (!string.IsNullOrEmpty(_stringToDecrypt))
-            {
-                try
-                {
-                    string result;
-
-                    byte[] decryted = Convert.FromBase64String(_stringToDecrypt);
-
-                    result = System.Text.Encoding.Unicode.GetString(decryted);
-
-                    return result;
-                }
-                catch
-                {
-                   //return Resource.CorruptedData + _stringToDecrypt;
-                }
-            }
-
-            return _stringToDecrypt;
-        }
-
-        #endregion
-
-
-        private void CBMarcarTodasTablas_CheckedChanged(object sender, System.EventArgs e)
-        {
-            for (int i = 0; i < ListCBTablas.Items.Count; i++)
-                ListCBTablas.SetItemChecked(i, CBMarcarTodasTablas.Checked);
-        }
-
-        private void BTGenerarReporte_Click(object sender, System.EventArgs e)
+        private async Task GenerarReporte()
         {
             this.Cursor = Cursors.WaitCursor;
 
-            string[] tables = new string[ListCBTablas.CheckedItems.Count];
+            #region Obtener los checked seleccionados
 
-            int c = 0;
-            foreach(string table in ListCBTablas.CheckedItems)
-            {
-                tables[c] = table;
+                string[] tables = new string[ListCB.CheckedItems.Count];
 
-                c++;
-            }
+                int c = 0;
+                foreach (string table in ListCB.CheckedItems)
+                {
+                    tables[c] = table;
 
-            for (int i = 0; i < ListCBTablas.Items.Count; i++)
-                ListCBTablas.SetItemChecked(i, false);
+                    c++;
+                }
 
-            CBMarcarTodasTablas.Checked = false;
+            #endregion
 
-            void action()
-            {
-                PropertyTables(tables);
-            }
+            ListCB.ClearSelected();
+
+            ChBMarkAllStructures.Checked = false;
 
             if (tables.Length > 0)
-            {
-                if (CBBTipoReporte.SelectedIndex == 0)
-                {
-                    PropertyTablesForExcel(tables);
-                }
-                else
-                {
-                    //_ = CBView.SelectedItem switch
-                    switch(CBView.SelectedItem)
-                    {
-                        case "Tablas":// => () =>
-                        {
-                            /*--La consulta muestra todas las tablas de la base de datos*/
-                            PropertyTables(tables);
-                                break;
-                        }
-                        case "Vistas":// => () =>
-                        {
-                            /*--La consulta muestra todas las vistas de la base de datos*/
-                            StructureViews(tables);
-                                break;
-                        }
-                        case "Procedimientos":// => () =>
-                        {
-                            /*--La consulta muestra todos los procedimientos de la base de datos*/
-                            StructureProcedure(tables);
-                                break;
-                        }
-                        case "Triggers":// => () =>
-                        {
-                            /*--La consulta muestra todos los triggers de la base de datos*/
-                            StructureTriggers(tables);
-                                break;
-                        }
-                        case "Functions":// => () =>
-                        {
-                            /*--La consulta muestra todos los Functions de la base de datos*/
-
-                            StructureFunctions(tables);
-                                break;
-                        }
-                        //_ => (Action)action
-                    };
-
-                }
-            }
+                await DataStructures(tables);
             else
                 MessageBox.Show("No hay opciones marcadas", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             this.Cursor = Cursors.Default;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="tables"></param>
-        private async void PropertyTables(string[] tables)
+        #region sin completar
+
+        private async Task DataStructures(string[] tables)
         {
-            try
+            async Task<List<Table>> Switch(string x) => x switch
             {
-                List<Table> listTable = await SqlServerConnection
-                .GetInstance()
-                .GetTablesProperty(TBServidor.Text_, CBBBaseDatos.Text, RBAutenticacionW.Checked, tables, TBUsuario.Text_, TBContraseña.Text_);
+                "Tablas" => await Connection.GetInstance(TBServer.Text, RBAutenticationW.Checked, CBBDataBase.Text, TBPort.ToInt(),  TBUser.Text, TBPasswork.Text).GetConecction().GetTablesProperty(tables),
 
-                if (listTable is not null)
-                {
-                    FromReport FromReport = new FromReport();
+                //"Vistas" => await Connection.Get().GetStructureViews(TBServer.Text, CBBDataBase.Text, RBAutenticationW.Checked, tables, TBUser.Text, TBPasswork.Text),
 
-                    Reports.Report report = new Reports.Report();
+                //"Procedimientos" => await Connection.Get().GetStructureProcedures(TBServer.Text, CBBDataBase.Text, RBAutenticationW.Checked, tables, TBUser.Text, TBPasswork.Text),
 
-                    report.TBCompanyName.Value = TBCompanyName.Text_;
+                //"Triggers" => await Connection.Get().GetStructureTriggers(TBServer.Text, CBBDataBase.Text, RBAutenticationW.Checked, tables, TBUser.Text, TBPasswork.Text),
 
-                    report.objectDataSource.DataSource = listTable;
+                //"Functions" => await Connection.Get().GetStructureFunctions(TBServer.Text, CBBDataBase.Text, RBAutenticationW.Checked, tables, TBUser.Text, TBPasswork.Text),
 
-                    report.reportNameTextBox.Value = $"Resporte de tabla : Servidor = {TBServidor.Text_};  base de datos = {CBBBaseDatos.Text};";
-     
-                    FromReport.reportViewer.ShowPrintPreviewButton = true;
-                    FromReport.reportViewer.ReportSource = report;
-                    FromReport.reportViewer.RefreshReport();
+                _ => await Connection.GetInstance(TBServer.Text,  RBAutenticationW.Checked, CBBDataBase.Text, TBPort.ToInt(), TBUser.Text, TBPasswork.Text).GetConecction().GetTablesProperty(tables)
+            };
 
-                    this.Cursor = Cursors.Default;
+            List<Table> listTable = await Switch((string)CBView.SelectedItem);
 
-                    FromReport.Show();
-                }
-                else
-                    MessageBox.Show("Error", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            if (listTable is not null)
+            {
+                if (CBBReportType.SelectedIndex == 0)
+                    ExcelReport(listTable);
+                else if (CBBReportType.SelectedIndex == 1)
+                    TelerikReport(listTable);
+                else if (CBBReportType.SelectedIndex == 2)
+                    HtmlReport(listTable);
             }
-            catch{}
+            else
+                MessageBox.Show("Error", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
+        #endregion
 
-        private async void PropertyTablesForExcel(string[] tables)
+
+        private void ExcelReport(List<Table> listTable)
         {
-            try
-            {
-                List<Table> listTable = await SqlServerConnection
-                .GetInstance()
-                .GetTablesProperty(TBServidor.Text_, CBBBaseDatos.Text, RBAutenticacionW.Checked, tables, TBUsuario.Text_, TBContraseña.Text_);
-
-                if (listTable is not null)
-                {
-                    ExcelFile(listTable);
-                }
-                else
-                    MessageBox.Show("Error", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch { }
-        }
-
-
-        private void ExcelFile(List<Table> listTable)
-        {   
             try
             {
                 this.UseWaitCursor = true;
 
-                FolderBrowserDialog openFile = new FolderBrowserDialog();
-                openFile.ShowDialog();
-
-                List<System.Data.DataTable> tables = new List<System.Data.DataTable>();
-                System.Data.DataTable dataTable = new System.Data.DataTable();
-                SLDocument document = new SLDocument();
+                List<DataTable> tables = new();
+                DataTable dataTable = new();
+                SLDocument document = new();
 
                 //----------------------- Styles ---------------------------//
-               
-                SLPageSettings ps = new SLPageSettings();
+
+                SLPageSettings ps = new();
 
                 SLStyle style = document.CreateStyle();
                 SLStyle fontBold = document.CreateStyle();
@@ -629,7 +341,7 @@ namespace DSRG
                     Tuple.Create("Rediseñada", typeof(string)),
                     Tuple.Create("Comentario", typeof(string))
                 };
-                
+
                 foreach (Tuple<string, Type> column in columnsForIndex)
                 {
                     dataTable.Columns.Add(column.Item1, column.Item2);
@@ -640,11 +352,11 @@ namespace DSRG
                 {
                     bool insert = true;
 
-                    foreach (System.Data.DataRow row in dataTable.Rows)
+                    foreach (DataRow row in dataTable.Rows)
                         if (row[1].ToString() == table.TableName)
                             insert = false;
 
-                    if (insert == true) 
+                    if (insert == true)
                     {
                         dataTable.Rows.Add(index, table.TableName, "", "", "", "SI", "NO", "NO", "");
                         index++;
@@ -684,11 +396,11 @@ namespace DSRG
 
                 // ----------------------- tablas ---------------------------//
 
-                tables = new List<System.Data.DataTable>();
-                dataTable = new System.Data.DataTable();
+                tables = new List<DataTable>();
+                dataTable = new DataTable();
 
-                Tuple<string, Type>[] columns = new Tuple<string, Type>[] 
-                { 
+                Tuple<string, Type>[] columns = new Tuple<string, Type>[]
+                {
                     Tuple.Create("Campo", typeof(string)),
                     Tuple.Create("Tipo de datos", typeof(string)),
                     Tuple.Create("Longitud", typeof(string)),
@@ -702,29 +414,29 @@ namespace DSRG
                 {
                     if (!tables.Any(x => x.TableName == table.TableName))
                     {
-                        tables.Add(new System.Data.DataTable { TableName = table.TableName});
-                    
+                        tables.Add(new DataTable { TableName = table.TableName });
+
                         dataTable = tables.FirstOrDefault(x => x.TableName == table.TableName);
 
-                        foreach(Tuple<string, Type> column in columns)
+                        foreach (Tuple<string, Type> column in columns)
                         {
                             dataTable.Columns.Add(column.Item1, column.Item2);
-                        }   
+                        }
                     }
 
-                    string precision = table.PropertyPrecision == null ? string.Empty : table.PropertyPrecision;
-                    string scale = table.PropertyScale == null ? string.Empty : table.PropertyScale;
+                    string precision = table.PropertyPrecision ?? string.Empty;
+                    string scale = table.PropertyScale ?? string.Empty;
 
-                    string type = StringToUpperCase(table.PropertyType);
+                    string type = Business.StringToUpperCase(table.PropertyType);
 
                     dataTable.Rows.Add(
                         table.PropertyName,
-                        type, 
-                        table.PropertyLeangth   is null or "" ?
+                        type,
+                        table.PropertyLeangth is null or "" ?
                         (type is "INT" ? string.Empty : (table.PropertyPrecision is null or "" ? string.Empty : $"({precision}, {scale})")) : table.PropertyLeangth,
-                        table.IsNullable, 
-                        table.ColumnDefault == null ? string.Empty : table.ColumnDefault,
-                        table.ConstraintName == null ? string.Empty : table.ConstraintName);
+                        table.IsNullable,
+                        table.ColumnDefault ?? string.Empty,
+                        table.ConstraintName ?? string.Empty);
                 }
 
                 foreach (var table in tables)
@@ -738,9 +450,9 @@ namespace DSRG
 
                     document.SetCellValue(3, 3, $"Tabla");
                     document.SetCellValue(3, 4, $"{table.TableName}");
-                    
+
                     document.SetCellValue(4, 3, "Descripcion");
-                    
+
                     document.ImportDataTable(6, 3, table, true);
 
                     //fuente 
@@ -768,234 +480,137 @@ namespace DSRG
                     document.SetCellStyle(7, 3, 6 + table.Rows.Count, 9, border);
                     document.SetCellStyle(7, 4, 7 + table.Rows.Count, 7, style);
                     document.SetCellStyle(7, 4, 7 + table.Rows.Count, 7, backGroudColor);
-                    
+
                     //agrandar columnas y filas
                     document.SetRowHeight(7, 6 + table.Rows.Count, 25.0D);
                     document.AutoFitColumn(3, 9);
                 }
 
-                document.SaveAs(Path.Combine(openFile.SelectedPath,"Archivo de tablas.xlsx"));
-     
-                System.Threading.Tasks.Task.Run(() => 
-                { 
-                    MessageBox.Show("Listo.", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                });
+                SaveFileDialog saveFileDialog = new();
+                saveFileDialog.Filter = "Libro de Excel|*.xlsx";
+                saveFileDialog.Title = "Save an html File";
+                saveFileDialog.ShowDialog();
+
+                document.SaveAs(Path.Combine(saveFileDialog.FileName, "Archivo de tablas.xlsx"));
+
+                Listo();
 
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
             this.UseWaitCursor = false;
         }
 
-        #region sin completar
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="tables"></param>
-        private async void StructureViews(string[] tables)
+        private void TelerikReport(List<Table> listTable)
         {
-            var listTable = await SqlServerConnection
-                .GetInstance()
-                .GetStructureViews(TBServidor.Text_, CBBBaseDatos.Text, RBAutenticacionW.Checked, tables, TBUsuario.Text_, TBContraseña.Text_);
-        }
+            FromReport FromReport = new();
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="tables"></param>
-        private async void StructureProcedure(string[] tables)
-        {
-            var listTable = await SqlServerConnection
-                .GetInstance()
-                .GetStructureProcedures(TBServidor.Text_, CBBBaseDatos.Text, RBAutenticacionW.Checked, tables, TBUsuario.Text_, TBContraseña.Text_);
-        }
+            Reports.Report report = new();
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="tables"></param>
-        private async void StructureTriggers(string[] tables)
-        {
-            var listTable = await SqlServerConnection
-                .GetInstance()
-                .GetStructureTriggers(TBServidor.Text_, CBBBaseDatos.Text, RBAutenticacionW.Checked, tables, TBUsuario.Text_, TBContraseña.Text_);
-        }
+            //report.TBCompanyName.Value = TBCompanyName.Text;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="tables"></param>
-        private async void StructureFunctions(string[] tables)
-        {
-            var listTable = await SqlServerConnection
-                .GetInstance()
-                .GetStructureFunctions(TBServidor.Text_, CBBBaseDatos.Text, RBAutenticacionW.Checked, tables, TBUsuario.Text_, TBContraseña.Text_);
-        }
+            report.objectDataSource.DataSource = listTable;
 
-        #endregion
+            report.reportNameTextBox.Value = $"Resporte de tabla : Servidor = {TBServer.Text};  base de datos = {CBBDataBase.Text};";
 
-        private string StringToUpperCase(string word)
-        {
-            string newWord = string.Empty;
-
-            foreach (char lyrics in word)
-                newWord += char.ToUpper(lyrics);
-
-            return newWord;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private async void BTBuscarBaseDatos_Click(object sender, System.EventArgs e)
-        {
-            try
-            {
-                if (TBServidor.IsEmpty())
-                {
-                    if (RBAutenticacionW.Checked is false)
-                    {
-                        TBUsuario.IsEmptyErrorProvider();
-                        TBContraseña.IsEmptyErrorProvider();
-                    }
-
-                    if (TBServidor.IsEmpty())
-                        MessageBox.Show("El campo servidor está en blanco.\nInserte algunos de los nombres locales.\n\n" +
-                            $"- {WindowsIdentity.GetCurrent().Name}\n" +
-                            "- .\n" +
-                            "- local"
-                            , "Información",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    this.Cursor = Cursors.WaitCursor;
-
-                    CBBBaseDatos.Items.Clear();
-
-                    CBBBaseDatos.Items.Add("Seleccione una Base de datos");
-
-                    foreach (string tableName in await SqlServerConnection
-                    .GetInstance()
-                    .GetDataBases(TBServidor.Text_, RBAutenticacionW.Checked, TBUsuario.Text_, TBContraseña.Text_))
-                    {
-                        CBBBaseDatos.Items.Add(tableName);
-                    }
-
-                    CBBBaseDatos.SelectedIndex = 0;
-                }
-            }
-            catch (System.Exception ex)
-            {
-                MessageBox.Show($"{ex.Message}\nEste error puede deberse a un error en las credenciales o conexión a internet.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            FromReport.reportViewer.ShowPrintPreviewButton = true;
+            FromReport.reportViewer.ReportSource = report;
+            FromReport.reportViewer.RefreshReport();
 
             this.Cursor = Cursors.Default;
 
+            FromReport.Show();
         }
 
-
-        private void CBView_SelectedIndexChanged(object sender, System.EventArgs e)
+        private void HtmlReport(List<Table> listTable)
         {
-            BTConeccion.Text = $"Buscar {CBView.SelectedItem}";
-            GBBaseDatos.Text = $"{CBView.SelectedItem}";
+            List<DataTable> tables = new();
+            DataTable dataTable = new();
+
+            Tuple<string, Type>[] columns = new Tuple<string, Type>[]
+            {
+                    Tuple.Create("Campo", typeof(string)),
+                    Tuple.Create("Tipo de datos", typeof(string)),
+                    Tuple.Create("Longitud", typeof(string)),
+                    Tuple.Create("Null", typeof(string)),
+                    Tuple.Create("Default", typeof(string)),
+                    Tuple.Create("Restricción", typeof(string))
+            };
+
+            foreach (var table in listTable)
+            {
+                if (!tables.Any(x => x.TableName == table.TableName))
+                {
+                    tables.Add(new DataTable { TableName = table.TableName });
+
+                    dataTable = tables.FirstOrDefault(x => x.TableName == table.TableName);
+
+                    foreach (Tuple<string, Type> column in columns)
+                    {
+                        dataTable.Columns.Add(column.Item1, column.Item2);
+                    }
+                }
+
+                string precision = table.PropertyPrecision ?? string.Empty;
+                string scale = table.PropertyScale ?? string.Empty;
+
+                string type = Business.StringToUpperCase(table.PropertyType);
+
+                dataTable.Rows.Add(
+                    table.PropertyName,
+                    type,
+                    table.PropertyLeangth is null or "" ?
+                    (type is "INT" ? string.Empty : (table.PropertyPrecision is null or "" ? string.Empty : $"({precision}, {scale})")) : table.PropertyLeangth,
+                    table.IsNullable,
+                    table.ColumnDefault ?? string.Empty,
+                    table.ConstraintName ?? string.Empty);
+            }
+
+            string html_ = HtmlResource.HTML;
+            string table_ = HtmlResource.Table;
+            string row_ = HtmlResource.Rows;
+
+            string rows = default;
+            string text = default;
+
+            foreach (DataTable table in tables)
+            {
+                rows = default;
+
+                foreach (DataRow row in table.Rows)
+                {
+                    rows += row_
+                       .Replace("ROW1", row[0].ToString())
+                       .Replace("ROW2", row[1].ToString())
+                       .Replace("ROW3", row[2].ToString())
+                       .Replace("ROW4", row[3].ToString())
+                       .Replace("ROW5", row[4].ToString())
+                       .Replace("ROW6", row[5].ToString());
+                }
+
+                text += table_.Replace("TABLENAME", table.TableName).Replace("ROWS", rows);
+            }
+
+            SaveFileDialog saveFileDialog = new();
+            saveFileDialog.Filter = "web html|*.html";
+            saveFileDialog.Title = "Save an html File";
+            saveFileDialog.ShowDialog();
+
+            File.WriteAllText(saveFileDialog.FileName, html_.Replace("TABLES", text));
+
+            Listo();
         }
 
-        private void Close_Click(object sender, EventArgs e)
+        private void Listo()
         {
-            if (DialogResult.Yes == MessageBox.Show("¿SEGURO QUE DESEA CERRAR LA APLICACIÓN?", "Pregunta", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
-                Application.Exit();
+            Task.Run(() =>
+            {
+                MessageBox.Show("Listo.", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            });
         }
 
-        private void Maximize_Click(object sender, EventArgs e)
-        {
-            BTNormal.Visible = true;
-            BTNormal.Enabled = true;
-            BTMaximize.Visible = false;
-            BTMaximize.Enabled = false;
-            WindowState = FormWindowState.Maximized;
-        }
-
-        private void Minimize_Click(object sender, EventArgs e)
-        {
-            WindowState = FormWindowState.Minimized;
-        }
-
-        private void Normal_Click(object sender, EventArgs e)
-        {
-            BTNormal.Visible = false;
-            BTNormal.Enabled = false;
-            BTMaximize.Visible = true;
-            BTMaximize.Enabled = true;
-            WindowState = FormWindowState.Normal;
-            Size = new Size(593, 680);
-
-            if (DesktopLocation.Y <= 0)
-                Location = new Point(Location.X, Location.Y + 50);
-
-        }
-
-        private void Logo_Click(object sender, EventArgs e)
-        {
-            PanelOpciones.Visible = !PanelOpciones.Visible;
-        }
-
-        private void BTAcercaDe_Click(object sender, EventArgs e)
-        {
-            PanelOpciones.Visible = false;
-
-            MessageBox.Show("DSRG\n\"Database structure report generator.\"\n\nVersión 1.5\n\nDSRG made by Luis Eduardo Frías, es una generado de reporte de tu base de datos relacionar, conpatible actual mente con Sql Server.\n\nCopyRight © 2021\nTodos los derechos reservados.\n" +
-                "Los Programas de Computadora (en lo adelante “software”), definidos en nuestra legislación están protegidos en la República " +
-                "Dominicana a través de la figura del Derecho de Autor, la cual está contemplada en la Ley 65-00 sobre Derecho de Autor.",
-                "Acerca de", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-
-        private void BTAjustes_Click(object sender, EventArgs e)
-        {
-            PanelOpciones.Visible = false;
-
-            this.AddOwnedForm(Tema.GetInstance(ConfiguracionTema, _DartLight).ShowTheme());
-        }
-
-        private void CBBBaseDatos_DataSourceChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CBBBaseDatos_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (CBBBaseDatos.SelectedIndex >= 1)
-                GBBaseDatos.Enabled = true;
-            else
-                GBBaseDatos.Enabled = false;
-        }
-
-        private void ListCBTablas_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (ListCBTablas.CheckedItems.Count >= 1)
-                BTGenerarReporte.Enabled = true;
-            else
-                BTGenerarReporte.Enabled = false;
-
-            LBTablaSelect.Text = $"Tablas seleccionadas: {ListCBTablas.CheckedItems.Count}";
-        }
-
-        private void TBServidor_TextBoxIEP_TextChanged(object sender, EventArgs e)
-        {
-            if(TBServidor.Text_.Length >= 1)
-                BTBuscarBaseDatos.Enabled = true;
-            else
-                BTBuscarBaseDatos.Enabled = false;
-        }
-
-        private void ListCBTablas_ItemCheck(object sender, ItemCheckEventArgs e)
-        {
-   
-        }
     }
 }

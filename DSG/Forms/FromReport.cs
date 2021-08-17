@@ -1,9 +1,7 @@
-﻿
-namespace DSRG
-{
-    using System.Windows.Forms;
-    //
+﻿using System.Windows.Forms;
 
+namespace Presentation
+{
     public partial class FromReport : Form
     {
         public FromReport()

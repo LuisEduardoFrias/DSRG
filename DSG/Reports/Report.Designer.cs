@@ -1,5 +1,4 @@
-
-namespace DSRG.Reports
+namespace Presentation.Reports
 {
     partial class Report
     {

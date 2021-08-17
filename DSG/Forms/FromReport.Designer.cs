@@ -1,5 +1,4 @@
-﻿
-namespace DSRG
+﻿namespace Presentation
 {
     partial class FromReport
     {

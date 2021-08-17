@@ -1,10 +1,8 @@
-﻿
-namespace DSRG
-{
-    using System;
-    using System.Windows.Forms;
-    //
+﻿using System;
+using System.Windows.Forms;
 
+namespace Presentation
+{
     static class Program
     {
         /// <summary>
