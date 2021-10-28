@@ -27,7 +27,7 @@ namespace DataAccess.Class
 
         public IConection GetConecction()
         {
-            mysql.MySqlConnection mySqlCon = new mysql.MySqlConnection($"Server={_server}; Port={_port}; User Id={_user}; Password={_password};");
+           // mysql.MySqlConnection mySqlCon = new mysql.MySqlConnection($"Server={_server}; Port={_port}; User Id={_user}; Password={_password};");
 
             sql.SqlConnection sqlCon = new sql.SqlConnection(
                $"Server={_server}; " +
@@ -36,9 +36,13 @@ namespace DataAccess.Class
 
             try
             {
-                mySqlCon.Open();
-                mySqlCon.Close();
-                return MySqlConnection.GetInstance();
+                //mySqlCon.Open();
+                //mySqlCon.Close();
+                //return MySqlConnection.GetInstance();
+
+                sqlCon.Open();
+                sqlCon.Close();
+                return SqlServerConnection.GetInstance();
             }
             catch
             {

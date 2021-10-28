@@ -491,7 +491,7 @@ namespace Presentation
                 saveFileDialog.Title = "Save an html File";
                 saveFileDialog.ShowDialog();
 
-                document.SaveAs(Path.Combine(saveFileDialog.FileName, "Archivo de tablas.xlsx"));
+                document.SaveAs(saveFileDialog.FileName); //Path.Combine(, "Archivo de tablas.xlsx"));
 
                 Listo();
 
