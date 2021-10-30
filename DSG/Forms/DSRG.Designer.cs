@@ -77,7 +77,7 @@ namespace Presentation
             this.TBPasswork.BackColor = System.Drawing.Color.Transparent;
             this.TBPasswork.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.TBPasswork.BorderColor = System.Drawing.Color.Black;
-            this.TBPasswork.BorderRadius = 13;
+            this.TBPasswork.BorderRadius = 10;
             this.TBPasswork.BorderStyle = System.Drawing.Drawing2D.DashStyle.DashDotDot;
             this.TBPasswork.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.TBPasswork.DefaultText = "";
@@ -92,8 +92,8 @@ namespace Presentation
             this.TBPasswork.ForeColor = System.Drawing.Color.Black;
             this.TBPasswork.HoverState.BorderColor = System.Drawing.Color.DeepSkyBlue;
             this.TBPasswork.HoverState.Parent = this.TBPasswork;
-            this.TBPasswork.Location = new System.Drawing.Point(6, 60);
-            this.TBPasswork.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.TBPasswork.Location = new System.Drawing.Point(4, 49);
+            this.TBPasswork.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.TBPasswork.Name = "TBPasswork";
             this.TBPasswork.PasswordChar = '*';
             this.TBPasswork.PlaceholderForeColor = System.Drawing.Color.DimGray;
@@ -101,7 +101,7 @@ namespace Presentation
             this.TBPasswork.SelectedText = "";
             this.TBPasswork.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             this.TBPasswork.ShadowDecoration.Parent = this.TBPasswork;
-            this.TBPasswork.Size = new System.Drawing.Size(220, 28);
+            this.TBPasswork.Size = new System.Drawing.Size(165, 23);
             this.TBPasswork.Style = Guna.UI2.WinForms.Enums.TextBoxStyle.Material;
             this.TBPasswork.TabIndex = 7;
             // 
@@ -114,7 +114,7 @@ namespace Presentation
             this.TBUser.BackColor = System.Drawing.Color.Transparent;
             this.TBUser.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.TBUser.BorderColor = System.Drawing.Color.Black;
-            this.TBUser.BorderRadius = 10;
+            this.TBUser.BorderRadius = 8;
             this.TBUser.BorderStyle = System.Drawing.Drawing2D.DashStyle.DashDotDot;
             this.TBUser.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.TBUser.DefaultText = "";
@@ -129,8 +129,8 @@ namespace Presentation
             this.TBUser.ForeColor = System.Drawing.Color.Black;
             this.TBUser.HoverState.BorderColor = System.Drawing.Color.DeepSkyBlue;
             this.TBUser.HoverState.Parent = this.TBUser;
-            this.TBUser.Location = new System.Drawing.Point(5, 29);
-            this.TBUser.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.TBUser.Location = new System.Drawing.Point(4, 24);
+            this.TBUser.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.TBUser.Name = "TBUser";
             this.TBUser.PasswordChar = '\0';
             this.TBUser.PlaceholderForeColor = System.Drawing.Color.DimGray;
@@ -138,7 +138,7 @@ namespace Presentation
             this.TBUser.SelectedText = "";
             this.TBUser.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             this.TBUser.ShadowDecoration.Parent = this.TBUser;
-            this.TBUser.Size = new System.Drawing.Size(221, 23);
+            this.TBUser.Size = new System.Drawing.Size(166, 19);
             this.TBUser.Style = Guna.UI2.WinForms.Enums.TextBoxStyle.Material;
             this.TBUser.TabIndex = 6;
             // 
@@ -150,12 +150,11 @@ namespace Presentation
             this.ListCB.Font = new System.Drawing.Font("Arial Narrow", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ListCB.ForeColor = System.Drawing.Color.Black;
             this.ListCB.FormattingEnabled = true;
-            this.ListCB.Location = new System.Drawing.Point(8, 57);
-            this.ListCB.Margin = new System.Windows.Forms.Padding(4);
+            this.ListCB.Location = new System.Drawing.Point(6, 46);
             this.ListCB.MultiColumn = true;
             this.ListCB.Name = "ListCB";
             this.ListCB.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.ListCB.Size = new System.Drawing.Size(523, 222);
+            this.ListCB.Size = new System.Drawing.Size(393, 178);
             this.ListCB.Sorted = true;
             this.ListCB.TabIndex = 15;
             this.ListCB.TabStop = false;
@@ -173,13 +172,14 @@ namespace Presentation
             this.GBEstructuras.CustomBorderThickness = new System.Windows.Forms.Padding(1, 20, 1, 1);
             this.GBEstructuras.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.GBEstructuras.ForeColor = System.Drawing.Color.Black;
-            this.GBEstructuras.Location = new System.Drawing.Point(10, 347);
+            this.GBEstructuras.Location = new System.Drawing.Point(8, 282);
+            this.GBEstructuras.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.GBEstructuras.Name = "GBEstructuras";
             this.GBEstructuras.ShadowDecoration.Color = System.Drawing.Color.DimGray;
             this.GBEstructuras.ShadowDecoration.Depth = 20;
             this.GBEstructuras.ShadowDecoration.Parent = this.GBEstructuras;
             this.GBEstructuras.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(0, 0, 5, 5);
-            this.GBEstructuras.Size = new System.Drawing.Size(538, 336);
+            this.GBEstructuras.Size = new System.Drawing.Size(404, 273);
             this.GBEstructuras.TabIndex = 0;
             this.GBEstructuras.Text = "Estructuras";
             this.GBEstructuras.TextOffset = new System.Drawing.Point(0, -10);
@@ -197,9 +197,10 @@ namespace Presentation
             this.ChBMarkAllStructures.CheckMarkColor = System.Drawing.Color.Black;
             this.ChBMarkAllStructures.Cursor = System.Windows.Forms.Cursors.Hand;
             this.ChBMarkAllStructures.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ChBMarkAllStructures.Location = new System.Drawing.Point(8, 26);
+            this.ChBMarkAllStructures.Location = new System.Drawing.Point(6, 21);
+            this.ChBMarkAllStructures.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.ChBMarkAllStructures.Name = "ChBMarkAllStructures";
-            this.ChBMarkAllStructures.Size = new System.Drawing.Size(181, 21);
+            this.ChBMarkAllStructures.Size = new System.Drawing.Size(154, 19);
             this.ChBMarkAllStructures.TabIndex = 14;
             this.ChBMarkAllStructures.Text = "Marcar todas las tablas";
             this.ChBMarkAllStructures.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SingleBitPerPixelGridFit;
@@ -215,7 +216,7 @@ namespace Presentation
             this.BTReportGenerator.Animated = true;
             this.BTReportGenerator.AutoRoundedCorners = true;
             this.BTReportGenerator.BackColor = System.Drawing.Color.Transparent;
-            this.BTReportGenerator.BorderRadius = 12;
+            this.BTReportGenerator.BorderRadius = 10;
             this.BTReportGenerator.CheckedState.Parent = this.BTReportGenerator;
             this.BTReportGenerator.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BTReportGenerator.CustomImages.Parent = this.BTReportGenerator;
@@ -225,10 +226,11 @@ namespace Presentation
             this.BTReportGenerator.HoverState.BorderColor = System.Drawing.Color.DimGray;
             this.BTReportGenerator.HoverState.CustomBorderColor = System.Drawing.Color.Gray;
             this.BTReportGenerator.HoverState.Parent = this.BTReportGenerator;
-            this.BTReportGenerator.Location = new System.Drawing.Point(303, 300);
+            this.BTReportGenerator.Location = new System.Drawing.Point(227, 244);
+            this.BTReportGenerator.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.BTReportGenerator.Name = "BTReportGenerator";
             this.BTReportGenerator.ShadowDecoration.Parent = this.BTReportGenerator;
-            this.BTReportGenerator.Size = new System.Drawing.Size(228, 27);
+            this.BTReportGenerator.Size = new System.Drawing.Size(171, 22);
             this.BTReportGenerator.TabIndex = 16;
             this.BTReportGenerator.Text = "Generar Reporte";
             this.BTReportGenerator.Click += new System.EventHandler(this.BTGenerarReporte_Click);
@@ -239,10 +241,9 @@ namespace Presentation
             this.LBTablaSelect.BackColor = System.Drawing.Color.Transparent;
             this.LBTablaSelect.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LBTablaSelect.ForeColor = System.Drawing.Color.Black;
-            this.LBTablaSelect.Location = new System.Drawing.Point(4, 310);
-            this.LBTablaSelect.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.LBTablaSelect.Location = new System.Drawing.Point(3, 252);
             this.LBTablaSelect.Name = "LBTablaSelect";
-            this.LBTablaSelect.Size = new System.Drawing.Size(198, 17);
+            this.LBTablaSelect.Size = new System.Drawing.Size(167, 15);
             this.LBTablaSelect.TabIndex = 21;
             this.LBTablaSelect.Text = "Estructuras seleccionadas: 0";
             // 
@@ -252,10 +253,9 @@ namespace Presentation
             this.TablasCount.BackColor = System.Drawing.Color.Transparent;
             this.TablasCount.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TablasCount.ForeColor = System.Drawing.Color.Black;
-            this.TablasCount.Location = new System.Drawing.Point(4, 283);
-            this.TablasCount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.TablasCount.Location = new System.Drawing.Point(3, 230);
             this.TablasCount.Name = "TablasCount";
-            this.TablasCount.Size = new System.Drawing.Size(100, 17);
+            this.TablasCount.Size = new System.Drawing.Size(83, 15);
             this.TablasCount.TabIndex = 20;
             this.TablasCount.Text = "Estructuras: 0";
             // 
@@ -274,13 +274,14 @@ namespace Presentation
             this.GBDB.CustomBorderThickness = new System.Windows.Forms.Padding(1, 20, 1, 1);
             this.GBDB.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.GBDB.ForeColor = System.Drawing.Color.Black;
-            this.GBDB.Location = new System.Drawing.Point(282, 10);
+            this.GBDB.Location = new System.Drawing.Point(212, 8);
+            this.GBDB.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.GBDB.Name = "GBDB";
             this.GBDB.ShadowDecoration.Color = System.Drawing.Color.DimGray;
             this.GBDB.ShadowDecoration.Depth = 20;
             this.GBDB.ShadowDecoration.Parent = this.GBDB;
             this.GBDB.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(0, 0, 5, 5);
-            this.GBDB.Size = new System.Drawing.Size(266, 331);
+            this.GBDB.Size = new System.Drawing.Size(200, 269);
             this.GBDB.TabIndex = 0;
             this.GBDB.Text = "Base de datos";
             this.GBDB.TextOffset = new System.Drawing.Point(0, -10);
@@ -291,7 +292,7 @@ namespace Presentation
             this.BTSearch.Animated = true;
             this.BTSearch.AutoRoundedCorners = true;
             this.BTSearch.BackColor = System.Drawing.Color.Transparent;
-            this.BTSearch.BorderRadius = 12;
+            this.BTSearch.BorderRadius = 10;
             this.BTSearch.CheckedState.Parent = this.BTSearch;
             this.BTSearch.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BTSearch.CustomImages.Parent = this.BTSearch;
@@ -302,10 +303,11 @@ namespace Presentation
             this.BTSearch.HoverState.BorderColor = System.Drawing.Color.DimGray;
             this.BTSearch.HoverState.CustomBorderColor = System.Drawing.Color.Gray;
             this.BTSearch.HoverState.Parent = this.BTSearch;
-            this.BTSearch.Location = new System.Drawing.Point(9, 295);
+            this.BTSearch.Location = new System.Drawing.Point(7, 240);
+            this.BTSearch.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.BTSearch.Name = "BTSearch";
             this.BTSearch.ShadowDecoration.Parent = this.BTSearch;
-            this.BTSearch.Size = new System.Drawing.Size(250, 27);
+            this.BTSearch.Size = new System.Drawing.Size(188, 22);
             this.BTSearch.TabIndex = 12;
             this.BTSearch.Text = "Buscar";
             this.BTSearch.Click += new System.EventHandler(this.BTConeccion_Click);
@@ -316,10 +318,9 @@ namespace Presentation
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(6, 162);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Location = new System.Drawing.Point(4, 132);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(61, 17);
+            this.label4.Size = new System.Drawing.Size(51, 15);
             this.label4.TabIndex = 17;
             this.label4.Text = "Obtener";
             // 
@@ -329,10 +330,9 @@ namespace Presentation
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(6, 98);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(4, 80);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(111, 17);
+            this.label3.Size = new System.Drawing.Size(95, 15);
             this.label3.TabIndex = 17;
             this.label3.Text = "Tipo de Reporte";
             // 
@@ -342,10 +342,9 @@ namespace Presentation
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(6, 30);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(4, 24);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(102, 17);
+            this.label2.Size = new System.Drawing.Size(87, 15);
             this.label2.TabIndex = 17;
             this.label2.Text = "Base de datos";
             // 
@@ -376,10 +375,11 @@ namespace Presentation
             "Procedimientos",
             "Triggers"});
             this.CBView.ItemsAppearance.Parent = this.CBView;
-            this.CBView.Location = new System.Drawing.Point(5, 182);
+            this.CBView.Location = new System.Drawing.Point(4, 148);
+            this.CBView.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.CBView.Name = "CBView";
             this.CBView.ShadowDecoration.Parent = this.CBView;
-            this.CBView.Size = new System.Drawing.Size(254, 36);
+            this.CBView.Size = new System.Drawing.Size(192, 36);
             this.CBView.Style = Guna.UI2.WinForms.Enums.TextBoxStyle.Material;
             this.CBView.TabIndex = 11;
             // 
@@ -409,10 +409,11 @@ namespace Presentation
             "PDF",
             "Html"});
             this.CBBReportType.ItemsAppearance.Parent = this.CBBReportType;
-            this.CBBReportType.Location = new System.Drawing.Point(5, 118);
+            this.CBBReportType.Location = new System.Drawing.Point(4, 96);
+            this.CBBReportType.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.CBBReportType.Name = "CBBReportType";
             this.CBBReportType.ShadowDecoration.Parent = this.CBBReportType;
-            this.CBBReportType.Size = new System.Drawing.Size(254, 36);
+            this.CBBReportType.Size = new System.Drawing.Size(192, 36);
             this.CBBReportType.Style = Guna.UI2.WinForms.Enums.TextBoxStyle.Material;
             this.CBBReportType.TabIndex = 10;
             // 
@@ -439,10 +440,11 @@ namespace Presentation
             this.CBBDataBase.HoverState.Parent = this.CBBDataBase;
             this.CBBDataBase.ItemHeight = 30;
             this.CBBDataBase.ItemsAppearance.Parent = this.CBBDataBase;
-            this.CBBDataBase.Location = new System.Drawing.Point(5, 50);
+            this.CBBDataBase.Location = new System.Drawing.Point(4, 41);
+            this.CBBDataBase.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.CBBDataBase.Name = "CBBDataBase";
             this.CBBDataBase.ShadowDecoration.Parent = this.CBBDataBase;
-            this.CBBDataBase.Size = new System.Drawing.Size(254, 36);
+            this.CBBDataBase.Size = new System.Drawing.Size(192, 36);
             this.CBBDataBase.Style = Guna.UI2.WinForms.Enums.TextBoxStyle.Material;
             this.CBBDataBase.TabIndex = 9;
             this.CBBDataBase.SelectedIndexChanged += new System.EventHandler(this.CBBBaseDatos_SelectedIndexChanged);
@@ -452,7 +454,7 @@ namespace Presentation
             this.TBGetDataBas.Animated = true;
             this.TBGetDataBas.AutoRoundedCorners = true;
             this.TBGetDataBas.BackColor = System.Drawing.Color.Transparent;
-            this.TBGetDataBas.BorderRadius = 12;
+            this.TBGetDataBas.BorderRadius = 10;
             this.TBGetDataBas.CheckedState.Parent = this.TBGetDataBas;
             this.TBGetDataBas.Cursor = System.Windows.Forms.Cursors.Hand;
             this.TBGetDataBas.CustomImages.Parent = this.TBGetDataBas;
@@ -462,10 +464,11 @@ namespace Presentation
             this.TBGetDataBas.HoverState.BorderColor = System.Drawing.Color.DimGray;
             this.TBGetDataBas.HoverState.CustomBorderColor = System.Drawing.Color.Gray;
             this.TBGetDataBas.HoverState.Parent = this.TBGetDataBas;
-            this.TBGetDataBas.Location = new System.Drawing.Point(8, 295);
+            this.TBGetDataBas.Location = new System.Drawing.Point(6, 240);
+            this.TBGetDataBas.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.TBGetDataBas.Name = "TBGetDataBas";
             this.TBGetDataBas.ShadowDecoration.Parent = this.TBGetDataBas;
-            this.TBGetDataBas.Size = new System.Drawing.Size(250, 27);
+            this.TBGetDataBas.Size = new System.Drawing.Size(188, 22);
             this.TBGetDataBas.TabIndex = 8;
             this.TBGetDataBas.Text = "Conectar";
             this.TBGetDataBas.Click += new System.EventHandler(this.TBGetDataBas_Click);
@@ -485,13 +488,14 @@ namespace Presentation
             this.guna2GroupBox2.CustomBorderThickness = new System.Windows.Forms.Padding(1, 20, 1, 1);
             this.guna2GroupBox2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2GroupBox2.ForeColor = System.Drawing.Color.Black;
-            this.guna2GroupBox2.Location = new System.Drawing.Point(10, 10);
+            this.guna2GroupBox2.Location = new System.Drawing.Point(8, 8);
+            this.guna2GroupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.guna2GroupBox2.Name = "guna2GroupBox2";
             this.guna2GroupBox2.ShadowDecoration.Color = System.Drawing.Color.DimGray;
             this.guna2GroupBox2.ShadowDecoration.Depth = 20;
             this.guna2GroupBox2.ShadowDecoration.Parent = this.guna2GroupBox2;
             this.guna2GroupBox2.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(0, 0, 5, 5);
-            this.guna2GroupBox2.Size = new System.Drawing.Size(266, 331);
+            this.guna2GroupBox2.Size = new System.Drawing.Size(200, 269);
             this.guna2GroupBox2.TabIndex = 16;
             this.guna2GroupBox2.Text = "Datos de conexión";
             this.guna2GroupBox2.TextOffset = new System.Drawing.Point(0, -10);
@@ -506,7 +510,7 @@ namespace Presentation
             this.TBPort.BackColor = System.Drawing.Color.Transparent;
             this.TBPort.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.TBPort.BorderColor = System.Drawing.Color.Black;
-            this.TBPort.BorderRadius = 10;
+            this.TBPort.BorderRadius = 8;
             this.TBPort.BorderStyle = System.Drawing.Drawing2D.DashStyle.DashDotDot;
             this.TBPort.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.TBPort.DefaultText = "";
@@ -521,8 +525,8 @@ namespace Presentation
             this.TBPort.ForeColor = System.Drawing.Color.Black;
             this.TBPort.HoverState.BorderColor = System.Drawing.Color.DeepSkyBlue;
             this.TBPort.HoverState.Parent = this.TBPort;
-            this.TBPort.Location = new System.Drawing.Point(7, 90);
-            this.TBPort.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.TBPort.Location = new System.Drawing.Point(5, 73);
+            this.TBPort.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.TBPort.Name = "TBPort";
             this.TBPort.PasswordChar = '\0';
             this.TBPort.PlaceholderForeColor = System.Drawing.Color.DimGray;
@@ -530,7 +534,7 @@ namespace Presentation
             this.TBPort.SelectedText = "";
             this.TBPort.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             this.TBPort.ShadowDecoration.Parent = this.TBPort;
-            this.TBPort.Size = new System.Drawing.Size(251, 23);
+            this.TBPort.Size = new System.Drawing.Size(188, 19);
             this.TBPort.Style = Guna.UI2.WinForms.Enums.TextBoxStyle.Material;
             this.TBPort.TabIndex = 3;
             // 
@@ -543,7 +547,7 @@ namespace Presentation
             this.TBServer.BackColor = System.Drawing.Color.Transparent;
             this.TBServer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.TBServer.BorderColor = System.Drawing.Color.Black;
-            this.TBServer.BorderRadius = 10;
+            this.TBServer.BorderRadius = 8;
             this.TBServer.BorderStyle = System.Drawing.Drawing2D.DashStyle.DashDotDot;
             this.TBServer.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.TBServer.DefaultText = "";
@@ -558,8 +562,8 @@ namespace Presentation
             this.TBServer.ForeColor = System.Drawing.Color.Black;
             this.TBServer.HoverState.BorderColor = System.Drawing.Color.DeepSkyBlue;
             this.TBServer.HoverState.Parent = this.TBServer;
-            this.TBServer.Location = new System.Drawing.Point(8, 55);
-            this.TBServer.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.TBServer.Location = new System.Drawing.Point(6, 45);
+            this.TBServer.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.TBServer.Name = "TBServer";
             this.TBServer.PasswordChar = '\0';
             this.TBServer.PlaceholderForeColor = System.Drawing.Color.DimGray;
@@ -567,7 +571,7 @@ namespace Presentation
             this.TBServer.SelectedText = "";
             this.TBServer.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             this.TBServer.ShadowDecoration.Parent = this.TBServer;
-            this.TBServer.Size = new System.Drawing.Size(230, 23);
+            this.TBServer.Size = new System.Drawing.Size(172, 19);
             this.TBServer.Style = Guna.UI2.WinForms.Enums.TextBoxStyle.Material;
             this.TBServer.TabIndex = 2;
             // 
@@ -583,9 +587,10 @@ namespace Presentation
             this.CBSaveDatas.Cursor = System.Windows.Forms.Cursors.Hand;
             this.CBSaveDatas.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CBSaveDatas.ForeColor = System.Drawing.Color.Black;
-            this.CBSaveDatas.Location = new System.Drawing.Point(8, 26);
+            this.CBSaveDatas.Location = new System.Drawing.Point(6, 21);
+            this.CBSaveDatas.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.CBSaveDatas.Name = "CBSaveDatas";
-            this.CBSaveDatas.Size = new System.Drawing.Size(174, 21);
+            this.CBSaveDatas.Size = new System.Drawing.Size(149, 19);
             this.CBSaveDatas.TabIndex = 1;
             this.CBSaveDatas.Text = "Guardar ultimos datos";
             this.CBSaveDatas.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SingleBitPerPixelGridFit;
@@ -614,9 +619,10 @@ namespace Presentation
             this.RBAutenticationW.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.RBAutenticationW.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.RBAutenticationW.ForeColor = System.Drawing.Color.Black;
-            this.RBAutenticationW.Location = new System.Drawing.Point(8, 125);
+            this.RBAutenticationW.Location = new System.Drawing.Point(6, 102);
+            this.RBAutenticationW.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.RBAutenticationW.Name = "RBAutenticationW";
-            this.RBAutenticationW.Size = new System.Drawing.Size(193, 21);
+            this.RBAutenticationW.Size = new System.Drawing.Size(163, 19);
             this.RBAutenticationW.TabIndex = 4;
             this.RBAutenticationW.TabStop = true;
             this.RBAutenticationW.Text = "Autenticacón de windows";
@@ -646,9 +652,10 @@ namespace Presentation
             this.RBAutenticationS.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.RBAutenticationS.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.RBAutenticationS.ForeColor = System.Drawing.Color.Black;
-            this.RBAutenticationS.Location = new System.Drawing.Point(8, 154);
+            this.RBAutenticationS.Location = new System.Drawing.Point(6, 125);
+            this.RBAutenticationS.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.RBAutenticationS.Name = "RBAutenticationS";
-            this.RBAutenticationS.Size = new System.Drawing.Size(157, 21);
+            this.RBAutenticationS.Size = new System.Drawing.Size(132, 19);
             this.RBAutenticationS.TabIndex = 5;
             this.RBAutenticationS.Text = "Autenticacón de Sql";
             this.RBAutenticationS.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SingleBitPerPixel;
@@ -670,10 +677,11 @@ namespace Presentation
             this.GBCredenciales.FillColor = System.Drawing.Color.Transparent;
             this.GBCredenciales.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.GBCredenciales.ForeColor = System.Drawing.Color.Black;
-            this.GBCredenciales.Location = new System.Drawing.Point(8, 184);
+            this.GBCredenciales.Location = new System.Drawing.Point(6, 150);
+            this.GBCredenciales.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.GBCredenciales.Name = "GBCredenciales";
             this.GBCredenciales.ShadowDecoration.Parent = this.GBCredenciales;
-            this.GBCredenciales.Size = new System.Drawing.Size(250, 105);
+            this.GBCredenciales.Size = new System.Drawing.Size(188, 85);
             this.GBCredenciales.TabIndex = 0;
             this.GBCredenciales.Text = "Credenciales";
             this.GBCredenciales.TextOffset = new System.Drawing.Point(0, -10);
@@ -684,30 +692,31 @@ namespace Presentation
             this.guna2Panel1.AutoRoundedCorners = true;
             this.guna2Panel1.AutoScroll = true;
             this.guna2Panel1.BackColor = System.Drawing.Color.White;
-            this.guna2Panel1.BorderRadius = 278;
+            this.guna2Panel1.BorderRadius = 209;
             this.guna2Panel1.BorderStyle = System.Drawing.Drawing2D.DashStyle.Dash;
             this.guna2Panel1.Controls.Add(this.guna2Panel2);
             this.guna2Panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.guna2Panel1.Location = new System.Drawing.Point(0, 0);
+            this.guna2Panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.guna2Panel1.Name = "guna2Panel1";
             this.guna2Panel1.ShadowDecoration.Parent = this.guna2Panel1;
-            this.guna2Panel1.Size = new System.Drawing.Size(558, 701);
+            this.guna2Panel1.Size = new System.Drawing.Size(420, 576);
             this.guna2Panel1.TabIndex = 8;
             // 
             // guna2Panel2
             // 
             this.guna2Panel2.AutoRoundedCorners = true;
             this.guna2Panel2.BackColor = System.Drawing.Color.Transparent;
-            this.guna2Panel2.BorderRadius = 277;
+            this.guna2Panel2.BorderRadius = 208;
             this.guna2Panel2.BorderStyle = System.Drawing.Drawing2D.DashStyle.Dash;
             this.guna2Panel2.Controls.Add(this.GBEstructuras);
             this.guna2Panel2.Controls.Add(this.guna2GroupBox2);
             this.guna2Panel2.Controls.Add(this.GBDB);
             this.guna2Panel2.Location = new System.Drawing.Point(0, 0);
-            this.guna2Panel2.Margin = new System.Windows.Forms.Padding(10);
+            this.guna2Panel2.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.guna2Panel2.Name = "guna2Panel2";
             this.guna2Panel2.ShadowDecoration.Parent = this.guna2Panel2;
-            this.guna2Panel2.Size = new System.Drawing.Size(557, 699);
+            this.guna2Panel2.Size = new System.Drawing.Size(418, 568);
             this.guna2Panel2.TabIndex = 8;
             // 
             // guna2Button1
@@ -798,14 +807,13 @@ namespace Presentation
             // 
             // DSRG
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
-            this.ClientSize = new System.Drawing.Size(558, 701);
+            this.ClientSize = new System.Drawing.Size(420, 576);
             this.Controls.Add(this.guna2Panel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4);
-            this.MinimumSize = new System.Drawing.Size(576, 748);
+            this.MinimumSize = new System.Drawing.Size(436, 615);
             this.Name = "DSRG";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = " DSRC";

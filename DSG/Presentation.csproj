@@ -289,6 +289,10 @@
     <None Include="Resources\Close Black.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\RJControls\CustomControls\CustomControls.csproj">
+      <Project>{602aa7a6-9a92-47e1-b800-2f78154ea050}</Project>
+      <Name>CustomControls</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CrossCutting\CrossCutting.csproj">
       <Project>{694F59D9-97BC-4EFE-8F84-C68FD45A04D4}</Project>
       <Name>CrossCutting</Name>
